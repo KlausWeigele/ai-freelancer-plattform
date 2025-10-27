@@ -4,7 +4,7 @@
 
 ✅ **Accepted**
 
-**Date:** Oktober 2024
+**Date:** 27. Oktober 2025
 
 ## Context
 
@@ -172,5 +172,5 @@ CRA ist deprecated. Next.js ist der offizielle Nachfolger.
 ---
 
 **Author:** Klaus Weigele
-**Date:** Oktober 2024
+**Date:** 27. Oktober 2025
 **Status:** Accepted

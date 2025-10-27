@@ -4,7 +4,7 @@
 **Markt:** Deutschland (DACH später)
 **Geschäftsmodell:** 2% Provision
 **Status:** Pre-Launch / Business Validation
-**Datum:** Oktober 2024
+**Datum:** 27. Oktober 2025
 
 ---
 

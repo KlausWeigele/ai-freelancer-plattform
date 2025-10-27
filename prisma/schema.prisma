@@ -1,6 +1,6 @@
 // Prisma Schema for AI-Freelancer-Plattform
 // Version: 1.0
-// Date: Oktober 2024
+// Date: 27. Oktober 2025
 
 generator client {
   provider = "prisma-client-js"

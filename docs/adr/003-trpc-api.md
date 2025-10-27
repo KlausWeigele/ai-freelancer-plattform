@@ -4,7 +4,7 @@
 
 ✅ **Accepted**
 
-**Date:** Oktober 2024
+**Date:** 27. Oktober 2025
 
 ## Context
 
@@ -430,5 +430,5 @@ export function CreateProjectForm() {
 ---
 
 **Author:** Klaus Weigele
-**Date:** Oktober 2024
+**Date:** 27. Oktober 2025
 **Status:** Accepted

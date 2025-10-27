@@ -4,7 +4,7 @@
 
 ✅ **Accepted**
 
-**Date:** Oktober 2024
+**Date:** 27. Oktober 2025
 
 ## Context
 
@@ -335,5 +335,5 @@ Production (500 users):
 ---
 
 **Author:** Klaus Weigele
-**Date:** Oktober 2024
+**Date:** 27. Oktober 2025
 **Status:** Accepted

@@ -4,7 +4,7 @@
 
 ✅ **Accepted**
 
-**Date:** Oktober 2024
+**Date:** 27. Oktober 2025
 
 ## Context
 
@@ -296,5 +296,5 @@ export const protectedProcedure = publicProcedure.use(async ({ ctx, next }) => {
 ---
 
 **Author:** Klaus Weigele
-**Date:** Oktober 2024
+**Date:** 27. Oktober 2025
 **Status:** Accepted

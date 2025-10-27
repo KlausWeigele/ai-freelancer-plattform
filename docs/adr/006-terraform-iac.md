@@ -4,7 +4,7 @@
 
 ✅ **Accepted**
 
-**Date:** Oktober 2024
+**Date:** 27. Oktober 2025
 
 ## Context
 
@@ -638,6 +638,6 @@ module "ecs" {
 ---
 
 **Author:** Klaus Weigele
-**Date:** Oktober 2024
+**Date:** 27. Oktober 2025
 **Status:** Accepted
 **Impact:** High (affects all infrastructure management)

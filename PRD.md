@@ -2,7 +2,7 @@
 # AI-Freelancer-Plattform Deutschland
 
 **Version:** 1.0
-**Datum:** Oktober 2024
+**Datum:** 27. Oktober 2025
 **Status:** Draft → Ready for Architecture
 **Modus:** MVP (Lean PRD)
 
@@ -12,7 +12,7 @@
 
 | Version | Datum | Autor | Änderungen |
 |---------|-------|-------|------------|
-| 1.0 | 2024-10 | Gründer | Initial PRD (MVP-Scope) |
+| 1.0 | 2025-10-27 | Gründer | Initial PRD (MVP-Scope) |
 
 ---
 
@@ -1943,6 +1943,6 @@ POST   /api/invoices              # Generate Invoice (after Completion)
 ---
 
 **PRD Version:** 1.0
-**Created:** Oktober 2024
-**Last Updated:** Oktober 2024
+**Created:** 27. Oktober 2025
+**Last Updated:** 27. Oktober 2025
 **Status:** Draft → Awaiting Approval

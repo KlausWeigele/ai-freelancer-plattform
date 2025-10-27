@@ -2,7 +2,7 @@
 # AI-Freelancer-Plattform Deutschland
 
 **Version:** 1.0
-**Datum:** Oktober 2024
+**Datum:** 27. Oktober 2025
 **Status:** In Progress
 
 ---
@@ -11,7 +11,7 @@
 
 | Version | Datum | Änderungen |
 |---------|-------|------------|
-| 1.0 | 2024-10 | Initial Architecture Design |
+| 1.0 | 2025-10-27 | Initial Architecture Design |
 
 ---
 
@@ -1532,6 +1532,6 @@ jobs:
 ---
 
 **Document Version:** 1.0
-**Created:** Oktober 2024
-**Last Updated:** Oktober 2024
+**Created:** 27. Oktober 2025
+**Last Updated:** 27. Oktober 2025
 **Author:** Klaus Weigele

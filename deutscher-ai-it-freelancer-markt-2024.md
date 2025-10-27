@@ -1,7 +1,7 @@
 # Deutscher AI/IT-Freelancer-Markt 2024
 ## Marktanalyse und Trends
 
-**Stand:** Oktober 2024
+**Stand:** 27. Oktober 2025
 **Fokus:** Deutschland, 2023-2024 Daten
 
 ---
