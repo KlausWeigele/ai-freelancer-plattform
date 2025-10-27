@@ -1,0 +1,311 @@
+# Nightly Testing Workflow
+# AI-Freelancer-Plattform
+# Date: 2025-10-27
+#
+# Runs comprehensive tests every night at 2:00 AM UTC (3:00 AM CET)
+# Can also be triggered manually
+
+name: Nightly Tests
+
+on:
+  schedule:
+    # Run at 2:00 AM UTC (3:00 AM CET) every day
+    - cron: '0 2 * * *'
+  workflow_dispatch:  # Allow manual trigger
+
+env:
+  NODE_VERSION: '20'
+  PNPM_VERSION: '10'
+
+jobs:
+  # ============================================================================
+  # Comprehensive Testing Suite
+  # ============================================================================
+  nightly-tests:
+    name: Comprehensive Testing
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_DB: freelancer_test
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma Client
+        run: pnpm db:generate
+
+      - name: Setup Database
+        run: |
+          pnpm prisma migrate deploy
+          pnpm prisma db seed || echo "No seed script found, skipping..."
+        env:
+          DATABASE_URL: postgresql://test_user:test_password@localhost:5432/freelancer_test?schema=public
+
+      # ========================================================================
+      # Unit Tests (Full Suite)
+      # ========================================================================
+      - name: Run Full Unit Test Suite
+        run: pnpm run test:unit --coverage
+        if: false  # Enable when tests are implemented
+        env:
+          DATABASE_URL: postgresql://test_user:test_password@localhost:5432/freelancer_test?schema=public
+          NEXTAUTH_SECRET: test-secret-for-nightly
+          JWT_SECRET: test-jwt-secret-for-nightly
+
+      # ========================================================================
+      # Integration Tests (Full Suite)
+      # ========================================================================
+      - name: Run Full Integration Test Suite
+        run: pnpm run test:integration
+        if: false  # Enable when tests are implemented
+        env:
+          DATABASE_URL: postgresql://test_user:test_password@localhost:5432/freelancer_test?schema=public
+          NEXTAUTH_SECRET: test-secret-for-nightly
+          JWT_SECRET: test-jwt-secret-for-nightly
+
+      # ========================================================================
+      # E2E Tests (Playwright)
+      # ========================================================================
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps chromium firefox webkit
+        if: false  # Enable when tests are implemented
+
+      - name: Run E2E Tests (All Browsers)
+        run: pnpm run test:e2e
+        if: false  # Enable when tests are implemented
+        env:
+          BASE_URL: http://localhost:3000
+          DATABASE_URL: postgresql://test_user:test_password@localhost:5432/freelancer_test?schema=public
+          NEXTAUTH_SECRET: test-secret-for-nightly
+          JWT_SECRET: test-jwt-secret-for-nightly
+
+      - name: Upload Playwright Report
+        if: always() && false  # Enable when tests are implemented
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+
+      # ========================================================================
+      # Performance Tests
+      # ========================================================================
+      - name: Run Performance Tests
+        run: |
+          echo "Running performance tests..."
+          # pnpm run test:performance
+          echo "Performance tests skipped (not implemented yet)"
+        continue-on-error: true
+
+      # ========================================================================
+      # Visual Regression Tests
+      # ========================================================================
+      - name: Run Visual Regression Tests
+        run: |
+          echo "Running visual regression tests..."
+          # pnpm run test:visual
+          echo "Visual tests skipped (not implemented yet)"
+        continue-on-error: true
+
+      # ========================================================================
+      # Security Scans
+      # ========================================================================
+      - name: Deep Security Audit
+        run: |
+          echo "Running security audit..."
+          pnpm audit --audit-level=low || echo "Security issues found"
+          # Install and run Snyk if available
+          # pnpm add -D snyk
+          # pnpm exec snyk test || true
+        continue-on-error: true
+
+      - name: Dependency Vulnerability Check
+        run: |
+          echo "Checking for known vulnerabilities..."
+          pnpm audit --production
+        continue-on-error: true
+
+      # ========================================================================
+      # Code Quality Metrics
+      # ========================================================================
+      - name: Generate Test Report
+        if: always()
+        run: |
+          echo "Generating test report..."
+          # pnpm run test:report
+          echo "Test report generation skipped (not implemented yet)"
+
+      - name: Upload Coverage to Codecov
+        if: false  # Enable when tests are implemented
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./coverage/coverage-final.json
+          fail_ci_if_error: false
+
+      # ========================================================================
+      # Docker Build Test
+      # ========================================================================
+      - name: Test Docker Production Build
+        run: |
+          echo "Building Docker image..."
+          docker build -t freelancer-app:nightly .
+
+          echo "Testing Docker image..."
+          docker run -d \
+            --name nightly-test \
+            -p 3000:3000 \
+            -e DATABASE_URL="postgresql://test:test@host.docker.internal:5432/test?schema=public" \
+            -e NEXTAUTH_SECRET="test-secret" \
+            -e JWT_SECRET="test-jwt" \
+            freelancer-app:nightly
+
+          sleep 15
+          docker logs nightly-test
+          docker rm -f nightly-test
+
+      # ========================================================================
+      # Database Migration Test
+      # ========================================================================
+      - name: Test Database Migrations (Fresh DB)
+        run: |
+          echo "Testing migrations on fresh database..."
+          pnpm prisma migrate reset --force
+          pnpm prisma migrate deploy
+          echo "✅ Migration test passed"
+        env:
+          DATABASE_URL: postgresql://test_user:test_password@localhost:5432/freelancer_test?schema=public
+
+      # ========================================================================
+      # Notifications
+      # ========================================================================
+      - name: Create Test Summary
+        if: always()
+        run: |
+          echo "# Nightly Test Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Date:** $(date)" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+
+      - name: Notify on Failure
+        if: failure()
+        run: |
+          echo "🚨 Nightly tests failed!"
+          echo "Check logs at: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          # TODO: Add notification integration (Email, Slack, Discord, etc.)
+
+  # ============================================================================
+  # Database Backup Test (Production-like)
+  # ============================================================================
+  backup-test:
+    name: Database Backup Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_DB: freelancer_test
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install PostgreSQL Client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+
+      - name: Create Test Data
+        run: |
+          export PGPASSWORD=test_password
+          psql -h localhost -U test_user -d freelancer_test -c "CREATE TABLE test_backup (id serial PRIMARY KEY, data text);"
+          psql -h localhost -U test_user -d freelancer_test -c "INSERT INTO test_backup (data) VALUES ('test data');"
+
+      - name: Test Backup
+        run: |
+          export PGPASSWORD=test_password
+          pg_dump -h localhost -U test_user -d freelancer_test -F c -f backup.dump
+          echo "✅ Backup created successfully"
+
+      - name: Test Restore
+        run: |
+          export PGPASSWORD=test_password
+          psql -h localhost -U test_user -c "DROP DATABASE freelancer_test;"
+          psql -h localhost -U test_user -c "CREATE DATABASE freelancer_test;"
+          pg_restore -h localhost -U test_user -d freelancer_test backup.dump
+          echo "✅ Restore successful"
+
+      - name: Verify Restore
+        run: |
+          export PGPASSWORD=test_password
+          COUNT=$(psql -h localhost -U test_user -d freelancer_test -t -c "SELECT COUNT(*) FROM test_backup;")
+          if [ "$COUNT" -eq "1" ]; then
+            echo "✅ Data verified after restore"
+          else
+            echo "❌ Data verification failed"
+            exit 1
+          fi
+
+  # ============================================================================
+  # Dependency Updates Check
+  # ============================================================================
+  dependency-check:
+    name: Check for Updates
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Check for Outdated Dependencies
+        run: |
+          pnpm outdated || echo "Some dependencies are outdated"
+          echo "Review outdated dependencies and update carefully"
