@@ -1,0 +1,361 @@
+// Prisma Schema for AI-Freelancer-Plattform
+// Version: 1.0
+// Date: Oktober 2024
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// ENUMS
+// ============================================================================
+
+enum UserRole {
+  FREELANCER
+  COMPANY
+  ADMIN
+}
+
+enum FreelancerStatus {
+  PENDING_REVIEW
+  ACTIVE
+  REJECTED
+}
+
+enum ExperienceLevel {
+  APPRENTICE   // 300-500€/Tag
+  INTERMEDIATE // 500-800€/Tag
+  EXPERT       // 800-1200€/Tag
+}
+
+enum ProjectStatus {
+  OPEN                // Neu erstellt, wartet auf Matching
+  PROPOSALS_SENT      // Admin hat Freelancer vorgeschlagen
+  TRIAL_ACTIVE        // Trial Period läuft
+  ACTIVE              // Trial erfolgreich, Projekt aktiv
+  COMPLETED           // Projekt abgeschlossen, wartet auf Payment
+  CANCELLED           // Abgebrochen (während Trial oder Active)
+  DISPUTED            // Dispute (Admin-Intervention)
+  PAID                // Bezahlt
+  CLOSED              // Final geschlossen
+}
+
+enum BookingStatus {
+  PENDING_ACCEPTANCE  // Firma hat gebucht, Freelancer muss akzeptieren
+  TRIAL_ACTIVE        // Trial Period (7 Tage)
+  ACTIVE              // Trial erfolgreich, Booking aktiv
+  COMPLETED           // Beide haben als "completed" markiert
+  CANCELLED           // Abgebrochen (während Trial oder Active)
+  DISPUTED            // Dispute (Admin-Intervention)
+  PAID                // Bezahlt
+  CLOSED              // Final geschlossen
+}
+
+enum BudgetRange {
+  LESS_10K        // <10.000€
+  RANGE_10_20K    // 10-20k€
+  RANGE_20_50K    // 20-50k€
+  RANGE_50_100K   // 50-100k€
+  MORE_100K       // >100k€
+}
+
+enum DurationEstimate {
+  ONE_TWO_WEEKS       // 1-2 Wochen
+  TWO_FOUR_WEEKS      // 2-4 Wochen
+  ONE_THREE_MONTHS    // 1-3 Monate
+  THREE_SIX_MONTHS    // 3-6 Monate
+  MORE_SIX_MONTHS     // >6 Monate
+}
+
+enum RemoteType {
+  REMOTE
+  ONSITE
+  HYBRID
+}
+
+enum ContractModel {
+  MILESTONE      // Milestone-based
+  SPRINT         // Sprint-based (2-4 Wochen Sprints)
+  RETAINER       // Retainer (monatlich)
+  TIME_MATERIAL  // Time & Material (pro Tag)
+}
+
+enum CompanySize {
+  SIZE_1_10
+  SIZE_11_50
+  SIZE_51_200
+  SIZE_201_1000
+  MORE_1000
+}
+
+enum PaymentStatus {
+  PENDING         // Warten auf Zahlung
+  PAID            // Firma hat gezahlt
+  PAYOUT_COMPLETE // Freelancer hat Payout erhalten
+}
+
+// ============================================================================
+// CORE MODELS
+// ============================================================================
+
+/// User-Account (für Freelancer, Firmen, Admin)
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  passwordHash  String    @map("password_hash")
+  emailVerified Boolean   @default(false) @map("email_verified")
+  role          UserRole
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+  lastLogin     DateTime? @map("last_login")
+
+  // Relations
+  freelancerProfile FreelancerProfile?
+  companyProfile    CompanyProfile?
+  sentMessages      Message[]
+
+  // Verification & Password Reset
+  verificationTokens VerificationToken[]
+  passwordResetTokens PasswordResetToken[]
+
+  @@index([email])
+  @@index([role])
+  @@map("users")
+}
+
+/// Email Verification Token
+model VerificationToken {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  token     String   @unique
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([userId])
+  @@map("verification_tokens")
+}
+
+/// Password Reset Token
+model PasswordResetToken {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  token     String   @unique
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  usedAt    DateTime? @map("used_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([userId])
+  @@map("password_reset_tokens")
+}
+
+/// Freelancer-Profil (kuratiert, nur Top 10%)
+model FreelancerProfile {
+  id                   String            @id @default(uuid())
+  userId               String            @unique @map("user_id")
+  name                 String
+  location             String
+  bio                  String?           @db.Text
+  skills               String[]          // PostgreSQL Array: ["langchain", "rag", "python"]
+  experienceLevel      ExperienceLevel   @map("experience_level")
+  dayRate              Int               @map("day_rate") // in Euro (z.B. 800)
+  availableFrom        DateTime?         @map("available_from")
+  daysPerWeek          Int               @map("days_per_week") @default(5) // 1-5
+  portfolioUrl         String?           @map("portfolio_url")
+  portfolioDescription String?           @map("portfolio_description") @db.Text
+  status               FreelancerStatus  @default(PENDING_REVIEW)
+  rejectionReason      String?           @map("rejection_reason") @db.Text
+  createdAt            DateTime          @default(now()) @map("created_at")
+  updatedAt            DateTime          @updatedAt @map("updated_at")
+
+  // Relations
+  user     User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bookings ProjectBooking[]
+
+  @@index([status])
+  @@index([experienceLevel])
+  @@index([dayRate])
+  @@map("freelancer_profiles")
+}
+
+/// Firmen-Profil
+model CompanyProfile {
+  id          String       @id @default(uuid())
+  userId      String       @unique @map("user_id")
+  companyName String       @map("company_name")
+  location    String
+  website     String?
+  description String?      @db.Text
+  companySize CompanySize  @map("company_size")
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+
+  // Relations
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  projects Project[]
+
+  @@index([companyName])
+  @@map("company_profiles")
+}
+
+/// Projekt (von Firma erstellt)
+model Project {
+  id               String            @id @default(uuid())
+  companyId        String            @map("company_id")
+  name             String            @db.VarChar(100)
+  description      String            @db.Text
+  skills           String[]          // Required Skills: ["langchain", "rag", "python"]
+  budgetRange      BudgetRange       @map("budget_range")
+  durationEstimate DurationEstimate  @map("duration_estimate")
+  startDate        DateTime          @map("start_date")
+  remoteType       RemoteType        @map("remote_type")
+  contractModel    ContractModel     @map("contract_model")
+  status           ProjectStatus     @default(OPEN)
+  createdAt        DateTime          @default(now()) @map("created_at")
+  updatedAt        DateTime          @updatedAt @map("updated_at")
+
+  // Relations
+  company  CompanyProfile   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  bookings ProjectBooking[]
+
+  @@index([companyId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("projects")
+}
+
+/// Project Booking (Firma bucht Freelancer für Projekt)
+model ProjectBooking {
+  id               String         @id @default(uuid())
+  projectId        String         @map("project_id")
+  freelancerId     String         @map("freelancer_id")
+  status           BookingStatus  @default(PENDING_ACCEPTANCE)
+  trialStartDate   DateTime?      @map("trial_start_date")
+  trialEndDate     DateTime?      @map("trial_end_date")
+  daysWorked       Decimal?       @map("days_worked") @db.Decimal(10, 2) // z.B. 15.5 Tage
+  totalAmount      Decimal?       @map("total_amount") @db.Decimal(10, 2) // z.B. 12400.00€
+  commission       Decimal?       @db.Decimal(10, 2) // 2% von totalAmount, z.B. 248.00€
+  freelancerPayout Decimal?       @map("freelancer_payout") @db.Decimal(10, 2) // totalAmount - commission
+  createdAt        DateTime       @default(now()) @map("created_at")
+  updatedAt        DateTime       @updatedAt @map("updated_at")
+
+  // Relations
+  project    Project            @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  freelancer FreelancerProfile  @relation(fields: [freelancerId], references: [id], onDelete: Cascade)
+  messages   Message[]
+  invoice    Invoice?
+  statusHistory BookingStatusHistory[]
+
+  @@index([projectId])
+  @@index([freelancerId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("project_bookings")
+}
+
+/// Booking Status History (Audit Trail)
+model BookingStatusHistory {
+  id        String        @id @default(uuid())
+  bookingId String        @map("booking_id")
+  oldStatus BookingStatus @map("old_status")
+  newStatus BookingStatus @map("new_status")
+  reason    String?       @db.Text // Optional: Grund für Status-Change
+  createdAt DateTime      @default(now()) @map("created_at")
+
+  booking ProjectBooking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  @@index([bookingId])
+  @@index([createdAt])
+  @@map("booking_status_history")
+}
+
+/// Messages (1-to-1 Chat zwischen Firma und Freelancer pro Booking)
+model Message {
+  id        String   @id @default(uuid())
+  bookingId String   @map("booking_id")
+  senderId  String   @map("sender_id")
+  content   String   @db.Text // max 5000 chars (validiert in Code)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relations
+  booking ProjectBooking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  sender  User           @relation(fields: [senderId], references: [id], onDelete: Cascade)
+
+  @@index([bookingId])
+  @@index([createdAt])
+  @@map("messages")
+}
+
+/// Invoice (Abrechnung nach Projekt-Abschluss)
+model Invoice {
+  id               String        @id @default(uuid())
+  bookingId        String        @unique @map("booking_id")
+  invoiceNumber    String        @unique @map("invoice_number") // z.B. "INV-2024-001"
+  totalAmount      Decimal       @map("total_amount") @db.Decimal(10, 2)
+  commission       Decimal       @db.Decimal(10, 2)
+  freelancerPayout Decimal       @map("freelancer_payout") @db.Decimal(10, 2)
+  paymentStatus    PaymentStatus @map("payment_status") @default(PENDING)
+  paidAt           DateTime?     @map("paid_at")
+  payoutAt         DateTime?     @map("payout_at")
+  createdAt        DateTime      @default(now()) @map("created_at")
+  updatedAt        DateTime      @updatedAt @map("updated_at")
+
+  // Relations
+  booking ProjectBooking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  @@index([paymentStatus])
+  @@index([invoiceNumber])
+  @@index([createdAt])
+  @@map("invoices")
+}
+
+// ============================================================================
+// V1.0: AI FEATURES (später)
+// ============================================================================
+
+// /// Skill Trend (für AI Career Coach)
+// model SkillTrend {
+//   id             String   @id @default(uuid())
+//   skill          String   @unique
+//   demandScore    Float    @map("demand_score") // 0-100
+//   avgDayRate     Int      @map("avg_day_rate") // in Euro
+//   growthRate     Float    @map("growth_rate") // % Wachstum
+//   lastUpdated    DateTime @map("last_updated") @updatedAt
+//
+//   @@index([skill])
+//   @@map("skill_trends")
+// }
+
+// /// Project Embedding (für AI-Matching)
+// model ProjectEmbedding {
+//   id         String   @id @default(uuid())
+//   projectId  String   @unique @map("project_id")
+//   embedding  Unsupported("vector(1536)") // pgvector extension
+//   createdAt  DateTime @default(now()) @map("created_at")
+//
+//   project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+//
+//   @@map("project_embeddings")
+// }
+
+// /// Freelancer Embedding (für AI-Matching)
+// model FreelancerEmbedding {
+//   id            String   @id @default(uuid())
+//   freelancerId  String   @unique @map("freelancer_id")
+//   embedding     Unsupported("vector(1536)") // pgvector extension
+//   createdAt     DateTime @default(now()) @map("created_at")
+//
+//   freelancer FreelancerProfile @relation(fields: [freelancerId], references: [id], onDelete: Cascade)
+//
+//   @@map("freelancer_embeddings")
+// }
