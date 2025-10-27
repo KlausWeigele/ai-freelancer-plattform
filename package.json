@@ -1,14 +1,22 @@
 {
-  "name": "freelancer",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "ai-freelancer-plattform",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI-Freelancer-Plattform für Deutschland - 2% Provision, AI-Features, Kuratierte Qualität",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "typecheck": "tsc --noEmit",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:studio": "prisma studio"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Klaus Weigele",
+  "license": "UNLICENSED",
   "packageManager": "pnpm@10.11.1",
   "dependencies": {
     "@prisma/client": "^6.18.0",
