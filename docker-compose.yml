@@ -1,0 +1,132 @@
+# Docker Compose for Local Development
+# AI-Freelancer-Plattform
+# Date: 2025-10-27
+
+version: '3.9'
+
+services:
+  # ============================================================================
+  # PostgreSQL Database
+  # ============================================================================
+  postgres:
+    image: postgres:15-alpine
+    container_name: freelancer-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: freelancer_admin
+      POSTGRES_PASSWORD: dev_password_change_in_production
+      POSTGRES_DB: freelancer_db
+      POSTGRES_INITDB_ARGS: "-E UTF8 --locale=en_US.UTF-8"
+    ports:
+      - "5432:5432"
+    volumes:
+      # Persist database data
+      - postgres_data:/var/lib/postgresql/data
+      # Optional: Custom init scripts
+      # - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U freelancer_admin -d freelancer_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - freelancer-network
+
+  # ============================================================================
+  # Next.js Application (Development)
+  # ============================================================================
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: deps  # Use deps stage for development
+    container_name: freelancer-app
+    restart: unless-stopped
+    environment:
+      # Database
+      DATABASE_URL: "postgresql://freelancer_admin:dev_password_change_in_production@postgres:5432/freelancer_db?schema=public"
+
+      # NextAuth
+      NEXTAUTH_URL: "http://localhost:3000"
+      NEXTAUTH_SECRET: "dev-secret-change-in-production"
+      JWT_SECRET: "dev-jwt-secret-change-in-production"
+
+      # Node Environment
+      NODE_ENV: development
+
+      # Feature Flags
+      NEXT_PUBLIC_ENABLE_MESSAGING: "true"
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount source code for hot-reload
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    command: sh -c "pnpm prisma generate && pnpm prisma migrate dev && pnpm dev"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - freelancer-network
+
+  # ============================================================================
+  # Redis (Optional - for V1.0 caching/sessions)
+  # ============================================================================
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: freelancer-redis
+  #   restart: unless-stopped
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis_data:/data
+  #   healthcheck:
+  #     test: ["CMD", "redis-cli", "ping"]
+  #     interval: 10s
+  #     timeout: 3s
+  #     retries: 5
+  #   networks:
+  #     - freelancer-network
+
+  # ============================================================================
+  # Prisma Studio (Optional - Database GUI)
+  # ============================================================================
+  prisma-studio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: deps
+    container_name: freelancer-prisma-studio
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: "postgresql://freelancer_admin:dev_password_change_in_production@postgres:5432/freelancer_db?schema=public"
+    ports:
+      - "5555:5555"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: sh -c "pnpm prisma generate && pnpm prisma studio --hostname 0.0.0.0"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - freelancer-network
+    profiles:
+      - studio  # Only start with: docker-compose --profile studio up
+
+# ============================================================================
+# Volumes
+# ============================================================================
+volumes:
+  postgres_data:
+    driver: local
+  # redis_data:
+  #   driver: local
+
+# ============================================================================
+# Networks
+# ============================================================================
+networks:
+  freelancer-network:
+    driver: bridge
