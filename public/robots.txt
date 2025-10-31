@@ -1,0 +1,17 @@
+# robots.txt for AI-Freelancer-Plattform
+# Date: 2025-10-27
+#
+# Purpose: Prevent search engine indexing of test/staging website
+# This is a test/demo website and should not appear in search results.
+
+# Block all crawlers and search engines
+User-agent: *
+Disallow: /
+
+# No sitemap (test website)
+# Sitemap: https://www.weigele.art/sitemap.xml
+
+# Explanation:
+# This test website should not be indexed by search engines.
+# All pages are blocked from crawling.
+# For production, update this file to allow crawling.
