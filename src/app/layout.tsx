@@ -6,8 +6,9 @@ import TestBanner from '@/components/layouts/TestBanner';
 const inter = Inter({ subsets: ['latin'] });
 
 // Dynamic metadata based on environment
-const isStaging = process.env.NEXT_PUBLIC_ENVIRONMENT === 'staging' ||
-                  process.env.NEXT_PUBLIC_ENVIRONMENT === 'test';
+const isStaging =
+  process.env.NEXT_PUBLIC_ENVIRONMENT === 'staging' ||
+  process.env.NEXT_PUBLIC_ENVIRONMENT === 'test';
 
 export const metadata: Metadata = {
   title: isStaging

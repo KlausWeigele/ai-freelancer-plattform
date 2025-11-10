@@ -9,6 +9,7 @@
 ## 🎯 Projekt-Überblick
 
 Premium AI-Talent-Plattform mit:
+
 - **2% Provision** (vs. 10-16% Markt-Standard)
 - **AI-powered Features** (V1.0): Matching, Project Builder, Career Coach
 - **3-Tier-System**: Apprentice → Intermediate → Expert
@@ -21,6 +22,7 @@ Premium AI-Talent-Plattform mit:
 ## 🏗️ Tech Stack
 
 ### Core
+
 - **Frontend & Backend:** Next.js 16 (App Router, Server Components)
 - **Language:** TypeScript 5.9 (Strict Mode)
 - **Database:** PostgreSQL 15 (AWS RDS)
@@ -30,6 +32,7 @@ Premium AI-Talent-Plattform mit:
 - **Styling:** Tailwind CSS 4.1 + shadcn/ui
 
 ### Infrastructure
+
 - **Hosting:** AWS (ECS Fargate, RDS, S3, CloudFront)
 - **Region:** eu-central-1 (Frankfurt) - DSGVO-compliant
 - **CI/CD:** GitHub Actions
@@ -37,6 +40,7 @@ Premium AI-Talent-Plattform mit:
 - **Email:** AWS SES
 
 ### Future (V1.0)
+
 - **AI:** Anthropic Claude 3.5 Sonnet
 - **Payments:** Stripe
 - **Caching:** Redis
@@ -131,11 +135,13 @@ pnpm db:studio              # Open Prisma Studio (GUI)
 ## 📚 Documentation
 
 ### Phase 1: Business Validation ✅
+
 - [BUSINESS_CASE.md](./BUSINESS_CASE.md) - Complete market analysis
 - [PRD.md](./PRD.md) - Product Requirements Document
 - [RISK_ASSESSMENT.md](./RISK_ASSESSMENT.md) - Risk analysis & mitigation
 
 ### Phase 3: Architecture ✅
+
 - [ARCHITECTURE.md](./docs/ARCHITECTURE.md) - Technical Architecture
 - [ADRs](./docs/adr/) - Architecture Decision Records
   - ADR-001: Next.js Full-Stack
@@ -145,6 +151,7 @@ pnpm db:studio              # Open Prisma Studio (GUI)
   - ADR-005: AWS Hosting
 
 ### Database
+
 - [Prisma Schema](./prisma/schema.prisma) - Complete DB Schema
 
 ---
@@ -167,6 +174,7 @@ pnpm db:studio              # Open Prisma Studio (GUI)
 ## 🎯 Roadmap
 
 ### MVP (Monat 1-4) - Current Phase
+
 - [x] Phase 1: Business Validation
 - [x] Phase 2: PRD
 - [x] Phase 3: Architecture & Tech Stack
@@ -182,6 +190,7 @@ pnpm db:studio              # Open Prisma Studio (GUI)
 - [ ] Phase 11: Deployment (MVP Launch)
 
 ### V1.0 (Monat 5-12)
+
 - [ ] AI Project Builder
 - [ ] AI-Matching (Semantic)
 - [ ] AI Career Coach
@@ -189,6 +198,7 @@ pnpm db:studio              # Open Prisma Studio (GUI)
 - [ ] AI Team Assembly
 
 ### V2.0+ (Future)
+
 - [ ] Apprenticeship Program (formal)
 - [ ] Reviews & Ratings
 - [ ] Advanced Analytics
@@ -203,6 +213,7 @@ pnpm db:studio              # Open Prisma Studio (GUI)
 - **Break-even:** Year 1
 
 ### Competitive Advantage
+
 1. **Günstig:** 2% vs. 10-16% (Wettbewerb)
 2. **AI-Features:** Kein Wettbewerber hat AI-Spezialisierung
 3. **Trial Period:** Risiko-Minimierung
@@ -214,6 +225,7 @@ pnpm db:studio              # Open Prisma Studio (GUI)
 ## 🇩🇪 Market Focus
 
 **Target:** Deutschland (DSGVO-compliant)
+
 - 295,000 IT Freelancer
 - 149,000 offene IT-Stellen
 - 57% AI-Adoption (doubled since 2022)

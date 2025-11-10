@@ -27,6 +27,7 @@
 This guide covers the complete deployment process for the AI-Freelancer-Plattform, from local development to production deployment using GitHub Actions and Docker.
 
 **Deployment Strategy:**
+
 - **Trunk-based development** with `main` branch
 - **Automated CI** on every push
 - **Staging deployment** automatic after CI passes
@@ -48,6 +49,7 @@ pnpm dev
 ```
 
 **Access:**
+
 - App: http://localhost:3000
 - Database: localhost:5432
 - Prisma Studio: http://localhost:5555 (with --profile studio)
@@ -89,11 +91,13 @@ pnpm dev
 Configure these secrets in GitHub repository settings:
 
 **Database:**
+
 ```bash
 DATABASE_URL=postgresql://user:password@host:5432/dbname?schema=public
 ```
 
 **Authentication:**
+
 ```bash
 NEXTAUTH_URL=https://your-domain.com
 NEXTAUTH_SECRET=<generated-secret-32-chars>
@@ -101,12 +105,14 @@ JWT_SECRET=<generated-secret-32-chars>
 ```
 
 **Docker Registry (if using):**
+
 ```bash
 DOCKER_USERNAME=your-docker-username
 DOCKER_PASSWORD=your-docker-password
 ```
 
 **AWS (if using):**
+
 ```bash
 AWS_ACCESS_KEY_ID=your-access-key
 AWS_SECRET_ACCESS_KEY=your-secret-key
@@ -114,6 +120,7 @@ AWS_REGION=eu-central-1
 ```
 
 **Generate Secrets:**
+
 ```bash
 # Generate secure random secrets
 openssl rand -base64 32
@@ -151,6 +158,7 @@ git push -u origin main
 ### 3. Configure Branch Protection (Recommended)
 
 **Via GitHub Web UI:**
+
 1. Go to Settings → Branches
 2. Add rule for `main` branch
 3. Enable:
@@ -159,6 +167,7 @@ git push -u origin main
    - ✅ Require CI workflow to pass
 
 **Via GitHub CLI:**
+
 ```bash
 gh api repos/:owner/:repo/branches/main/protection -X PUT \
   -F required_status_checks[strict]=true \
@@ -168,6 +177,7 @@ gh api repos/:owner/:repo/branches/main/protection -X PUT \
 ### 4. Set GitHub Secrets
 
 **Via GitHub CLI:**
+
 ```bash
 # Set secrets from .env file
 gh secret set DATABASE_URL < <(echo "postgresql://...")
@@ -180,6 +190,7 @@ gh secret set AWS_SECRET_ACCESS_KEY --body "$AWS_SECRET_ACCESS_KEY"
 ```
 
 **Via GitHub Web UI:**
+
 1. Go to Settings → Secrets and variables → Actions
 2. Click "New repository secret"
 3. Add each secret with name and value
@@ -189,6 +200,7 @@ gh secret set AWS_SECRET_ACCESS_KEY --body "$AWS_SECRET_ACCESS_KEY"
 Create two environments: `staging` and `production`
 
 **Via GitHub Web UI:**
+
 1. Go to Settings → Environments
 2. Click "New environment"
 3. Create `staging` and `production`
@@ -268,6 +280,7 @@ gh run watch
 ### Automatic Deployment
 
 Staging deploys automatically when:
+
 1. Code is pushed to `main` branch
 2. CI workflow passes successfully
 3. Docker image builds successfully
@@ -299,6 +312,7 @@ Update `.github/workflows/ci.yml` deploy-staging job:
 **Common Platforms:**
 
 **AWS ECS:**
+
 ```bash
 aws ecs update-service \
   --cluster staging-cluster \
@@ -307,12 +321,14 @@ aws ecs update-service \
 ```
 
 **Railway:**
+
 ```bash
 npm install -g @railway/cli
 railway up --environment staging
 ```
 
 **Vercel:**
+
 ```bash
 vercel deploy
 ```
@@ -361,6 +377,7 @@ git tag -l
 ```
 
 **Semantic Versioning:**
+
 - `vMAJOR.MINOR.PATCH`
 - Example: `v1.2.3`
   - `1` = Major version (breaking changes)
@@ -370,6 +387,7 @@ git tag -l
 ### Trigger Production Deployment
 
 **Via GitHub Web UI:**
+
 1. Go to Actions → Deploy to Production
 2. Click "Run workflow"
 3. Enter version tag: `v1.0.0`
@@ -379,6 +397,7 @@ git tag -l
 6. **Approve deployment** when prompted (production environment)
 
 **Via GitHub CLI:**
+
 ```bash
 # Trigger deployment workflow
 gh workflow run deploy-production.yml \
@@ -453,6 +472,7 @@ aws logs tail /ecs/freelancer-app --follow
 ### Automatic Rollback
 
 If deployment fails, the workflow will:
+
 1. Detect failure
 2. Generate rollback instructions
 3. Notify team
@@ -616,16 +636,19 @@ export async function GET() {
 ### Monitoring Tools
 
 **Application Performance:**
+
 - DataDog
 - New Relic
 - AWS CloudWatch
 
 **Error Tracking:**
+
 - Sentry
 - LogRocket
 - Rollbar
 
 **Uptime Monitoring:**
+
 - UptimeRobot
 - Pingdom
 - Better Uptime
@@ -633,6 +656,7 @@ export async function GET() {
 ### Log Aggregation
 
 **AWS CloudWatch Logs:**
+
 ```bash
 # View logs
 aws logs tail /ecs/freelancer-app --follow
@@ -652,6 +676,7 @@ aws logs filter-log-events \
 **Issue:** Lint, type check, or build fails
 
 **Solution:**
+
 ```bash
 # Run locally to reproduce
 pnpm run lint
@@ -669,6 +694,7 @@ git push
 **Issue:** Docker build fails in CI
 
 **Solution:**
+
 ```bash
 # Test locally
 docker build -t freelancer-app:test .
@@ -687,6 +713,7 @@ docker build --progress=plain -t freelancer-app:test . 2>&1 | tee build.log
 **Issue:** Container starts but app crashes
 
 **Solution:**
+
 ```bash
 # Check container logs
 docker logs <container-id>
@@ -707,6 +734,7 @@ aws ecs describe-tasks \
 **Issue:** `Error: P1001: Can't reach database server`
 
 **Solution:**
+
 ```bash
 # 1. Verify DATABASE_URL is correct
 echo $DATABASE_URL
@@ -727,6 +755,7 @@ pg_isready -h <host> -p 5432
 **Issue:** Health check endpoint returns 503
 
 **Solution:**
+
 ```bash
 # 1. Check database connectivity
 curl https://your-domain.com/api/health
@@ -779,11 +808,13 @@ See [Rollback Procedures](#rollback-procedures) section.
 ## Emergency Contacts
 
 **Production Incidents:**
+
 - On-call engineer: [Contact info]
 - DevOps lead: [Contact info]
 - Database admin: [Contact info]
 
 **Escalation:**
+
 - Team lead: [Contact info]
 - CTO: [Contact info]
 

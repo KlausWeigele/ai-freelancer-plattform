@@ -198,6 +198,7 @@ terraform plan -detailed-exitcode
 ### 1. Secrets Management
 
 ❌ **NEVER** commit secrets to Git:
+
 ```hcl
 # ❌ DON'T DO THIS
 variable "db_password" {
@@ -206,6 +207,7 @@ variable "db_password" {
 ```
 
 ✅ **DO THIS:**
+
 ```hcl
 # ✅ Use terraform.tfvars (gitignored)
 variable "db_password" {
@@ -290,6 +292,7 @@ jobs:
 Erstellt ECS Cluster + Service + Task Definition für Next.js App.
 
 **Inputs:**
+
 - `cluster_name`: ECS Cluster Name
 - `service_name`: ECS Service Name
 - `desired_count`: Number of tasks (1 for dev, 3+ for prod)
@@ -298,6 +301,7 @@ Erstellt ECS Cluster + Service + Task Definition für Next.js App.
 - `memory`: Task Memory in MB (512, 1024, 2048, 4096, 8192)
 
 **Outputs:**
+
 - `cluster_id`: ECS Cluster ID
 - `service_name`: ECS Service Name
 
@@ -306,6 +310,7 @@ Erstellt ECS Cluster + Service + Task Definition für Next.js App.
 Erstellt PostgreSQL RDS Instance.
 
 **Inputs:**
+
 - `db_name`: Database name
 - `db_username`: Master username
 - `db_password`: Master password (sensitive)
@@ -314,6 +319,7 @@ Erstellt PostgreSQL RDS Instance.
 - `multi_az`: Enable Multi-AZ (true/false)
 
 **Outputs:**
+
 - `db_endpoint`: Database connection endpoint
 - `db_port`: Database port (5432)
 
@@ -322,6 +328,7 @@ Erstellt PostgreSQL RDS Instance.
 Erstellt VPC, Subnets, Security Groups.
 
 **Outputs:**
+
 - `vpc_id`: VPC ID
 - `private_subnet_ids`: Private subnet IDs (für ECS, RDS)
 - `public_subnet_ids`: Public subnet IDs (für Load Balancer)

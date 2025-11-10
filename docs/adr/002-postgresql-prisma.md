@@ -9,6 +9,7 @@
 ## Context
 
 Die AI-Freelancer-Plattform braucht eine robuste Datenbank für:
+
 - User-Accounts (Freelancer, Firmen, Admin)
 - Profile (detaillierte Informationen, Skills)
 - Projekte (Beschreibungen, Status, Matching)
@@ -17,6 +18,7 @@ Die AI-Freelancer-Plattform braucht eine robuste Datenbank für:
 - Invoices (Abrechnung, Provision)
 
 **Requirements:**
+
 - Relational Data Model (Users → Profiles → Projects → Bookings)
 - ACID Transactions (kritisch für Payments)
 - DSGVO-Compliance (EU Data Residency)
@@ -32,6 +34,7 @@ Ich verwende **PostgreSQL 15** als Datenbank und **Prisma 5.x** als ORM.
 ### Warum PostgreSQL?
 
 **Database-Ebene:**
+
 - ✅ **Relational Model:** Perfekt für User → Profile → Project → Booking Beziehungen
 - ✅ **ACID Compliance:** Transaktionen für Payments
 - ✅ **Mature & Stable:** 30+ Jahre Entwicklung, Production-Proven
@@ -44,6 +47,7 @@ Ich verwende **PostgreSQL 15** als Datenbank und **Prisma 5.x** als ORM.
 ### Warum Prisma?
 
 **ORM-Ebene:**
+
 - ✅ **Type Safety:** End-to-end TypeScript (DB ↔ Code)
 - ✅ **Auto-Completion:** IDE Support, weniger Fehler
 - ✅ **Migrations:** Prisma Migrate (versioniert, reproducible)
@@ -57,11 +61,13 @@ Ich verwende **PostgreSQL 15** als Datenbank und **Prisma 5.x** als ORM.
 ### Alternative 1: MySQL + Prisma
 
 **Pros:**
+
 - ✅ Ähnlich zu PostgreSQL (relational)
 - ✅ Weit verbreitet
 - ✅ Prisma unterstützt MySQL
 
 **Cons:**
+
 - ❌ Keine pgvector (für AI-Features)
 - ❌ JSON Support schlechter
 - ❌ Full-Text Search schwächer
@@ -72,11 +78,13 @@ PostgreSQL ist technisch überlegen (pgvector, JSON, Full-Text Search). Für AI-
 ### Alternative 2: MongoDB (NoSQL)
 
 **Pros:**
+
 - ✅ Flexibles Schema (JSON-Documents)
 - ✅ Horizontal Scaling einfacher
 - ✅ Gute Performance bei einfachen Queries
 
 **Cons:**
+
 - ❌ **KEIN ACID** (Transaktionen komplexer)
 - ❌ Joins sind schwach/teuer
 - ❌ Weniger Type Safety
@@ -88,11 +96,13 @@ Unser Datenmodell ist stark relational. ACID-Transaktionen sind kritisch für Pa
 ### Alternative 3: PostgreSQL + TypeORM
 
 **Pros:**
+
 - ✅ Mature ORM (seit 2016)
 - ✅ Active Queries (komplexe Queries einfacher)
 - ✅ Migrations Support
 
 **Cons:**
+
 - ❌ Weniger Type Safety als Prisma
 - ❌ Schlechtere DX (mehr Boilerplate)
 - ❌ Decorator-Syntax (komplexer)
@@ -104,11 +114,13 @@ Prisma hat bessere TypeScript-Integration, modernere API, bessere DX. Für Solo-
 ### Alternative 4: PostgreSQL + Drizzle ORM
 
 **Pros:**
+
 - ✅ Sehr type-safe (ähnlich Prisma)
 - ✅ Lightweight (kleiner Bundle)
 - ✅ SQL-ähnliche API (weniger Abstraktion)
 
 **Cons:**
+
 - ❌ Jünger als Prisma (kleineres Ecosystem)
 - ❌ Weniger Tooling (kein Studio)
 - ❌ Migrations komplexer
@@ -119,11 +131,13 @@ Prisma ist etablierter, hat besseres Tooling (Prisma Studio), größeres Ecosyst
 ### Alternative 5: PostgreSQL + Raw SQL (kein ORM)
 
 **Pros:**
+
 - ✅ Maximale Kontrolle
 - ✅ Kein ORM-Overhead
 - ✅ Performance-optimiert
 
 **Cons:**
+
 - ❌ **Kein Type Safety**
 - ❌ SQL Injection Risiko (wenn nicht sorgfältig)
 - ❌ Viel Boilerplate
@@ -137,13 +151,16 @@ Für Solo-Dev ist Type Safety + DX wichtiger als maximale Performance. Prisma is
 ### PostgreSQL Rationale
 
 1. **Relational Model passt perfekt:**
+
    ```
    User → FreelancerProfile → ProjectBooking → Invoice
    User → CompanyProfile → Project → ProjectBooking
    ```
+
    Viele Foreign Keys, Joins sind notwendig.
 
 2. **ACID für Payments:**
+
    ```sql
    BEGIN TRANSACTION;
      UPDATE project_bookings SET status='COMPLETED';
@@ -151,9 +168,11 @@ Für Solo-Dev ist Type Safety + DX wichtiger als maximale Performance. Prisma is
      UPDATE users SET balance=...;
    COMMIT;
    ```
+
    Atomic transactions sind kritisch.
 
 3. **pgvector für V1.0:**
+
    ```sql
    CREATE EXTENSION vector;
    CREATE TABLE embeddings (
@@ -161,6 +180,7 @@ Für Solo-Dev ist Type Safety + DX wichtiger als maximale Performance. Prisma is
      embedding vector(1536)
    );
    ```
+
    Für AI-Matching (semantische Suche).
 
 4. **AWS RDS = Managed:**
@@ -178,8 +198,8 @@ Für Solo-Dev ist Type Safety + DX wichtiger als maximale Performance. Prisma is
 const user = await prisma.user.findUnique({
   where: { email: email }, // TypeScript checks "email" exists
   include: {
-    freelancerProfile: true // Auto-completion!
-  }
+    freelancerProfile: true, // Auto-completion!
+  },
 });
 
 // user.freelancerProfile?.skills ist type-safe!

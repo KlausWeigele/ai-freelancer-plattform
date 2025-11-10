@@ -12,8 +12,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Hinweise zur Test-Webseite | AI-Freelancer-Plattform',
-  description:
-    'Wichtige Hinweise zur Nutzung dieser Test- und Demonstrationswebseite',
+  description: 'Wichtige Hinweise zur Nutzung dieser Test- und Demonstrationswebseite',
   robots: 'noindex, nofollow',
 };
 
@@ -22,15 +21,10 @@ export default function DisclaimerPage() {
     <div className="container mx-auto px-4 py-12 max-w-4xl">
       {/* Header */}
       <div className="mb-8">
-        <Link
-          href="/"
-          className="text-sm text-gray-600 hover:text-gray-900 mb-4 inline-block"
-        >
+        <Link href="/" className="text-sm text-gray-600 hover:text-gray-900 mb-4 inline-block">
           ← Zurück zur Startseite
         </Link>
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          ⚠️ Hinweise zur Test-Webseite
-        </h1>
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">⚠️ Hinweise zur Test-Webseite</h1>
         <p className="text-lg text-gray-600">
           Wichtige Informationen zur Nutzung dieser Demonstrationswebseite
         </p>
@@ -57,9 +51,8 @@ export default function DisclaimerPage() {
               Dies ist eine Test- und Demonstrationswebseite
             </h2>
             <p className="text-amber-800">
-              Diese Website dient ausschließlich zu Test-, Entwicklungs- und
-              Demonstrationszwecken. Sie ist <strong>nicht</strong> für den
-              produktiven Einsatz bestimmt.
+              Diese Website dient ausschließlich zu Test-, Entwicklungs- und Demonstrationszwecken.
+              Sie ist <strong>nicht</strong> für den produktiven Einsatz bestimmt.
             </p>
           </div>
         </div>
@@ -69,13 +62,10 @@ export default function DisclaimerPage() {
       <div className="prose prose-lg max-w-none">
         {/* Status */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            Status der Webseite
-          </h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Status der Webseite</h2>
           <p className="text-gray-700 mb-4">
-            Diese Webseite befindet sich in der Entwicklungsphase und dient der
-            Erprobung neuer Funktionen, dem Testing von Features und der
-            Demonstration technischer Konzepte.
+            Diese Webseite befindet sich in der Entwicklungsphase und dient der Erprobung neuer
+            Funktionen, dem Testing von Features und der Demonstration technischer Konzepte.
           </p>
           <p className="text-gray-700">
             <strong>Aktuelle Phase:</strong> Staging / Pre-Production
@@ -92,63 +82,53 @@ export default function DisclaimerPage() {
             Keine Garantie oder Gewährleistung
           </h2>
           <p className="text-gray-700 mb-4">
-            Für diese Test-Webseite wird <strong>keinerlei Garantie</strong>{' '}
-            oder Gewährleistung übernommen:
+            Für diese Test-Webseite wird <strong>keinerlei Garantie</strong> oder Gewährleistung
+            übernommen:
           </p>
           <ul className="list-disc list-inside space-y-2 text-gray-700">
             <li>
-              <strong>Verfügbarkeit:</strong> Die Website kann jederzeit ohne
-              Vorankündigung offline genommen, geändert oder gelöscht werden.
+              <strong>Verfügbarkeit:</strong> Die Website kann jederzeit ohne Vorankündigung offline
+              genommen, geändert oder gelöscht werden.
             </li>
             <li>
-              <strong>Funktionalität:</strong> Funktionen können fehlerhaft
-              sein, nicht vollständig funktionieren oder sich unerwartet
-              verhalten.
+              <strong>Funktionalität:</strong> Funktionen können fehlerhaft sein, nicht vollständig
+              funktionieren oder sich unerwartet verhalten.
             </li>
             <li>
-              <strong>Datensicherheit:</strong> Test-Datenbanken können
-              jederzeit zurückgesetzt werden. Geben Sie keine echten oder
-              sensiblen Daten ein.
+              <strong>Datensicherheit:</strong> Test-Datenbanken können jederzeit zurückgesetzt
+              werden. Geben Sie keine echten oder sensiblen Daten ein.
             </li>
             <li>
-              <strong>Performance:</strong> Ladezeiten und Performance können
-              variieren oder eingeschränkt sein.
+              <strong>Performance:</strong> Ladezeiten und Performance können variieren oder
+              eingeschränkt sein.
             </li>
           </ul>
         </section>
 
         {/* Datenschutz */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            Umgang mit Daten
-          </h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Umgang mit Daten</h2>
           <p className="text-gray-700 mb-4">
             <strong className="text-red-600">Wichtiger Hinweis:</strong>
           </p>
           <ul className="list-disc list-inside space-y-2 text-gray-700">
             <li>
-              Geben Sie <strong>keine echten personenbezogenen Daten</strong>{' '}
-              ein.
+              Geben Sie <strong>keine echten personenbezogenen Daten</strong> ein.
             </li>
             <li>
-              Verwenden Sie <strong>keine echten E-Mail-Adressen</strong> oder
-              Passwörter, die Sie anderswo verwenden.
+              Verwenden Sie <strong>keine echten E-Mail-Adressen</strong> oder Passwörter, die Sie
+              anderswo verwenden.
             </li>
             <li>
-              Alle eingegebenen Daten können{' '}
-              <strong>jederzeit gelöscht</strong> werden.
+              Alle eingegebenen Daten können <strong>jederzeit gelöscht</strong> werden.
             </li>
             <li>
-              Für Test-Zwecke verwenden Sie bitte{' '}
-              <strong>Dummy-/Beispieldaten</strong>.
+              Für Test-Zwecke verwenden Sie bitte <strong>Dummy-/Beispieldaten</strong>.
             </li>
           </ul>
           <p className="text-gray-700 mt-4">
             Weitere Informationen finden Sie in unserer{' '}
-            <Link
-              href="/datenschutz"
-              className="text-blue-600 hover:underline"
-            >
+            <Link href="/datenschutz" className="text-blue-600 hover:underline">
               Datenschutzerklärung
             </Link>
             .
@@ -157,9 +137,7 @@ export default function DisclaimerPage() {
 
         {/* Keine rechtliche Bindung */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            Keine rechtliche Bindung
-          </h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Keine rechtliche Bindung</h2>
           <p className="text-gray-700 mb-4">
             Durch die Nutzung dieser Test-Webseite entsteht{' '}
             <strong>kein rechtlich bindendes Verhältnis</strong>:
@@ -169,28 +147,22 @@ export default function DisclaimerPage() {
               Es werden <strong>keine echten Verträge</strong> geschlossen.
             </li>
             <li>
-              Es erfolgen <strong>keine Zahlungen</strong> oder
-              Abrechnungen.
+              Es erfolgen <strong>keine Zahlungen</strong> oder Abrechnungen.
             </li>
             <li>
-              Angebote und Preise sind <strong>beispielhaft</strong> und nicht
-              verbindlich.
+              Angebote und Preise sind <strong>beispielhaft</strong> und nicht verbindlich.
             </li>
             <li>
-              Die Plattform wird <strong>nicht kommerziell</strong>{' '}
-              betrieben (Staging-Phase).
+              Die Plattform wird <strong>nicht kommerziell</strong> betrieben (Staging-Phase).
             </li>
           </ul>
         </section>
 
         {/* Haftungsausschluss */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            Haftungsausschluss
-          </h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Haftungsausschluss</h2>
           <p className="text-gray-700">
-            Der Betreiber dieser Test-Webseite übernimmt{' '}
-            <strong>keine Haftung</strong> für:
+            Der Betreiber dieser Test-Webseite übernimmt <strong>keine Haftung</strong> für:
           </p>
           <ul className="list-disc list-inside space-y-2 text-gray-700 mb-4">
             <li>Technische Fehler, Bugs oder Ausfälle</li>
@@ -206,12 +178,8 @@ export default function DisclaimerPage() {
 
         {/* Feedback */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            Feedback erwünscht
-          </h2>
-          <p className="text-gray-700 mb-4">
-            Als Test-Webseite freuen wir uns über Ihr Feedback:
-          </p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Feedback erwünscht</h2>
+          <p className="text-gray-700 mb-4">Als Test-Webseite freuen wir uns über Ihr Feedback:</p>
           <ul className="list-disc list-inside space-y-2 text-gray-700">
             <li>Fehlerberichte und Bug-Reports</li>
             <li>Verbesserungsvorschläge</li>
@@ -219,8 +187,8 @@ export default function DisclaimerPage() {
             <li>Feature-Anfragen</li>
           </ul>
           <p className="text-gray-700 mt-4">
-            Bitte beachten Sie: Feedback wird zur Kenntnis genommen, aber es
-            besteht <strong>keine Verpflichtung zur Umsetzung</strong>.
+            Bitte beachten Sie: Feedback wird zur Kenntnis genommen, aber es besteht{' '}
+            <strong>keine Verpflichtung zur Umsetzung</strong>.
           </p>
         </section>
 
@@ -238,12 +206,10 @@ export default function DisclaimerPage() {
 
         {/* Änderungen */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            Änderungen dieser Hinweise
-          </h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Änderungen dieser Hinweise</h2>
           <p className="text-gray-700">
-            Diese Hinweise können jederzeit ohne Vorankündigung geändert
-            werden. Es wird empfohlen, diese Seite regelmäßig zu überprüfen.
+            Diese Hinweise können jederzeit ohne Vorankündigung geändert werden. Es wird empfohlen,
+            diese Seite regelmäßig zu überprüfen.
           </p>
           <p className="text-gray-700 mt-4">
             <strong>Letzte Aktualisierung:</strong> 27. Oktober 2025

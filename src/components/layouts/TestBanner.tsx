@@ -42,9 +42,7 @@ export default function TestBanner() {
 
             {/* Text */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-              <span className="font-bold text-lg">
-                ⚠️ Dies ist eine Test-/Demowebseite
-              </span>
+              <span className="font-bold text-lg">⚠️ Dies ist eine Test-/Demowebseite</span>
               <span className="text-sm text-white/90">
                 Nicht für den produktiven Einsatz bestimmt.
               </span>

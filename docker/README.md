@@ -50,6 +50,7 @@ docker-compose down -v
 ```
 
 **Services started:**
+
 - **PostgreSQL:** `localhost:5432`
 - **Next.js App:** `http://localhost:3000`
 - **Prisma Studio:** `http://localhost:5555` (optional, see below)
@@ -96,6 +97,7 @@ docker-compose --profile studio up
 ```
 
 **Benefits:**
+
 - ✅ Small image size (~150MB vs. ~1GB)
 - ✅ Security (non-root user)
 - ✅ Fast startup
@@ -112,6 +114,7 @@ docker-compose up
 ```
 
 **What happens:**
+
 1. PostgreSQL starts (health check until ready)
 2. Next.js app starts:
    - `pnpm prisma generate` (generate client)
@@ -121,9 +124,10 @@ docker-compose up
 ### 2. Code Changes
 
 Your code is mounted as a volume:
+
 ```yaml
 volumes:
-  - .:/app  # Source code mounted
+  - .:/app # Source code mounted
 ```
 
 **Hot-reload works!** Changes trigger rebuild automatically.
@@ -223,6 +227,7 @@ docker-compose -f docker-compose.prod.yml --env-file .env.prod up
 ```
 
 **Access:**
+
 - **App via Nginx:** `http://localhost:80`
 - **App direct:** `http://localhost:3000`
 - **PostgreSQL:** `localhost:5432`
@@ -242,6 +247,7 @@ runner        ~150MB    Production (FINAL) ✅
 ```
 
 **Optimization techniques:**
+
 1. ✅ Alpine base image (node:20-alpine)
 2. ✅ Multi-stage build (only copy necessary files)
 3. ✅ .dockerignore (exclude unnecessary files)
@@ -254,7 +260,7 @@ runner        ~150MB    Production (FINAL) ✅
 // next.config.js
 module.exports = {
   output: 'standalone', // ← Required for Docker optimization
-}
+};
 ```
 
 **This copies only necessary files to `.next/standalone/`**
@@ -291,17 +297,19 @@ export async function GET() {
 ### 3. Secrets Management
 
 ❌ **NEVER** hardcode secrets:
+
 ```yaml
 # ❌ DON'T DO THIS
 environment:
-  DATABASE_URL: "postgresql://user:hardcoded_password@..."
+  DATABASE_URL: 'postgresql://user:hardcoded_password@...'
 ```
 
 ✅ **DO THIS:**
+
 ```yaml
 # ✅ Use environment variables
 environment:
-  DATABASE_URL: "${DATABASE_URL}"
+  DATABASE_URL: '${DATABASE_URL}'
 ```
 
 ```bash
@@ -314,7 +322,7 @@ docker-compose --env-file .env.prod up
 ```yaml
 networks:
   freelancer-network:
-    driver: bridge  # Isolated network
+    driver: bridge # Isolated network
 ```
 
 Services can only communicate within this network.
@@ -328,6 +336,7 @@ Services can only communicate within this network.
 **Cause:** Missing dependency or incorrect standalone build.
 
 **Solution:**
+
 ```bash
 # Ensure Next.js standalone output is enabled
 # In next.config.js:
@@ -342,10 +351,11 @@ docker build --no-cache -t freelancer-app:latest .
 **Cause:** PostgreSQL not ready when app starts.
 
 **Solution:** Already handled by `depends_on` + health check:
+
 ```yaml
 depends_on:
   postgres:
-    condition: service_healthy  # ← Wait for PostgreSQL
+    condition: service_healthy # ← Wait for PostgreSQL
 ```
 
 ### Issue: Prisma Client not generated
@@ -353,6 +363,7 @@ depends_on:
 **Cause:** Prisma Client not generated during build.
 
 **Solution:**
+
 ```dockerfile
 # In Dockerfile builder stage:
 RUN pnpm prisma generate  # ← Make sure this runs
@@ -363,11 +374,12 @@ RUN pnpm prisma generate  # ← Make sure this runs
 **Cause:** Volume mounting issue on Windows.
 
 **Solution:**
+
 ```yaml
 volumes:
   - .:/app
-  - /app/node_modules  # ← Prevent overwriting node_modules
-  - /app/.next         # ← Prevent overwriting .next
+  - /app/node_modules # ← Prevent overwriting node_modules
+  - /app/.next # ← Prevent overwriting .next
 ```
 
 ### Issue: Port already in use
@@ -375,6 +387,7 @@ volumes:
 **Cause:** Another service using port 3000/5432.
 
 **Solution:**
+
 ```bash
 # Change ports in docker-compose.yml
 ports:

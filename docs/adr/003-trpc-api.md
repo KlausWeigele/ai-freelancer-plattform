@@ -9,12 +9,14 @@
 ## Context
 
 Die AI-Freelancer-Plattform braucht eine API für:
+
 - Frontend ↔ Backend Kommunikation
 - CRUD Operations (Users, Projects, Bookings)
 - Complex Workflows (Trial Period, Matching, Payments)
 - Real-time Features (Messaging, später)
 
 **Requirements:**
+
 - Type Safety (Frontend ↔ Backend)
 - Gute DX (Developer Experience)
 - Easy to maintain (Solo-Developer)
@@ -22,6 +24,7 @@ Die AI-Freelancer-Plattform braucht eine API für:
 - Security (Authentication, Authorization)
 
 **Constraint:**
+
 - Full-Stack TypeScript (Next.js Frontend + Backend)
 - Nicht-öffentliche API (nur für eigene Frontend)
 
@@ -32,6 +35,7 @@ Ich verwende **tRPC (TypeScript Remote Procedure Call)** für die API.
 ### Was ist tRPC?
 
 tRPC ermöglicht **end-to-end type-safe APIs** ohne Code-Generation:
+
 - Backend definiert Procedures (Queries + Mutations)
 - Frontend importiert Backend-Types automatisch
 - Auto-Completion, Type-Checking im Frontend
@@ -47,11 +51,13 @@ tRPC ermöglicht **end-to-end type-safe APIs** ohne Code-Generation:
 // Backend: src/server/routers/projects.ts
 export const projectsRouter = router({
   create: protectedProcedure
-    .input(z.object({
-      name: z.string(),
-      skills: z.array(z.string()),
-      budgetRange: z.enum(['LESS_10K', 'RANGE_10_20K', /* ... */]),
-    }))
+    .input(
+      z.object({
+        name: z.string(),
+        skills: z.array(z.string()),
+        budgetRange: z.enum(['LESS_10K', 'RANGE_10_20K' /* ... */]),
+      })
+    )
     .mutation(async ({ input, ctx }) => {
       return await ctx.prisma.project.create({ data: input });
     }),
@@ -62,9 +68,9 @@ const mutation = trpc.projects.create.useMutation();
 
 // ✅ TypeScript weiß exakt, was `input` braucht:
 mutation.mutate({
-  name: "AI Chatbot",
-  skills: ["langchain", "python"],
-  budgetRange: "RANGE_10_20K" // Auto-Completion!
+  name: 'AI Chatbot',
+  skills: ['langchain', 'python'],
+  budgetRange: 'RANGE_10_20K', // Auto-Completion!
 });
 
 // ❌ Fehler, falls falscher Type:
@@ -129,12 +135,14 @@ const project = await trpc.projects.create.mutate({ name, skills, budgetRange })
 ### Alternative 1: REST API
 
 **Pros:**
+
 - ✅ Standard (jeder kennt REST)
 - ✅ HTTP-Caching möglich
 - ✅ Öffentliche API möglich
 - ✅ Framework-agnostic
 
 **Cons:**
+
 - ❌ **Kein Type Safety** (Frontend ↔ Backend)
 - ❌ Viel Boilerplate (Endpoints, Validation, Serialization)
 - ❌ API-Docs notwendig (Swagger/OpenAPI)
@@ -144,6 +152,7 @@ const project = await trpc.projects.create.mutate({ name, skills, budgetRange })
 Für eine interne API (nur eigenes Frontend) ist Type Safety wichtiger als REST-Standards. tRPC ist produktiver.
 
 **Wann REST?**
+
 - Öffentliche API (für Partner)
 - Multi-Platform (iOS, Android, Web)
 - → Später, wenn nötig
@@ -151,12 +160,14 @@ Für eine interne API (nur eigenes Frontend) ist Type Safety wichtiger als REST-
 ### Alternative 2: GraphQL
 
 **Pros:**
+
 - ✅ Flexible Queries (Client wählt Felder)
 - ✅ Single Endpoint
 - ✅ Type Safety (mit CodeGen)
 - ✅ Gut für komplexe Daten-Fetching
 
 **Cons:**
+
 - ❌ **Viel Setup-Aufwand** (Schema, Resolvers, CodeGen)
 - ❌ Steile Lernkurve
 - ❌ Over-Engineering für MVP
@@ -167,6 +178,7 @@ Für eine interne API (nur eigenes Frontend) ist Type Safety wichtiger als REST-
 GraphQL ist Overkill für dieses Projekt. tRPC ist einfacher, schneller zu entwickeln, und bietet ähnliche Type Safety.
 
 **Wann GraphQL?**
+
 - Komplexe, verschachtelte Daten
 - Viele verschiedene Clients
 - → Nicht nötig für MVP
@@ -174,11 +186,13 @@ GraphQL ist Overkill für dieses Projekt. tRPC ist einfacher, schneller zu entwi
 ### Alternative 3: Next.js Server Actions
 
 **Pros:**
+
 - ✅ Native Next.js (kein Extra-Framework)
 - ✅ Type-safe
 - ✅ Einfach für Mutations
 
 **Cons:**
+
 - ❌ Nur Mutations (keine Queries mit Server Actions)
 - ❌ Weniger Flexibilität als tRPC
 - ❌ Noch relativ neu (App Router Feature)
@@ -187,17 +201,20 @@ GraphQL ist Overkill für dieses Projekt. tRPC ist einfacher, schneller zu entwi
 Server Actions sind gut für einfache Mutations, aber tRPC ist besser für komplexe APIs (Queries + Mutations, Middleware, Error Handling).
 
 **Kombination:**
+
 - tRPC für API (Queries + Mutations)
 - Server Actions für UI-Interactions (später, optional)
 
 ### Alternative 4: gRPC
 
 **Pros:**
+
 - ✅ Sehr performant (Binary Protocol)
 - ✅ Type-safe (Protobuf)
 - ✅ Gut für Microservices
 
 **Cons:**
+
 - ❌ Nicht web-native (braucht Proxy für Browser)
 - ❌ Viel Setup
 - ❌ Over-Engineering für Monolith

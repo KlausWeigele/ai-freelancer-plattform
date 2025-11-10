@@ -1,4 +1,5 @@
 # Product Requirements Document (PRD)
+
 # AI-Freelancer-Plattform Deutschland
 
 **Version:** 1.0
@@ -10,18 +11,20 @@
 
 ## Document History
 
-| Version | Datum | Autor | Änderungen |
-|---------|-------|-------|------------|
-| 1.0 | 2025-10-27 | Gründer | Initial PRD (MVP-Scope) |
+| Version | Datum      | Autor   | Änderungen              |
+| ------- | ---------- | ------- | ----------------------- |
+| 1.0     | 2025-10-27 | Gründer | Initial PRD (MVP-Scope) |
 
 ---
 
 ## 1. Product Overview
 
 ### 1.1 Product Name
+
 **[TBD]** - AI-Freelancer-Plattform für Deutschland
 
 **Naming-Optionen:**
+
 - AI-Match.de
 - ExpertFlow.de
 - TalentForge.de
@@ -42,12 +45,14 @@ Eine Premium-Freelancer-Börse, die KI-Experten und Firmen durch AI-powered Matc
 ### 1.3 Product Mission
 
 **Problem:**
+
 - Firmen finden keine qualifizierten KI-Experten (149.000 offene IT-Stellen)
 - Freelancer verlieren 10-16% an Provisionen
 - Keine deutsche Plattform hat KI-Spezialisierung oder AI-Features
 
 **Lösung:**
 Premium AI-Talent-Plattform mit:
+
 - 2% Provision (statt 10-16%)
 - AI-gestütztem Matching, Project Building, Career Coaching
 - 3-Tier-System (Apprentice → Intermediate → Expert)
@@ -59,10 +64,12 @@ Premium AI-Talent-Plattform mit:
 ### 1.4 Target Release
 
 **MVP Launch:** Monat 4 (nach 3 Monaten Development)
+
 - Beta (Private): Monat 4, Woche 1-2
 - Public Launch: Monat 5
 
 **V1.0:** Monat 6-12
+
 - Alle Core Features stabil
 - AI-Features produktiv
 - 100 Projekte durchgeführt
@@ -75,7 +82,7 @@ Premium AI-Talent-Plattform mit:
    - 50 kuratierte Freelancer (Top 10% KI-Experten)
    - 30 aktive Firmen
    - 30 erfolgreiche Projekte
-   - >80% Trial-to-Project Conversion
+   - > 80% Trial-to-Project Conversion
 
 2. **Skalierung beginnen** (Monat 7-12)
    - 100 kuratierte Freelancer
@@ -89,8 +96,8 @@ Premium AI-Talent-Plattform mit:
    - Positive Unit Economics
 
 4. **Quality Metrics** (kontinuierlich)
-   - >90% Projekterfolgsrate
-   - >85% AI-Match-Accuracy
+   - > 90% Projekterfolgsrate
+   - > 85% AI-Match-Accuracy
    - NPS >50 (Freelancer & Firmen)
    - <48h Time-to-Match
 
@@ -108,6 +115,7 @@ Premium AI-Talent-Plattform mit:
 #### Persona F1: Senior AI Expert (Max, 36)
 
 **Profil:**
+
 - 10+ Jahre Software-Entwicklung
 - 4 Jahre AI/ML-Erfahrung
 - Skills: LangChain, Vector DBs, RAG, Fine-tuning, Python, FastAPI
@@ -115,17 +123,20 @@ Premium AI-Talent-Plattform mit:
 - Location: Berlin, arbeitet remote
 
 **Motivations:**
+
 - Faire Provision (2% vs. 10-16%)
 - Hochwertige Projekte (keine Low-Quality-Anfragen)
 - Flexible Verträge (keine festen 12-Monats-Commitments)
 - Transparenz (klare Requirements, faire Firmen)
 
 **Pain Points:**
+
 - freelance.de: Zu viele unpassende Anfragen, 10% Provision
 - Toptal: 30-50% Provision (versteckt)
 - LinkedIn: Zeit-intensiv, viel Spam
 
 **Use Cases:**
+
 1. **UC-F1-1:** Findet passendes KI-Projekt in 48h
 2. **UC-F1-2:** Verhandelt flexible Verträge (Milestone-based)
 3. **UC-F1-3:** Arbeitet an 2-3 Projekten parallel (Retainer)
@@ -136,6 +147,7 @@ Premium AI-Talent-Plattform mit:
 #### Persona F2: Junior AI Enthusiast (Timo, 28)
 
 **Profil:**
+
 - 3 Jahre Backend-Entwicklung (Python, Node.js)
 - KEINE AI-Projekt-Erfahrung (nur Kurse)
 - Skills: Python, APIs, Datenbanken, hat LLM-Kurse gemacht
@@ -143,17 +155,20 @@ Premium AI-Talent-Plattform mit:
 - Location: München, remote bevorzugt
 
 **Motivations:**
+
 - In AI-Feld einsteigen (Learning on the Job)
 - Portfolio aufbauen (echte Projekte)
 - Karriere-Pfad (Apprentice → Expert)
 - AI Career Coach nutzen (strategische Weiterentwicklung)
 
 **Pain Points:**
+
 - Seniors verdrängen ihn (kann nicht mit 1.000€/Tag konkurrieren)
 - Niemand gibt Chance ohne Erfahrung
 - Weiß nicht, welche Skills er lernen soll
 
 **Use Cases:**
+
 1. **UC-F2-1:** Startet als Apprentice mit 400€/Tag
 2. **UC-F2-2:** Arbeitet an einfachem AI-Projekt (Learning on the Job)
 3. **UC-F2-3:** Nutzt AI Career Coach für Skill-Empfehlungen
@@ -164,6 +179,7 @@ Premium AI-Talent-Plattform mit:
 #### Persona F3: Mid-Level ML Engineer (Sarah, 31)
 
 **Profil:**
+
 - 6 Jahre Software-Entwicklung
 - 2 Jahre ML/Data Science (klassisches ML, scikit-learn)
 - Will GenAI/LLM lernen (Trend)
@@ -171,17 +187,20 @@ Premium AI-Talent-Plattform mit:
 - Location: Hamburg, hybrid
 
 **Motivations:**
+
 - Weiterentwicklung in GenAI/LLM
 - Höhere Tagessätze erreichen (900-1.000€)
 - AI Career Coach für strategische Planung
 - Spannende AI-Projekte
 
 **Pain Points:**
+
 - Weiß nicht, welche Skills sie priorisieren soll (LangChain? RAG? Vector DBs?)
 - Klassisches ML wird weniger nachgefragt
 - Will nicht zurückfallen
 
 **Use Cases:**
+
 1. **UC-F3-1:** Nimmt GenAI-Projekte an (lernt LangChain on the Job)
 2. **UC-F3-2:** AI Career Coach zeigt Markt-Trends (LangChain +689%)
 3. **UC-F3-3:** Steigt von 650€ auf 900€/Tag (nach Skill-Upgrade)
@@ -194,24 +213,28 @@ Premium AI-Talent-Plattform mit:
 #### Persona C1: Startup CTO (Lisa, 29)
 
 **Profil:**
+
 - Frühes Startup, 5 Mitarbeiter, Series A (2 Mio. €)
 - Braucht AI-Integration (Chatbot, RAG)
 - Budget: 20-40k€ pro AI-Projekt
 - Location: Berlin
 
 **Motivations:**
+
 - Schnell AI-Expertise zukaufen (nicht 3 Monate warten)
 - Budget schonen (2% vs. 10-16%)
 - Trial Period nutzen (Risiko minimieren)
 - Junior + Senior kombinieren (Kosten senken)
 
 **Pain Points:**
+
 - Toptal zu teuer (30-50% Markup)
 - Upwork zu viel Schrott (Qualität unsicher)
 - Interne Hiring dauert zu lange
 - Kein Budget für Full-Time Senior
 
 **Use Cases:**
+
 1. **UC-C1-1:** Erstellt Projekt mit AI Project Builder (perfekte Beschreibung)
 2. **UC-C1-2:** Bekommt in 48h 3 Freelancer-Vorschläge (AI-gematched)
 3. **UC-C1-3:** Startet 1-Woche-Trial mit Senior (testet Qualität)
@@ -223,24 +246,28 @@ Premium AI-Talent-Plattform mit:
 #### Persona C2: Enterprise AI Lead (Thomas, 42)
 
 **Profil:**
+
 - Konzern, 5.000+ Mitarbeiter
 - AI-Transformation verantwortlich
 - Budget: 100-300k€ pro Pilotprojekt
 - Location: Frankfurt
 
 **Motivations:**
+
 - Teams schnell skalieren (mal 3, mal 10 Freelancer)
 - Kuratierte Qualität (Top 10%)
 - AI Team Assembly (komplexe Projekte)
 - Schnelligkeit (48h statt 3 Monate)
 
 **Pain Points:**
+
 - Interne Hiring dauert Monate (Compliance, HR-Prozesse)
 - Externe Consultancies zu teuer (McKinsey, BCG)
 - Braucht flexible Kapazität (Pilot-Phase unklar)
 - Qualität kritisch (kann sich Fails nicht leisten)
 
 **Use Cases:**
+
 1. **UC-C2-1:** Erstellt komplexes Projekt (AI-Chatbot + RAG + Frontend)
 2. **UC-C2-2:** AI Team Assembly schlägt 3er-Team vor (LLM Engineer + Backend + Frontend)
 3. **UC-C2-3:** Bucht Team für Pilotprojekt (3 Monate)
@@ -252,23 +279,27 @@ Premium AI-Talent-Plattform mit:
 #### Persona C3: Agentur-Inhaber (Michael, 39)
 
 **Profil:**
+
 - Software-Agentur, 12 Mitarbeiter
 - Kunden fragen nach AI, Team hat keine Expertise
 - Budget: 10-30k€ (White-Label für Kunden)
 - Location: München
 
 **Motivations:**
+
 - Schnell AI-Kapazität zukaufen (für Kundenprojekte)
 - Apprentice-Freelancer für einfache Tasks (günstig)
 - Trial Period nutzen (will Qualität prüfen)
 - Flexible Verträge (mal 2 Wochen, mal 3 Monate)
 
 **Pain Points:**
+
 - Kann nicht permanent 1.000€/Tag Seniors leisten
 - Braucht verschiedene Skill-Levels (Junior für Prompt Engineering, Senior für Architektur)
 - Will AI-Skills intern aufbauen (Team lernt mit)
 
 **Use Cases:**
+
 1. **UC-C3-1:** Bucht Apprentice (400€/Tag) für Prompt Engineering
 2. **UC-C3-2:** Bucht Expert (1.000€/Tag) für 3 Tage Architektur-Beratung
 3. **UC-C3-3:** Nutzt Trial Period (testet Qualität vor Commitment)
@@ -287,11 +318,13 @@ Premium AI-Talent-Plattform mit:
 **Description:** User können Accounts erstellen, sich anmelden, Profile verwalten
 
 **Business Value:**
+
 - Grundvoraussetzung für personalisierte Plattform
 - Kuratierung möglich (Freelancer-Vetting)
 - Sicherheit (Datenschutz, DSGVO)
 
 **MVP Scope:**
+
 - Registrierung (Email + Password)
 - Login/Logout
 - Email-Verification
@@ -311,11 +344,13 @@ Premium AI-Talent-Plattform mit:
 **Description:** Freelancer können detaillierte Profile erstellen (Skills, Erfahrung, Portfolio, Rate)
 
 **Business Value:**
+
 - Basis für AI-Matching
 - Qualitätssicherung durch Vetting
 - Differenzierung (kuratiert vs. Open-Marketplace)
 
 **MVP Scope:**
+
 - Basic Info (Name, Location, Bio)
 - Skills (Tags: LangChain, RAG, Python, etc.)
 - Erfahrungs-Level (Apprentice/Intermediate/Expert)
@@ -325,6 +360,7 @@ Premium AI-Talent-Plattform mit:
 - **KEIN:** File-Uploads (später), Zertifikate, detaillierte CV
 
 **Vetting-Prozess (Manual für MVP):**
+
 - Admin reviewed alle Profile manuell
 - Checks: Portfolio, Skills, References
 - Accept/Reject (nur Top 10%)
@@ -342,10 +378,12 @@ Premium AI-Talent-Plattform mit:
 **Description:** Firmen können Company-Profile erstellen
 
 **Business Value:**
+
 - Trust (Freelancer sehen, wer Firma ist)
 - Compliance (Handelsregister-Check später)
 
 **MVP Scope:**
+
 - Basic Info (Firmenname, Location, Website)
 - Beschreibung (Was macht die Firma?)
 - Firmengröße (1-10, 11-50, 51-200, 201-1000, 1000+)
@@ -364,10 +402,12 @@ Premium AI-Talent-Plattform mit:
 **Description:** Firmen können Projekte posten
 
 **Business Value:**
+
 - Core Value Proposition (Firmen finden Freelancer)
 - Basis für Matching
 
 **MVP Scope:**
+
 - Projektname
 - Beschreibung (Freitext)
 - Benötigte Skills (Tags)
@@ -378,6 +418,7 @@ Premium AI-Talent-Plattform mit:
 - Vertragsmodell (Milestone/Sprint/Retainer/Time&Material)
 
 **KEIN (für später):**
+
 - AI Project Builder (V1.0)
 - File-Uploads (später)
 - Detaillierte Milestones (später)
@@ -395,17 +436,20 @@ Premium AI-Talent-Plattform mit:
 **Description:** Admin matched Projekte manuell zu Freelancern
 
 **Business Value:**
+
 - MVP kann ohne AI-Matching launchen
 - Feedback für späteres AI-Training
 - Qualitätskontrolle
 
 **MVP Scope:**
+
 - Admin sieht alle offenen Projekte
 - Admin sieht alle Freelancer
 - Admin schlägt 2-3 Freelancer per Email vor (an Firma)
 - Firma wählt aus
 
 **KEIN:**
+
 - AI-Matching (V1.0)
 - Automatisierung
 
@@ -422,10 +466,12 @@ Premium AI-Talent-Plattform mit:
 **Description:** Firma bucht Freelancer, Trial Period startet automatisch
 
 **Business Value:**
+
 - Core Differentiator (Trial Period)
 - Risiko-Minimierung
 
 **MVP Scope:**
+
 - Firma klickt "Buchen" bei Freelancer-Vorschlag
 - Freelancer bekommt Benachrichtigung (Email)
 - Freelancer akzeptiert/lehnt ab
@@ -433,6 +479,7 @@ Premium AI-Talent-Plattform mit:
 - Beide können innerhalb 1 Woche abbrechen (Button "Projekt beenden")
 
 **KEIN:**
+
 - Automatische Payments (Stripe später)
 - Escrow (später)
 - Milestone-Tracking (später)
@@ -450,6 +497,7 @@ Premium AI-Talent-Plattform mit:
 **Description:** Beide sehen Projekt-Status und Timeline
 
 **MVP Scope:**
+
 - Status: Trial / Active / Completed / Cancelled
 - Start-Datum
 - End-Datum (optional)
@@ -457,6 +505,7 @@ Premium AI-Talent-Plattform mit:
 - Provision berechnet (2%)
 
 **KEIN:**
+
 - Timetracking (automatisch, später)
 - Invoicing (später)
 - Milestones (später)
@@ -474,11 +523,13 @@ Premium AI-Talent-Plattform mit:
 **Description:** Firmen und Freelancer können kommunizieren
 
 **MVP Scope:**
+
 - Simple Chat (1-to-1, pro Projekt)
 - Text-Messages
 - **KEIN:** File-Sharing (Email benutzen), Read-Receipts, Typing-Indicators
 
 **Warum P1 aber im MVP:**
+
 - Notwendig für Trial Period (Kommunikation)
 - Simple Implementation möglich
 
@@ -495,6 +546,7 @@ Premium AI-Talent-Plattform mit:
 **Description:** Nach Projekt-Ende: Abrechnung erstellen
 
 **MVP Scope:**
+
 - Freelancer gibt Tage gearbeitet ein
 - System berechnet: Tage × Tagessatz = Betrag
 - System berechnet: Betrag × 2% = Provision
@@ -503,6 +555,7 @@ Premium AI-Talent-Plattform mit:
 - Admin markiert als "Bezahlt" (manual)
 
 **KEIN:**
+
 - Automatische Stripe-Payments (V1.0)
 - Escrow (V1.0)
 - Auto-Invoicing
@@ -522,6 +575,7 @@ Premium AI-Talent-Plattform mit:
 **Description:** AI-gestützter Dialog erstellt perfekte Projektbeschreibung
 
 **Scope:**
+
 - Chatbot-Interface (Firma beantwortet Fragen)
 - AI generiert vollständige Projektbeschreibung
 - Skills-Extraktion automatisch
@@ -541,6 +595,7 @@ Premium AI-Talent-Plattform mit:
 **Description:** AI matched Projekte automatisch zu Freelancern
 
 **Scope:**
+
 - Semantisches Matching (nicht nur Keywords)
 - Confidence Score (85%+ Match)
 - Top 3 Vorschläge
@@ -560,6 +615,7 @@ Premium AI-Talent-Plattform mit:
 **Description:** AI gibt Karriere-Empfehlungen basierend auf Markt-Trends
 
 **Scope:**
+
 - Analyse: Aktuelle Skills vs. Markt-Nachfrage
 - Empfehlungen: Welche Skills lernen?
 - Tagessatz-Potenzial
@@ -579,6 +635,7 @@ Premium AI-Talent-Plattform mit:
 **Description:** Automatische Zahlungsabwicklung mit Escrow
 
 **Scope:**
+
 - Stripe Integration
 - Firma zahlt in Escrow (vor Projektstart)
 - Nach Projekt-Ende: Release an Freelancer
@@ -599,6 +656,7 @@ Premium AI-Talent-Plattform mit:
 **Description:** AI zerlegt komplexe Projekte und stellt Teams zusammen
 
 **Scope:**
+
 - Projekt-Analyse (braucht 3 Rollen?)
 - Team-Vorschläge (LLM Engineer + Backend + Frontend)
 - Budget-Berechnung
@@ -614,27 +672,33 @@ Premium AI-Talent-Plattform mit:
 ### 3.3 Future Features (V2.0+)
 
 #### F15: Apprenticeship Program (formal)
+
 - Tier-System mit Auto-Upgrade
 - AI-gesteuerte Skill-Assessments
 - Badges & Certifications
 
 #### F16: Advanced Analytics
+
 - Dashboard für Freelancer (Earnings, Projects, Trends)
 - Dashboard für Firmen (Spending, Success-Rate)
 
 #### F17: Referral Program
+
 - Freelancer wirbt Freelancer: 500€ Bonus
 - Firma wirbt Firma: 1.000€ Credit
 
 #### F18: Mobile App (iOS/Android)
+
 - Native Apps (React Native)
 
 #### F19: Reviews & Ratings (clevere Version)
+
 - Verdeckte Reviews (simultane Abgabe)
 - AI Quality Score (objektiv)
 - Repeat-Rate Tracking
 
 #### F20: Advanced Search & Filters
+
 - Freelancer-Suchmaschine für Firmen
 - Projekt-Suchmaschine für Freelancer
 - Saved Searches, Alerts
@@ -653,6 +717,7 @@ möchte ich mich mit Email und Password registrieren
 damit ich ein Profil erstellen und Projekte finden kann
 
 **Acceptance Criteria:**
+
 - [ ] Freelancer kann Email, Password, Passwort-Bestätigung eingeben
 - [ ] Email muss valide sein (@-Symbol, Domain)
 - [ ] Email muss unique sein (Check gegen DB)
@@ -677,6 +742,7 @@ möchte ich meine Email verifizieren
 damit mein Account aktiviert wird und ich mich anmelden kann
 
 **Acceptance Criteria:**
+
 - [ ] Freelancer klickt auf Link in Email
 - [ ] Link ist 24h gültig
 - [ ] Bei valid Link: Account wird verifiziert, Auto-Login
@@ -698,6 +764,7 @@ möchte ich mich mit Email und Password anmelden
 damit ich auf mein Dashboard zugreifen kann
 
 **Acceptance Criteria:**
+
 - [ ] User kann Email + Password eingeben
 - [ ] Bei korrekten Credentials: Login + Redirect zu Dashboard
 - [ ] Bei falschen Credentials: Error "Invalid email or password"
@@ -720,6 +787,7 @@ möchte ich mein Passwort zurücksetzen können
 falls ich es vergessen habe
 
 **Acceptance Criteria:**
+
 - [ ] User klickt "Forgot Password?" auf Login-Page
 - [ ] User gibt Email ein
 - [ ] System sendet Reset-Link (wenn Email existiert)
@@ -745,6 +813,7 @@ möchte ich mein Profil vervollständigen (Skills, Rate, Erfahrung)
 damit Firmen mich finden und buchen können
 
 **Acceptance Criteria:**
+
 - [ ] Freelancer füllt Basic Info aus: Name, Location, Bio (max. 500 Zeichen)
 - [ ] Freelancer wählt Skills aus (Autocomplete-Tags: LangChain, RAG, Python, etc.)
 - [ ] Freelancer wählt Erfahrungs-Level: Apprentice/Intermediate/Expert
@@ -770,6 +839,7 @@ möchte ich Freelancer-Profile reviewen und approven/rejecten
 damit nur Top 10% auf die Plattform kommen
 
 **Acceptance Criteria:**
+
 - [ ] Admin sieht Liste aller "Pending Review" Profile
 - [ ] Admin kann Profil öffnen und Details sehen
 - [ ] Admin kann Portfolio-Links öffnen (GitHub, etc.)
@@ -795,6 +865,7 @@ möchte ich ein Company-Profil erstellen
 damit Freelancer sehen, wer wir sind
 
 **Acceptance Criteria:**
+
 - [ ] Firma füllt aus: Firmenname, Location, Website, Beschreibung (max. 1000 Zeichen)
 - [ ] Firma wählt Firmengröße: 1-10, 11-50, 51-200, 201-1000, 1000+
 - [ ] Form-Validation (Required Fields)
@@ -816,6 +887,7 @@ möchte ich ein Projekt posten
 damit ich passende Freelancer finde
 
 **Acceptance Criteria:**
+
 - [ ] Firma füllt aus:
   - Projektname (max. 100 Zeichen)
   - Beschreibung (Freitext, max. 5000 Zeichen)
@@ -846,6 +918,7 @@ möchte ich manuell passende Freelancer zu Projekten matchen
 damit Firmen qualifizierte Vorschläge bekommen
 
 **Acceptance Criteria:**
+
 - [ ] Admin sieht Dashboard: Alle "Open" Projekte
 - [ ] Admin öffnet Projekt, sieht alle Details
 - [ ] Admin sieht Liste aller "Active" Freelancer (mit Skills, Rate, Verfügbarkeit)
@@ -870,6 +943,7 @@ möchte ich einen vorgeschlagenen Freelancer buchen
 damit das Projekt startet (mit Trial Period)
 
 **Acceptance Criteria:**
+
 - [ ] Firma sieht 2-3 Freelancer-Vorschläge (Name, Skills, Rate, Portfolio)
 - [ ] Firma klickt "Book Freelancer" bei einem
 - [ ] System erstellt Project-Booking:
@@ -896,6 +970,7 @@ möchte ich innerhalb der Trial Period (1 Woche) jederzeit abbrechen können
 damit ich kein Risiko eingehe
 
 **Acceptance Criteria:**
+
 - [ ] Beide sehen "Trial Period" Status im Dashboard (mit Countdown: "5 days left")
 - [ ] Beide sehen Button "End Project" (während Trial)
 - [ ] Bei Klick: Confirmation-Dialog "Are you sure? This will end the project immediately"
@@ -922,6 +997,7 @@ möchte ich nach 7 Tagen Trial automatisch zu "Active" wechseln
 falls nicht abgebrochen wurde
 
 **Acceptance Criteria:**
+
 - [ ] Cron-Job läuft täglich (z.B. 00:00 Uhr)
 - [ ] Checked alle ProjectBookings mit Status="Trial" und Trial-End-Date < heute
 - [ ] Wenn Trial vorbei und nicht abgebrochen:
@@ -947,6 +1023,7 @@ möchte ich ein aktives Projekt beenden können
 damit Abrechnung erfolgen kann
 
 **Acceptance Criteria:**
+
 - [ ] Beide sehen "Active Project" im Dashboard
 - [ ] Beide sehen Button "Mark as Completed"
 - [ ] Bei Klick (einer von beiden):
@@ -977,6 +1054,7 @@ möchte ich nach Projekt-Ende Tage gearbeitet eingeben
 damit Abrechnung erstellt wird
 
 **Acceptance Criteria:**
+
 - [ ] Freelancer sieht "Project Completed" → Form "Enter days worked"
 - [ ] Freelancer gibt Tage ein (Number Input, min. 0.5, max. 365)
 - [ ] System berechnet:
@@ -1006,6 +1084,7 @@ möchte ich Zahlungen manuell als "Paid" markieren
 damit Freelancer informiert werden
 
 **Acceptance Criteria:**
+
 - [ ] Admin sieht Dashboard: Alle "Pending Payment" Bookings
 - [ ] Admin checked Bankkonto (manuell, extern)
 - [ ] Bei Zahlungseingang: Admin klickt "Mark as Paid"
@@ -1032,6 +1111,7 @@ möchte ich mit der anderen Partei kommunizieren können
 damit wir Details klären können (besonders während Trial)
 
 **Acceptance Criteria:**
+
 - [ ] Beide sehen "Messages" Tab im Project-Dashboard
 - [ ] Chat-Interface (simple, wie WhatsApp-Web)
 - [ ] User kann Text-Message eingeben (max. 5000 Zeichen)
@@ -1053,29 +1133,34 @@ damit wir Details klären können (besonders während Trial)
 ### 5.1 Authentication & Security
 
 **FR-001: Email Uniqueness**
+
 - System MUSS sicherstellen, dass jede Email nur einmal registriert wird
 - Check on Registration: DB-Query before INSERT
 - Error-Message: "Email already registered. Try logging in?"
 
 **FR-002: Password Strength**
+
 - Minimum 8 Zeichen
 - Mind. 1 Zahl (0-9)
-- Mind. 1 Sonderzeichen (!@#$%^&*)
+- Mind. 1 Sonderzeichen (!@#$%^&\*)
 - Client-side + Server-side Validation
 - Password wird mit bcrypt gehasht (Cost Factor 12)
 
 **FR-003: Email Verification Required**
+
 - User kann sich NICHT anmelden ohne Email-Verification
 - Verification-Link gültig für 24h
 - Nach Ablauf: User kann neuen Link anfordern
 
 **FR-004: Session Management**
+
 - JWT Access Token: 15 Minuten Gültigkeit
 - JWT Refresh Token: 7 Tage Gültigkeit
 - HttpOnly Cookies (XSS-Protection)
 - Secure Flag (nur HTTPS)
 
 **FR-005: Password Reset Flow**
+
 - Reset-Link gültig für 1 Stunde
 - Token wird in DB gespeichert (hashed)
 - Nach Password-Change: Token wird invalidiert
@@ -1086,23 +1171,27 @@ damit wir Details klären können (besonders während Trial)
 ### 5.2 Freelancer-Profil
 
 **FR-006: Skills-Tagging**
+
 - Skills sind vordefinierte Tags (nicht Freitext)
 - Autocomplete-Search beim Eingeben
 - Min. 1 Skill, Max. 20 Skills
 - Skills werden lowercase gespeichert (Consistency)
 
 **FR-007: Tagessatz-Range**
+
 - Min. 300€/Tag (Apprentice)
 - Max. 2.000€/Tag (Expert)
 - Integer (keine Cents)
 - Validierung: Server-side + Client-side
 
 **FR-008: Vetting-Status**
+
 - Profil-Status: Pending Review / Active / Rejected
 - Nur "Active" Freelancer sind sichtbar für Matching
 - "Rejected" Freelancer können Profil bearbeiten und re-submitten
 
 **FR-009: Verfügbarkeit**
+
 - Start-Datum: Nicht in Vergangenheit
 - Tage/Woche: 1-5 (validiert)
 - Wird in Matching berücksichtigt (später)
@@ -1112,6 +1201,7 @@ damit wir Details klären können (besonders während Trial)
 ### 5.3 Projekte
 
 **FR-010: Projekt-Status-Workflow**
+
 ```
 Open → Proposals Sent → Trial Active → Active → Completed → Paid → Closed
                        ↓
@@ -1119,11 +1209,13 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
 ```
 
 **FR-011: Budget-Range (required)**
+
 - Firma MUSS Budget-Range auswählen
 - Keine Freitext-Eingabe (Standardisierung)
 - Wird in Matching verwendet (Freelancer-Rate muss passen)
 
 **FR-012: Skills-Matching**
+
 - Projekt hat min. 1 Skill, max. 10 Skills
 - Admin matcht basierend auf Skill-Overlap (manual im MVP)
 - Später: AI-Matching mit Semantic Similarity
@@ -1133,16 +1225,19 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
 ### 5.4 Trial Period & Booking
 
 **FR-013: Trial Period Duration**
+
 - Fix: 7 Tage (168 Stunden)
 - Startet ab Accept-Zeitpunkt (nicht Booking-Zeitpunkt)
 - Beide Seiten können JEDERZEIT abbrechen (kein Minimum)
 
 **FR-014: Trial Abbruch - Fair Billing**
+
 - Bei Abbruch: Freelancer gibt Tage gearbeitet ein (Dezimal: 0.5, 1.0, 1.5, etc.)
 - Firma zahlt nur gearbeitete Tage + 2% Provision
 - Kein Penalty, keine Mindestgebühr
 
 **FR-015: Trial → Active Transition**
+
 - Automatisch nach 7 Tagen (Cron-Job)
 - Beide werden benachrichtigt (Email)
 - Status-Change: Trial Active → Active
@@ -1152,12 +1247,14 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
 ### 5.5 Payments & Invoicing
 
 **FR-016: Provisions-Berechnung**
+
 - Fix: 2% auf Brutto-Betrag
 - Betrag = Tage × Tagessatz
 - Provision = Betrag × 0.02
 - Freelancer erhält = Betrag - Provision
 
 **FR-017: Invoice-Generation**
+
 - PDF oder HTML (Email-Anhang)
 - Enthält:
   - Projektname
@@ -1169,6 +1266,7 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
   - Bankverbindung (Plattform-Konto)
 
 **FR-018: Payment-Status**
+
 - Pending Payment → Paid → Payout Complete → Closed
 - Admin markiert manuell (im MVP)
 - Später: Stripe Auto-Payout
@@ -1178,16 +1276,19 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
 ### 5.6 Messaging
 
 **FR-019: Message-Storage**
+
 - Messages persistent in DB
 - Soft-Delete (kein Hard-Delete)
 - Max. 5000 Zeichen pro Message
 - Timestamps (created_at)
 
 **FR-020: Realtime-Delivery**
+
 - Polling alle 5 Sekunden (MVP - simple)
 - Später: WebSocket (Pusher, Ably, Socket.io)
 
 **FR-021: Email-Notifications**
+
 - Bei neuer Message: Email an Empfänger
 - Subject: "New message from [Sender]"
 - Body: First 200 chars + Link to Chat
@@ -1199,16 +1300,19 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
 ### 6.1 Performance
 
 **NFR-001: Page Load Time**
+
 - Target: <2 Sekunden (LCP - Largest Contentful Paint)
 - Homepage, Dashboard, Profile Pages
 - Measured mit Lighthouse
 
 **NFR-002: API Response Time**
+
 - Target: <500ms (95th percentile)
 - Database Queries: <100ms average
 - Optimierung durch Indexing, Connection Pooling
 
 **NFR-003: Concurrent Users**
+
 - MVP Target: 50 gleichzeitige User
 - Later: 500+ (mit Scaling)
 
@@ -1217,25 +1321,30 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
 ### 6.2 Security
 
 **NFR-004: HTTPS Only**
+
 - TLS 1.3
 - Alle Pages, alle API-Calls
 - HSTS Header (Strict-Transport-Security)
 
 **NFR-005: Input Sanitization**
+
 - Alle User-Inputs werden sanitized (XSS-Prevention)
 - Parameterized Queries (SQL-Injection-Prevention)
 - Prisma ORM (built-in Protection)
 
 **NFR-006: Rate Limiting**
+
 - API: Max. 100 Requests/Minute pro IP
 - Login: Max. 5 Attempts/15 Minuten
 - Protection gegen Brute-Force, DDoS
 
 **NFR-007: CORS Configuration**
+
 - Nur eigene Domain erlaubt
-- Keine Wildcard (*)
+- Keine Wildcard (\*)
 
 **NFR-007a: Prompt Injection Prevention (V1.0 - für AI-Features)**
+
 - **Kritisch für:** AI Project Builder, AI-Matching, AI Career Coach, AI Team Assembly
 - **Threat:** User könnte versuchen, System-Prompts zu überschreiben oder AI zu manipulieren
 
@@ -1256,16 +1365,19 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
    - Regex-Check auf ungewöhnliche Patterns
 
 2. **Sichere Prompt-Struktur (Claude API Best Practice):**
+
    ```typescript
    // ✅ SICHER:
    const response = await anthropic.messages.create({
-     model: "claude-3-5-sonnet-20241022",
+     model: 'claude-3-5-sonnet-20241022',
      max_tokens: 1024,
      system: FIXED_SYSTEM_PROMPT, // Hardcoded, nicht user-modifiable
-     messages: [{
-       role: "user",
-       content: sanitizedUserInput // User-Input separat
-     }]
+     messages: [
+       {
+         role: 'user',
+         content: sanitizedUserInput, // User-Input separat
+       },
+     ],
    });
 
    // ❌ UNSICHER (DON'T DO THIS):
@@ -1304,11 +1416,13 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
    - Bei mehrfachen Violations: User-Account flaggen für Review
 
 **Testing:**
+
 - Penetration Testing mit bekannten Prompt Injection Techniken
 - Red-Teaming: Versuche absichtlich, System zu brechen
 - Automated Tests: Blacklist-Patterns in Test-Suite
 
 **Compliance:**
+
 - OWASP LLM Top 10: LLM01 - Prompt Injection (mitigiert)
 - Regelmäßige Security-Audits (quartalsweise)
 
@@ -1317,15 +1431,18 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
 ### 6.3 Scalability
 
 **NFR-008: Database Connection Pooling**
+
 - Prisma Connection Pool: Max. 10 Connections (MVP)
 - Later: Scale auf 100+ (bei Wachstum)
 
 **NFR-009: Caching**
+
 - Static Assets: CDN (CloudFront)
 - API Responses: Server-side Caching (später)
 - Session Storage: JWT (stateless)
 
 **NFR-010: Horizontal Scaling**
+
 - Stateless Architecture (Next.js Server Components)
 - Kann auf mehrere Instances skalieren (AWS ECS)
 
@@ -1334,23 +1451,27 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
 ### 6.4 Usability
 
 **NFR-011: Mobile-Responsive**
+
 - Works on 375px+ (iPhone SE)
 - Breakpoints: Mobile (375px), Tablet (768px), Desktop (1024px+)
 - Tailwind CSS Responsive Classes
 
 **NFR-012: Browser Support**
+
 - Chrome (latest 2 Versions)
 - Firefox (latest 2 Versions)
 - Safari (latest 2 Versions)
 - Edge (latest 2 Versions)
 
 **NFR-013: Accessibility**
+
 - WCAG 2.1 Level AA (Goal)
 - Keyboard Navigation
 - Screen Reader Compatible (Semantic HTML, ARIA Labels)
 - Color Contrast Ratio: Min. 4.5:1
 
 **NFR-014: Loading States**
+
 - All Actions >1s: Loading Spinner
 - Skeleton Screens für Listen (Projekte, Freelancer)
 - Optimistic UI Updates (wo möglich)
@@ -1360,20 +1481,24 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
 ### 6.5 Reliability
 
 **NFR-015: Uptime Target**
+
 - 99.5% Uptime (MVP - akzeptabel für Start)
 - Later: 99.9% (Production-Grade)
 
 **NFR-016: Data Backup**
+
 - Täglich: Automatische DB-Backups (AWS RDS)
 - Retention: 7 Tage
 - Point-in-Time Recovery möglich
 
 **NFR-017: Error Logging**
+
 - Sentry Integration (Error Tracking)
 - AWS CloudWatch (Infrastructure Monitoring)
 - Health-Check Endpoint: /api/health
 
 **NFR-018: Disaster Recovery**
+
 - RTO (Recovery Time Objective): <4 Stunden
 - RPO (Recovery Point Objective): <24 Stunden (Daily Backup)
 
@@ -1382,6 +1507,7 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
 ### 6.6 Compliance (DSGVO)
 
 **NFR-019: GDPR Compliance**
+
 - Datenschutzerklärung (Privacy Policy)
 - Cookie Banner (Consent Management)
 - Right to Access (User kann Daten anfordern)
@@ -1389,6 +1515,7 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
 - Data Minimization (nur notwendige Daten)
 
 **NFR-020: Data Residency**
+
 - AWS Frankfurt (eu-central-1)
 - KEINE Datenübertragung außerhalb EU
 - Anthropic API: Prüfen ob EU-Data-Residency verfügbar (oder warten auf Claude EU)
@@ -1402,6 +1529,7 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
 **Tech-Stack wird in Phase 3 (Architecture) finalisiert.**
 
 **Preliminary Constraints (aus Business Case):**
+
 - **Frontend & Backend:** Next.js 14+ (TypeScript, App Router, Server Components)
 - **Database:** PostgreSQL (AWS RDS)
 - **ORM:** Prisma
@@ -1416,16 +1544,19 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
 ### 7.2 Resource Constraints
 
 **RC-001: Solo Developer**
+
 - Entwickler: 1 Person (du)
 - Affects: Komplexität, Timeline, Features
 - Mitigation: MVP-Scope klein halten, kein Over-Engineering
 
 **RC-002: Zeit**
+
 - MVP Deadline: 3 Monate Development
 - Launch: Monat 4
 - Pressure: Scope klar abgrenzen, Priorität auf P0
 
 **RC-003: Budget**
+
 - Pre-Launch: 18.000€ (Legal, Security, Infrastructure-Setup)
 - Laufend: 2.000€/Monat (AWS, AI APIs, Marketing, Legal)
 - Constraint: Keine teuren Services, Bootstrapped
@@ -1435,17 +1566,20 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
 ### 7.3 Regulatory Constraints
 
 **REG-001: DSGVO (GDPR)**
+
 - Datenschutzerklärung erforderlich
 - Cookie Banner (Consent)
 - AVV (Auftragsverarbeitungsverträge) mit AWS, Anthropic
 - Datenhosting in EU (AWS Frankfurt)
 
 **REG-002: Scheinselbständigkeit**
+
 - Plattform = Vermittler (NICHT Arbeitgeber)
 - AGB muss klar stellen: Freelancer sind selbständig
 - Freelancer-Checks (Gewerbeschein, mehrere Auftraggeber)
 
 **REG-003: Impressum**
+
 - Gesetzlich erforderlich in Deutschland
 - Muss enthalten: Name, Adresse, Kontakt, USt-ID
 
@@ -1489,6 +1623,7 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
 ### 8.3 Future Features (V2.0+, explizit OUT)
 
 ❌ **OUT of V1.0:**
+
 - Apprenticeship Program (formal mit Auto-Upgrade)
 - Advanced Analytics Dashboards
 - Referral Program
@@ -1606,6 +1741,7 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
 **High-Level Entities:**
 
 ### Entity: User
+
 - id (UUID, PK)
 - email (unique, string)
 - password_hash (string)
@@ -1614,6 +1750,7 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
 - created_at, updated_at
 
 **Relationships:**
+
 - Has one: FreelancerProfile (if role=FREELANCER)
 - Has one: CompanyProfile (if role=COMPANY)
 - Has many: Messages
@@ -1621,6 +1758,7 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
 ---
 
 ### Entity: FreelancerProfile
+
 - id (UUID, PK)
 - user_id (UUID, FK → User)
 - name (string)
@@ -1637,12 +1775,14 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
 - created_at, updated_at
 
 **Relationships:**
+
 - Belongs to: User
 - Has many: ProjectBookings
 
 ---
 
 ### Entity: CompanyProfile
+
 - id (UUID, PK)
 - user_id (UUID, FK → User)
 - company_name (string)
@@ -1653,12 +1793,14 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
 - created_at, updated_at
 
 **Relationships:**
+
 - Belongs to: User
 - Has many: Projects
 
 ---
 
 ### Entity: Project
+
 - id (UUID, PK)
 - company_id (UUID, FK → CompanyProfile)
 - name (string)
@@ -1673,12 +1815,14 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
 - created_at, updated_at
 
 **Relationships:**
+
 - Belongs to: CompanyProfile
 - Has many: ProjectBookings
 
 ---
 
 ### Entity: ProjectBooking
+
 - id (UUID, PK)
 - project_id (UUID, FK → Project)
 - freelancer_id (UUID, FK → FreelancerProfile)
@@ -1692,6 +1836,7 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
 - created_at, updated_at
 
 **Relationships:**
+
 - Belongs to: Project
 - Belongs to: FreelancerProfile
 - Has many: Messages
@@ -1699,6 +1844,7 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
 ---
 
 ### Entity: Message
+
 - id (UUID, PK)
 - booking_id (UUID, FK → ProjectBooking)
 - sender_id (UUID, FK → User)
@@ -1706,12 +1852,14 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
 - created_at
 
 **Relationships:**
+
 - Belongs to: ProjectBooking
 - Belongs to: User (sender)
 
 ---
 
 ### Entity: Invoice
+
 - id (UUID, PK)
 - booking_id (UUID, FK → ProjectBooking)
 - invoice_number (string, auto-generated)
@@ -1722,6 +1870,7 @@ Open → Proposals Sent → Trial Active → Active → Completed → Paid → C
 - created_at, updated_at
 
 **Relationships:**
+
 - Belongs to: ProjectBooking
 
 ---
@@ -1813,22 +1962,26 @@ POST   /api/invoices              # Generate Invoice (after Completion)
 ### Explizit NICHT in MVP (V1.0):
 
 ❌ **AI-Features:**
+
 - AI Project Builder (V1.0, Monat 6)
 - AI-Matching (V1.0, Monat 6)
 - AI Career Coach (V1.0, Monat 8)
 - AI Team Assembly (V1.0, Monat 10)
 
 ❌ **Advanced Payments:**
+
 - Stripe Auto-Payments (V1.0, Monat 7)
 - Escrow (V1.0, Monat 7)
 - Auto-Invoicing (V1.0)
 
 ❌ **File-Handling:**
+
 - Portfolio-Uploads (PDF, Images)
 - Project-Attachments
 - Profile-Pictures
 
 ❌ **Advanced Features:**
+
 - Reviews & Ratings
 - Referral Program
 - Analytics Dashboards
@@ -1837,20 +1990,24 @@ POST   /api/invoices              # Generate Invoice (after Completion)
 - Email-Alerts
 
 ❌ **Integrations:**
+
 - Calendar-Sync
 - Slack/Teams-Integration
 - Zoom/Meet-Integration
 - LinkedIn-Import
 
 ❌ **Mobile:**
+
 - Native Mobile Apps (iOS/Android)
 - PWA (Progressive Web App)
 
 ❌ **Multi-Language:**
+
 - Englisch (nur Deutsch im MVP)
 - Weitere Sprachen
 
 ❌ **Advanced Messaging:**
+
 - File-Sharing im Chat
 - Read-Receipts
 - Typing-Indicators
@@ -1863,21 +2020,25 @@ POST   /api/invoices              # Generate Invoice (after Completion)
 ### 13.1 Assumptions
 
 **A-001: User Behavior**
+
 - Freelancer sind tech-savvy genug, um Profile selbst auszufüllen
 - Firmen können Projekte klar beschreiben (ohne AI Project Builder im MVP)
 - Beide Seiten nutzen Email regelmäßig (für Notifications)
 
 **A-002: Technical**
+
 - AWS hat 99.9%+ Uptime (RDS, ECS)
 - Anthropic API ist verfügbar für V1.0 (später)
 - Next.js + Prisma sind stabil genug für Production
 
 **A-003: Business**
+
 - 2% Provision ist attraktiv genug (vs. 10-16%)
 - Manual Matching funktioniert für ersten 50 Projekte (dann AI)
 - Firmen akzeptieren Trial Period als ausreichend (kein Escrow im MVP)
 
 **A-004: Market**
+
 - KI-Freelancer-Nachfrage bleibt hoch (nicht nur Hype)
 - Deutsche Firmen zahlen für Qualität (kuratierte Plattform)
 - Freelancer wechseln für 2% (vs. 10-16%)
@@ -1891,14 +2052,17 @@ POST   /api/invoices              # Generate Invoice (after Completion)
 **Top 3 Risks (aus Phase 1):**
 
 **R-001: Scheinselbständigkeit (Score 9/12)**
+
 - Mitigation: Anwalt (5.000€), AGB, Freelancer-Checks
 - Status: Mitigierbar vor Launch
 
 **R-002: Wettbewerb senkt Provisionen (Score 6/12)**
+
 - Mitigation: Differenzierung durch AI-Features, First-Mover (6-9 Monate Vorsprung)
 - Status: Strategisch adressiert
 
 **R-003: Schlechte AI-Matches (Score 6/12)**
+
 - Mitigation: Human-in-Loop (MVP = Manual Matching), Pilot Testing
 - Status: MVP hat kein AI-Matching → Risiko aufgeschoben auf V1.0
 
@@ -1916,6 +2080,7 @@ POST   /api/invoices              # Generate Invoice (after Completion)
 ### 14.2 Next Steps
 
 **Phase 3: Architecture & Tech-Stack**
+
 - Detailliertes DB-Schema (Prisma Schema)
 - API-Design (tRPC Procedures)
 - System-Architektur (Deployment, Scaling)
@@ -1932,10 +2097,12 @@ POST   /api/invoices              # Generate Invoice (after Completion)
 **Status:** ✅ DRAFT COMPLETE - Ready for Review
 
 **Next Action:**
+
 - Review PRD (du selbst oder Stakeholder)
 - Approve & Move to Phase 3 (Architecture)
 
 **Sign-Off:**
+
 - [ ] PRD reviewed and approved
 - [ ] MVP Scope confirmed (16 User Stories, ~80 Points)
 - [ ] Ready for Phase 3 (Architecture)

@@ -9,6 +9,7 @@
 ## Context
 
 Die AI-Freelancer-Plattform benötigt Cloud-Infrastruktur für Deployment:
+
 - **Compute:** AWS ECS Fargate (Container)
 - **Database:** AWS RDS PostgreSQL
 - **Storage:** AWS S3 (Files)
@@ -19,10 +20,12 @@ Die AI-Freelancer-Plattform benötigt Cloud-Infrastruktur für Deployment:
 **Herausforderung:** Wie verwalten wir diese Infrastruktur?
 
 **Optionen:**
+
 1. **Manual Provisioning** (AWS Console, Click-Ops)
 2. **Infrastructure as Code** (Terraform, CloudFormation, Pulumi)
 
 **Anforderungen:**
+
 - Multiple Environments (dev, staging, production)
 - Reproduzierbarkeit (Disaster Recovery)
 - Version Control (Git)
@@ -38,6 +41,7 @@ Wir verwenden **Terraform** für alle Infrastruktur-Provisionierung und -Verwalt
 ### Warum Terraform?
 
 **1. Reproduzierbarkeit**
+
 ```bash
 # Problem: Manuelle AWS Console Konfiguration
 - Admin klickt in AWS Console → ECS Cluster erstellt
@@ -51,6 +55,7 @@ terraform apply
 ```
 
 **2. Version Control**
+
 ```bash
 git log terraform/
 # → Sehe alle Infrastruktur-Änderungen
@@ -59,6 +64,7 @@ git log terraform/
 ```
 
 **3. Multi-Environment Support**
+
 ```
 terraform/
 ├── environments/
@@ -66,9 +72,11 @@ terraform/
 │   ├── staging/       # 2x ECS Task, db.t3.small
 │   └── production/    # 5x ECS Task, db.t3.medium, Multi-AZ
 ```
+
 Gleicher Code, unterschiedliche Werte → Consistency!
 
 **4. State Management**
+
 ```
 Terraform weiß:
 - Was ist deployed? (State)
@@ -81,6 +89,7 @@ $ terraform plan
 ```
 
 **5. Collaboration & Review**
+
 ```bash
 # Pull Request für Infrastruktur-Änderung:
 git diff terraform/
@@ -89,6 +98,7 @@ git diff terraform/
 ```
 
 **6. Multi-Cloud (Future-Proof)**
+
 ```hcl
 # Heute: AWS
 provider "aws" { region = "eu-central-1" }
@@ -100,6 +110,7 @@ provider "google" { region = "europe-west3" }
 ```
 
 **7. Documentation as Code**
+
 ```hcl
 # Terraform Config IST die Dokumentation
 resource "aws_ecs_service" "app" {
@@ -118,11 +129,13 @@ resource "aws_ecs_service" "app" {
 ### Alternative 1: AWS CloudFormation
 
 **Pros:**
+
 - ✅ Native AWS (keine 3rd-party Tool)
 - ✅ Gut integriert mit AWS Services
 - ✅ Kostenlos
 
 **Cons:**
+
 - ❌ **AWS-only** (kein Multi-Cloud)
 - ❌ **Verbose YAML** (100+ Zeilen für simple Ressource)
 - ❌ Langsamer als Terraform (Stack-Updates dauern länger)
@@ -171,11 +184,13 @@ Terraform ist prägnanter, Multi-Cloud-fähig, größeres Ecosystem.
 ### Alternative 2: Pulumi
 
 **Pros:**
+
 - ✅ Code in TypeScript/Python/Go (nicht HCL)
 - ✅ Volle Programming Language Features (Loops, Functions)
 - ✅ Type-safe (für TypeScript)
 
 **Cons:**
+
 - ❌ **Jüngeres Tool** (2018 vs. Terraform 2014)
 - ❌ Kleinere Community
 - ❌ Weniger Ressourcen/Tutorials
@@ -185,12 +200,12 @@ Terraform ist prägnanter, Multi-Cloud-fähig, größeres Ecosystem.
 
 ```typescript
 // Pulumi (TypeScript)
-import * as aws from "@pulumi/aws";
+import * as aws from '@pulumi/aws';
 
-const service = new aws.ecs.Service("app", {
+const service = new aws.ecs.Service('app', {
   cluster: cluster.id,
   desiredCount: 3,
-  launchType: "FARGATE",
+  launchType: 'FARGATE',
   // ...
 });
 ```
@@ -201,11 +216,13 @@ Terraform ist etablierter, größere Community, mehr Solo-Dev-friendly. Pulumi i
 ### Alternative 3: Manual Provisioning (AWS Console)
 
 **Pros:**
+
 - ✅ Schneller Start (kein Terraform Setup)
 - ✅ GUI-basiert (visuell)
 - ✅ Kein Code zu maintainen
 
 **Cons:**
+
 - ❌ **Nicht reproduzierbar**
 - ❌ **Kein Version Control** (keine History)
 - ❌ **Fehleranfällig** (Click-Fehler)
@@ -213,6 +230,7 @@ Terraform ist etablierter, größere Community, mehr Solo-Dev-friendly. Pulumi i
 - ❌ **Kein Rollback**
 
 **Beispiel-Szenario:**
+
 ```
 1. Admin erstellt ECS Cluster in AWS Console
 2. 3 Monate später: Disaster, alles gelöscht
@@ -224,6 +242,7 @@ Terraform ist etablierter, größere Community, mehr Solo-Dev-friendly. Pulumi i
 ```
 
 **Mit Terraform:**
+
 ```bash
 terraform apply
 # → Alles ist wieder da, exakt wie vorher
@@ -237,6 +256,7 @@ Für MVP wäre es schneller, aber für Production ist Reproduzierbarkeit kritisc
 ### Phase 1: Terraform Setup (Phase 3, jetzt)
 
 1. **Terraform Structure erstellen:**
+
 ```
 terraform/
 ├── environments/
@@ -257,6 +277,7 @@ terraform/
 ```
 
 2. **S3 Backend für State:**
+
 ```hcl
 # terraform/environments/production/main.tf
 terraform {
@@ -271,6 +292,7 @@ terraform {
 ```
 
 3. **Modules erstellen:**
+
 ```hcl
 # terraform/modules/ecs/main.tf
 resource "aws_ecs_cluster" "main" {
@@ -289,6 +311,7 @@ resource "aws_ecs_service" "app" {
 ### Phase 2: Infrastructure Deployment (Phase 3.6)
 
 1. **Development Environment:**
+
 ```bash
 cd terraform/environments/dev
 terraform init
@@ -297,6 +320,7 @@ terraform apply
 ```
 
 2. **Production Environment:**
+
 ```bash
 cd terraform/environments/production
 terraform plan  # Review changes
@@ -394,23 +418,27 @@ jobs:
 ### Mitigation Strategies
 
 **1. Learning Curve:**
+
 - Start simple: Nur ECS + RDS (Phase 3.6)
 - Expand gradually: S3, CloudFront, etc. (später)
 - Use existing Modules (Terraform Registry)
 - Dokumentation in README.md
 
 **2. State Management:**
+
 - S3 Backend mit Versioning (Backups)
 - DynamoDB für State Locking
 - Separate States pro Environment (dev, staging, prod)
 - Backup State regelmäßig
 
 **3. State Drift:**
+
 - Policy: "Alle Änderungen via Terraform"
 - AWS IAM: Read-Only Console Access (nur Terraform kann schreiben)
 - Regelmäßig `terraform plan` (CI/CD)
 
 **4. Debugging:**
+
 - `TF_LOG=DEBUG` für Verbose Output
 - `terraform plan` vor `apply`
 - Small Changes (nicht alles auf einmal)
@@ -418,14 +446,17 @@ jobs:
 ## Cost Implications
 
 **Terraform selbst:**
+
 - ✅ **Open Source** (kostenlos)
 - ✅ Terraform Cloud Free Tier (bis 5 Users)
 
 **AWS Kosten (unverändert):**
+
 - ECS, RDS, S3 kosten gleich viel (Terraform vs. Manual)
 - Terraform verursacht keine zusätzlichen AWS-Kosten
 
 **Time Investment:**
+
 - Initial Setup: ~3-5 Tage
 - Maintenance: ~1-2h/Monat
 - **ROI:** Spart Wochen bei Environment 2-3, Disaster Recovery, Onboarding neuer Devs
@@ -433,17 +464,20 @@ jobs:
 ## Security Considerations
 
 ✅ **State Security:**
+
 - S3 Bucket encrypted (AES-256)
 - S3 Versioning (Backup)
 - IAM Roles (Principle of Least Privilege)
 
 ✅ **Secrets Management:**
+
 - Keine Secrets in `.tf` Files (Git)
 - Use `terraform.tfvars` (gitignored)
 - Use AWS Parameter Store / Secrets Manager
 - Use Environment Variables in CI/CD
 
 ✅ **Access Control:**
+
 - Terraform State in S3 (restricted access)
 - IAM Roles für Terraform (nicht root)
 - Multi-Factor Auth für Production
@@ -451,6 +485,7 @@ jobs:
 ## Monitoring & Validation
 
 **Terraform Plan in CI/CD:**
+
 ```yaml
 # Run terraform plan on every PR
 on: pull_request
@@ -459,6 +494,7 @@ on: pull_request
 ```
 
 **Drift Detection:**
+
 ```bash
 # Cron Job: Daily terraform plan
 terraform plan -detailed-exitcode
@@ -466,6 +502,7 @@ terraform plan -detailed-exitcode
 ```
 
 **Terraform Validate:**
+
 ```bash
 terraform validate  # Syntax check
 terraform fmt -check # Format check

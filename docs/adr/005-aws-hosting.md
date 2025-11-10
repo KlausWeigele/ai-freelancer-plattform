@@ -9,6 +9,7 @@
 ## Context
 
 Die AI-Freelancer-Plattform muss deployed werden mit folgenden Requirements:
+
 - **DSGVO-Compliance:** EU Data Residency (Deutschland)
 - **Scalability:** 50 users (MVP) → 500+ (V1.0)
 - **Reliability:** 99.5% Uptime (MVP) → 99.9% (Production)
@@ -43,27 +44,32 @@ Ich verwende **AWS (Amazon Web Services)** mit **Region eu-central-1 (Frankfurt)
 ### Why AWS?
 
 **1. DSGVO-Compliance**
+
 - ✅ EU Region (Frankfurt, eu-central-1)
 - ✅ Data Residency: Alle Daten bleiben in Deutschland
 - ✅ GDPR-compliant (AWS BAA verfügbar)
 - ✅ Encryption at Rest (RDS, S3)
 
 **2. Mature Ecosystem**
+
 - ✅ 15+ Jahre AWS Erfahrung (etabliert)
 - ✅ Große Community, viele Tutorials
 - ✅ Support (falls nötig)
 
 **3. Managed Services**
+
 - ✅ RDS: Automated Backups, Multi-AZ, Monitoring
 - ✅ ECS: Container Orchestration, Auto-Scaling
 - ✅ CloudWatch: Logs, Metrics, Alarms (built-in)
 
 **4. Scalability**
+
 - ✅ ECS Auto-Scaling (CPU/Memory Thresholds)
 - ✅ RDS Read Replicas (später)
 - ✅ CloudFront CDN (global distribution)
 
 **5. Cost**
+
 - ✅ Pay-as-you-go (keine upfront costs)
 - ✅ Free Tier (12 Monate, RDS, EC2)
 - ✅ Cost-effective für MVP (50 users: ~200-300€/Monat)
@@ -73,12 +79,14 @@ Ich verwende **AWS (Amazon Web Services)** mit **Region eu-central-1 (Frankfurt)
 ### Alternative 1: Vercel
 
 **Pros:**
+
 - ✅ Next.js-native (zero-config deployment)
 - ✅ Einfachstes Setup
 - ✅ Automatic HTTPS, CDN
 - ✅ Serverless (keine Infra-Verwaltung)
 
 **Cons:**
+
 - ❌ **KEINE EU Data Residency** (USA-basiert)
 - ❌ DSGVO-kritisch (Daten könnten in USA liegen)
 - ❌ Keine Kontrolle über DB-Location
@@ -88,6 +96,7 @@ Ich verwende **AWS (Amazon Web Services)** mit **Region eu-central-1 (Frankfurt)
 DSGVO-Compliance ist kritisch. Vercel hat keine garantierte EU-Data-Residency. AWS Frankfurt ist sicherer.
 
 **Wann Vercel?**
+
 - Nicht-DSGVO-kritische Apps
 - Prototyping
 - Global Deployment
@@ -95,12 +104,14 @@ DSGVO-Compliance ist kritisch. Vercel hat keine garantierte EU-Data-Residency. A
 ### Alternative 2: Google Cloud Platform (GCP)
 
 **Pros:**
+
 - ✅ EU Region (Belgium, Frankfurt)
 - ✅ DSGVO-compliant
 - ✅ Cloud Run (ähnlich ECS Fargate)
 - ✅ Good performance
 
 **Cons:**
+
 - ❌ Weniger etabliert als AWS (kleineres Ecosystem)
 - ❌ Weniger Tutorials für Next.js
 - ❌ GCP-Kenntnisse nötig (Learning Curve)
@@ -109,18 +120,21 @@ DSGVO-Compliance ist kritisch. Vercel hat keine garantierte EU-Data-Residency. A
 AWS ist etablierter, mehr Community-Ressourcen. GCP wäre auch ok, aber AWS ist "safer choice".
 
 **Wann GCP?**
+
 - Wenn bereits GCP-Erfahrung
 - Wenn Google-Services genutzt (BigQuery, etc.)
 
 ### Alternative 3: Hetzner Cloud (Germany)
 
 **Pros:**
+
 - ✅ **Deutscher Anbieter** (DSGVO-optimal)
 - ✅ Sehr günstig (3-10x billiger als AWS)
 - ✅ EU-Datacenter (Falkenstein, Nürnberg)
 - ✅ Good performance
 
 **Cons:**
+
 - ❌ **Weniger Managed Services** (mehr selbst managen)
 - ❌ Kein RDS (PostgreSQL selbst verwalten)
 - ❌ Kein CloudWatch (Monitoring selbst setup)
@@ -130,6 +144,7 @@ AWS ist etablierter, mehr Community-Ressourcen. GCP wäre auch ok, aber AWS ist 
 Für Solo-Dev sind Managed Services wichtiger als Kosten. RDS + ECS + CloudWatch sparen viel Zeit. Hetzner wäre günstiger, aber mehr Aufwand.
 
 **Wann Hetzner?**
+
 - Wenn Budget sehr knapp (<500€/Monat)
 - Wenn DevOps-Erfahrung vorhanden
 - Später, wenn mehr Kontrolle gewünscht
@@ -137,10 +152,12 @@ Für Solo-Dev sind Managed Services wichtiger als Kosten. RDS + ECS + CloudWatch
 ### Alternative 4: Self-Hosted (VPS)
 
 **Pros:**
+
 - ✅ Volle Kontrolle
 - ✅ Günstig (Hetzner VPS: 20-50€/Monat)
 
 **Cons:**
+
 - ❌ **Alles selbst managen** (DB, Backups, Monitoring, Scaling)
 - ❌ Kein High Availability
 - ❌ Zeitaufwändig
@@ -208,6 +225,7 @@ Auto-Scaling:
 ```
 
 **Cost Estimate (MVP):**
+
 - 1 Task (0.5 vCPU, 1 GB): ~30€/Monat
 
 ### RDS PostgreSQL
@@ -222,6 +240,7 @@ Encryption: At Rest (AWS KMS)
 ```
 
 **Cost Estimate (MVP):**
+
 - db.t3.micro: ~15€/Monat
 - Storage 20GB: ~3€/Monat
 
@@ -241,6 +260,7 @@ CloudFront:
 ```
 
 **Cost Estimate (MVP):**
+
 - S3: ~5€/Monat (10 GB storage, wenig traffic)
 - CloudFront: ~10€/Monat (low traffic)
 
@@ -270,21 +290,25 @@ Production (500 users):
 ## Security Measures
 
 ✅ **Network Security:**
+
 - VPC (Virtual Private Cloud)
 - Security Groups (Firewall Rules)
 - HTTPS only (CloudFront + ALB)
 
 ✅ **Data Security:**
+
 - RDS Encryption at Rest (AWS KMS)
 - S3 Encryption (AES-256)
 - Parameter Store (Secrets)
 
 ✅ **Access Control:**
+
 - IAM Roles (Principle of Least Privilege)
 - No root access
 - MFA enabled
 
 ✅ **Compliance:**
+
 - EU Data Residency (Frankfurt)
 - GDPR-compliant
 - Regular Backups (7 days)

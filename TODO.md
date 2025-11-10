@@ -8,17 +8,17 @@
 
 ## 📊 Fortschritt Overview
 
-| Phase | Tasks | Implementiert | Getestet | Status |
-|-------|-------|---------------|----------|--------|
-| **Phase 0: Bestand** | 9 | 9/9 ✅ | 0/9 | Vorhanden |
-| **Phase 1: Next.js** | 3 | 3/3 ✅ | 3/3 ✅ | ✅ Complete |
-| **Phase 2: AWS Setup** | 4 | 0/4 | 0/4 | 🔴 Todo |
-| **Phase 3: Terraform** | 8 | 0/8 | 0/8 | 🔴 Todo |
-| **Phase 4: CloudFront** | 4 | 0/4 | 0/4 | 🔴 Todo |
-| **Phase 5: GitHub Actions** | 3 | 0/3 | 0/3 | 🔴 Todo |
-| **Phase 6: Migrations** | 2 | 0/2 | 0/2 | 🔴 Todo |
-| **Phase 7: Rollout** | 6 | 0/6 | 0/6 | 🔴 Todo |
-| **GESAMT** | **39** | **12/39** | **3/39** | **31% Done** |
+| Phase                       | Tasks  | Implementiert | Getestet | Status       |
+| --------------------------- | ------ | ------------- | -------- | ------------ |
+| **Phase 0: Bestand**        | 9      | 9/9 ✅        | 0/9      | Vorhanden    |
+| **Phase 1: Next.js**        | 3      | 3/3 ✅        | 3/3 ✅   | ✅ Complete  |
+| **Phase 2: AWS Setup**      | 4      | 0/4           | 0/4      | 🔴 Todo      |
+| **Phase 3: Terraform**      | 8      | 0/8           | 0/8      | 🔴 Todo      |
+| **Phase 4: CloudFront**     | 4      | 0/4           | 0/4      | 🔴 Todo      |
+| **Phase 5: GitHub Actions** | 3      | 0/3           | 0/3      | 🔴 Todo      |
+| **Phase 6: Migrations**     | 2      | 0/2           | 0/2      | 🔴 Todo      |
+| **Phase 7: Rollout**        | 6      | 0/6           | 0/6      | 🔴 Todo      |
+| **GESAMT**                  | **39** | **12/39**     | **3/39** | **31% Done** |
 
 ---
 
@@ -27,6 +27,7 @@
 > Diese Ressourcen existieren bereits und werden wiederverwendet
 
 ### Route 53 & DNS
+
 - [x] Implementiert
 - [ ] Getestet
 - **Ressource:** Route 53 Hosted Zone `weigele.art` (Z05025201BQ9KO181NQS8)
@@ -35,6 +36,7 @@
 - **Notizen:** 7 DNS Records vorhanden, CloudFront Alias aktiv
 
 ### CloudFront Distribution
+
 - [x] Implementiert
 - [ ] Getestet
 - **Ressource:** CloudFront Distribution `E10XAH9K76973M`
@@ -44,6 +46,7 @@
 - **Notizen:** Functions für www→apex redirect vorhanden
 
 ### ACM Certificate
+
 - [x] Implementiert
 - [ ] Getestet
 - **Ressource:** SSL Certificate für `weigele.art` (us-east-1)
@@ -51,6 +54,7 @@
 - **Kosten:** Kostenlos
 
 ### Terraform State Backend
+
 - [x] Implementiert
 - [ ] Getestet
 - **S3 Bucket:** `weigele-terraform-state`
@@ -59,6 +63,7 @@
 - **Kosten:** ~$0.002/Monat
 
 ### GitHub Repository
+
 - [x] Implementiert
 - [ ] Getestet
 - **Repository:** `https://github.com/KlausWeigele/ai-freelancer-plattform.git`
@@ -67,6 +72,7 @@
 - **Secrets:** 4 Secrets (DATABASE_URL, JWT_SECRET, NEXTAUTH_SECRET, NEXTAUTH_URL)
 
 ### Docker Setup
+
 - [x] Implementiert
 - [ ] Getestet
 - **Files:** Dockerfile, docker-compose.yml, docker-compose.prod.yml
@@ -74,6 +80,7 @@
 - **Notizen:** Multi-stage build, optimiert für Production
 
 ### GitHub Actions CI/CD
+
 - [x] Implementiert
 - [ ] Getestet
 - **Workflows:** ci.yml, nightly.yml, deploy-production.yml
@@ -81,12 +88,14 @@
 - **Notizen:** Bereit für AWS Integration
 
 ### Dokumentation
+
 - [x] Implementiert
 - [ ] Getestet
 - **Files:** deployment-guide.md, terraform/README.md, docker/README.md, ARCHITECTURE.md
 - **Status:** ✅ Umfassend (806+ Zeilen)
 
 ### ADR (Architecture Decision Records)
+
 - [x] Implementiert
 - [ ] Getestet
 - **Files:** ADR-001 bis ADR-006
@@ -100,6 +109,7 @@
 **Abhängigkeiten:** Keine
 
 ### 1.1 Next.js Standalone Output aktivieren
+
 - [x] Implementiert
 - [x] Getestet
 - **File:** `next.config.js`
@@ -109,6 +119,7 @@
 - **Result:** ✅ Standalone output: 147 MB (2025-11-10)
 
 ### 1.2 Health Check Endpoint implementieren
+
 - [x] Implementiert
 - [x] Getestet
 - **File:** `src/app/api/health/route.ts` ✅
@@ -120,6 +131,7 @@
 - **Result:** ✅ Returns 503 when DB disconnected, 200 when connected (2025-11-10)
 
 ### 1.3 Version Endpoint implementieren
+
 - [x] Implementiert
 - [x] Getestet
 - **File:** `src/app/api/version/route.ts` ✅
@@ -137,6 +149,7 @@
 **Abhängigkeiten:** AWS Account mit Admin-Zugang
 
 ### 2.1 IAM User für Terraform erstellen
+
 - [ ] Implementiert
 - [ ] Getestet
 - **AWS Console:** IAM → Users → Add User
@@ -156,6 +169,7 @@
 - **Test:** `aws configure` mit neuen Credentials → `aws sts get-caller-identity`
 
 ### 2.2 ECR Repository erstellen
+
 - [ ] Implementiert
 - [ ] Getestet
 - **Command:**
@@ -173,6 +187,7 @@
   ```
 
 ### 2.3 Terraform State Backend konfigurieren
+
 - [ ] Implementiert
 - [ ] Getestet
 - **S3 Bucket:** Bereits vorhanden (`weigele-terraform-state`)
@@ -181,6 +196,7 @@
 - **Test:** `terraform init` in dev environment
 
 ### 2.4 GitHub Secrets hinzufügen
+
 - [ ] Implementiert
 - [ ] Getestet
 - **Via GitHub CLI:**
@@ -201,6 +217,7 @@
 **Abhängigkeiten:** Phase 2 komplett
 
 ### 3.1 Terraform Networking Module erstellen
+
 - [ ] Implementiert
 - [ ] Getestet
 - **File:** `terraform/modules/networking/main.tf`
@@ -219,6 +236,7 @@
 - **Test:** `terraform plan` → Alle Ressourcen geplant
 
 ### 3.2 Terraform RDS Module erstellen
+
 - [ ] Implementiert
 - [ ] Getestet
 - **File:** `terraform/modules/rds/main.tf`
@@ -236,6 +254,7 @@
 - **Test:** `terraform plan` → RDS Instance geplant
 
 ### 3.3 Terraform ECS Module erstellen
+
 - [ ] Implementiert
 - [ ] Getestet
 - **File:** `terraform/modules/ecs/main.tf`
@@ -271,6 +290,7 @@
 - **Test:** `terraform plan` → ECS + ALB geplant
 
 ### 3.4 Terraform CloudWatch Module erstellen
+
 - [ ] Implementiert
 - [ ] Getestet
 - **File:** `terraform/modules/monitoring/main.tf`
@@ -286,6 +306,7 @@
 - **Test:** `terraform plan` → Monitoring geplant
 
 ### 3.5 Development Environment konfigurieren
+
 - [ ] Implementiert
 - [ ] Getestet
 - **File:** `terraform/environments/dev/main.tf`
@@ -305,6 +326,7 @@
 - **Test:** `terraform init && terraform plan`
 
 ### 3.6 Staging Environment konfigurieren
+
 - [ ] Implementiert
 - [ ] Getestet
 - **File:** `terraform/environments/staging/main.tf`
@@ -317,6 +339,7 @@
 - **Test:** `terraform plan`
 
 ### 3.7 Production Environment konfigurieren
+
 - [ ] Implementiert
 - [ ] Getestet
 - **File:** `terraform/environments/production/main.tf`
@@ -330,6 +353,7 @@
 - **Test:** `terraform plan`
 
 ### 3.8 Dev Environment deployen (erster Test!)
+
 - [ ] Implementiert
 - [ ] Getestet
 - **Command:** `cd terraform/environments/dev && terraform apply`
@@ -349,6 +373,7 @@
 **Abhängigkeiten:** Phase 3.8 (ALB DNS Name)
 
 ### 4.1 CloudFront Origin auf ALB ändern
+
 - [ ] Implementiert
 - [ ] Getestet
 - **AWS Console:** CloudFront → Distribution E10XAH9K76973M → Origins
@@ -360,6 +385,7 @@
 - **Test:** CloudFront zeigt Fehler (noch kein Docker Image deployed)
 
 ### 4.2 CloudFront Cache Behavior optimieren
+
 - [ ] Implementiert
 - [ ] Getestet
 - **Behaviors:**
@@ -375,6 +401,7 @@
 - **Test:** Nach Deployment: Headers prüfen, Cache-Verhalten validieren
 
 ### 4.3 CloudFront Functions prüfen
+
 - [ ] Implementiert
 - [ ] Getestet
 - **Functions:** 2 Functions vorhanden (redirect-www-to-apex, function)
@@ -382,6 +409,7 @@
 - **Test:** www.weigele.art → weigele.art Redirect funktioniert
 
 ### 4.4 CloudFront Monitoring aktivieren
+
 - [ ] Implementiert
 - [ ] Getestet
 - **Settings:**
@@ -397,6 +425,7 @@
 **Abhängigkeiten:** Phase 3 & 4 komplett
 
 ### 5.1 CI Workflow: Staging Deployment aktivieren
+
 - [ ] Implementiert
 - [ ] Getestet
 - **File:** `.github/workflows/ci.yml` (Zeile 254-260)
@@ -409,6 +438,7 @@
 - **Test:** Git push → CI läuft → Staging deployed → Health check OK
 
 ### 5.2 Production Workflow aktivieren
+
 - [ ] Implementiert
 - [ ] Getestet
 - **File:** `.github/workflows/deploy-production.yml`
@@ -421,6 +451,7 @@
 - **Test:** Manual trigger mit version tag → Production deployment
 
 ### 5.3 Nightly Workflow anpassen
+
 - [ ] Implementiert
 - [ ] Getestet
 - **File:** `.github/workflows/nightly.yml`
@@ -437,6 +468,7 @@
 **Abhängigkeiten:** RDS läuft (Phase 3)
 
 ### 6.1 Initial Migration auf Dev
+
 - [ ] Implementiert
 - [ ] Getestet
 - **Command:**
@@ -452,6 +484,7 @@
   ```
 
 ### 6.2 Migration Strategy dokumentieren
+
 - [ ] Implementiert
 - [ ] Getestet
 - **File:** `docs/database-migrations.md` (neu)
@@ -470,6 +503,7 @@
 **Abhängigkeiten:** Alle vorherigen Phasen
 
 ### 7.1 Development Environment vollständiger Test
+
 - [ ] Implementiert
 - [ ] Getestet
 - **Steps:**
@@ -482,6 +516,7 @@
 - **Erfolg:** Alle Funktionen laufen auf Dev
 
 ### 7.2 Staging Environment: CI/CD Test
+
 - [ ] Implementiert
 - [ ] Getestet
 - **Steps:**
@@ -494,6 +529,7 @@
 - **Erfolg:** CI/CD Pipeline funktioniert End-to-End
 
 ### 7.3 CloudFront End-to-End Test
+
 - [ ] Implementiert
 - [ ] Getestet
 - **Steps:**
@@ -506,6 +542,7 @@
 - **Erfolg:** CloudFront → ALB → ECS → RDS funktioniert
 
 ### 7.4 Production Deployment Vorbereitung
+
 - [ ] Implementiert
 - [ ] Getestet
 - **Steps:**
@@ -517,6 +554,7 @@
 - **Erfolg:** Production Infrastruktur steht, wartet auf Deployment
 
 ### 7.5 Production Deployment (Go-Live!)
+
 - [ ] Implementiert
 - [ ] Getestet
 - **Steps:**
@@ -531,6 +569,7 @@
 - **Erfolg:** Production läuft stabil
 
 ### 7.6 CloudFront auf Production umstellen
+
 - [ ] Implementiert
 - [ ] Getestet
 - **Steps:**
@@ -547,24 +586,28 @@
 ## Post-Launch Checklist
 
 ### Monitoring Setup
+
 - [ ] CloudWatch Dashboards erstellen
 - [ ] CloudWatch Alarms testen (Notifications)
 - [ ] Sentry Error Tracking integrieren (optional)
 - [ ] Uptime Monitoring (UptimeRobot) einrichten
 
 ### Documentation
+
 - [ ] README.md aktualisieren (Status: Phase 3.6 complete → Production deployed)
 - [ ] Deployment Runbook erstellen
 - [ ] Incident Response Plan dokumentieren
 - [ ] Rollback Prozedur testen (einmal simulieren)
 
 ### Cost Optimization
+
 - [ ] AWS Cost Explorer prüfen (erste Woche)
 - [ ] RDS Instance Size evaluieren (Performance vs. Kosten)
 - [ ] ECS Auto-Scaling Policies prüfen
 - [ ] CloudFront Kosten analysieren
 
 ### Security Hardening
+
 - [ ] Security Group Rules review (Least Privilege)
 - [ ] RDS Encryption prüfen
 - [ ] Secrets Rotation Policy (IAM, DB Passwörter)
@@ -577,41 +620,46 @@
 ### Wenn Deployment fehlschlägt:
 
 #### CloudFront Rollback
+
 - [ ] CloudFront Origin zurück auf vorherige Config
 - [ ] Cache invalidieren
 
 #### ECS Rollback
+
 - [ ] ECS Service: Previous Task Definition
   ```bash
   aws ecs update-service --task-definition freelancer-app:42
   ```
 
 #### Database Rollback
+
 - [ ] RDS Snapshot restore (falls Migration fehlschlägt)
   ```bash
   aws rds restore-db-instance-from-db-snapshot
   ```
 
 #### GitHub Deployment Rollback
+
 - [ ] Previous Git Tag deployen: `v0.9.0`
 
 ---
 
 ## Kosten-Tracking
 
-| Ressource | Dev (€/Monat) | Staging (€/Monat) | Production (€/Monat) |
-|-----------|---------------|-------------------|----------------------|
-| Route 53 | - | - | $0.50 |
-| CloudFront | - | - | $0-5 (Free Tier) |
-| ALB | $16 | $16 | $16 |
-| NAT Gateway | $32 | $64 | $64 |
-| ECS Fargate | $5 | $10 | $15-20 |
-| RDS t3.micro | $15 | - | - |
-| RDS t3.small | - | $30 | $30 |
-| Data Transfer | $1 | $2 | $3-5 |
-| **TOTAL** | **~$69** | **~$122** | **~$128-135** |
+| Ressource     | Dev (€/Monat) | Staging (€/Monat) | Production (€/Monat) |
+| ------------- | ------------- | ----------------- | -------------------- |
+| Route 53      | -             | -                 | $0.50                |
+| CloudFront    | -             | -                 | $0-5 (Free Tier)     |
+| ALB           | $16           | $16               | $16                  |
+| NAT Gateway   | $32           | $64               | $64                  |
+| ECS Fargate   | $5            | $10               | $15-20               |
+| RDS t3.micro  | $15           | -                 | -                    |
+| RDS t3.small  | -             | $30               | $30                  |
+| Data Transfer | $1            | $2                | $3-5                 |
+| **TOTAL**     | **~$69**      | **~$122**         | **~$128-135**        |
 
 **Optimierung nach 1 Monat:**
+
 - RDS Instance downsizing möglich?
 - NAT Gateway: Reduzieren auf 1 in dev?
 - ECS Tasks: Auto-scaling evaluieren
@@ -621,11 +669,13 @@
 ## Notizen & Learnings
 
 ### 2025-11-10: Projekt Start
+
 - [x] AWS Kosten von $36/Monat auf $0.60/Monat reduziert
 - [x] CloudFront Distribution E10XAH9K76973M behalten für Reuse
 - [x] Terraform State Backend bereits vorhanden (weigele-terraform-state)
 
 ### 2025-11-10: Phase 1 Complete ✅
+
 - [x] Next.js Standalone Output aktiviert (147 MB)
 - [x] Health Check Endpoint implementiert (`/api/health`)
 - [x] Version Endpoint implementiert (`/api/version`)
@@ -633,6 +683,7 @@
 - **Zeit:** ~30 Minuten (wie geschätzt)
 
 ### During Implementation:
+
 - Next.js Config Warning: `swcMinify` und `eslint` sind deprecated in Next.js 16, aber nicht kritisch
 - Standalone build erfolgreich: 147 MB (exzellent für Docker)
 - Health Check zeigt korrekt 503 wenn DB nicht erreichbar

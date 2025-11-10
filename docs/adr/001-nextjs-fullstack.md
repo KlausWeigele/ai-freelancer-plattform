@@ -9,6 +9,7 @@
 ## Context
 
 Ich brauche ein Framework für die AI-Freelancer-Plattform, das sowohl Frontend als auch Backend abdeckt. Als Solo-Developer ist es wichtig, ein Framework zu wählen, das:
+
 - Produktiv ist (schnelle Entwicklung)
 - Modernen Best Practices folgt
 - Gute TypeScript-Integration hat
@@ -22,6 +23,7 @@ Ich verwende **Next.js 14+ mit App Router** als Full-Stack-Framework.
 ### Warum Next.js?
 
 **Frontend-Vorteile:**
+
 - ✅ React-basiert (moderne, etablierte Library)
 - ✅ Server Components (weniger Client-JS, bessere Performance)
 - ✅ Built-in Routing (App Router, file-based)
@@ -31,18 +33,21 @@ Ich verwende **Next.js 14+ mit App Router** als Full-Stack-Framework.
 - ✅ Excellent TypeScript Support
 
 **Backend-Vorteile:**
+
 - ✅ API Routes (kein separater Backend-Server nötig)
 - ✅ Server Actions (mutations ohne API-Endpoints)
 - ✅ Middleware (Auth, Rate Limiting)
 - ✅ Cron Jobs (Vercel Cron oder externe Lösungen)
 
 **Solo-Dev Vorteile:**
+
 - ✅ Einheitliche Codebase (Frontend + Backend)
 - ✅ Shared Types (TypeScript end-to-end)
 - ✅ Weniger Context-Switching
 - ✅ Einfacheres Deployment (ein Container)
 
 **Deployment:**
+
 - ✅ Vercel (native, zero-config)
 - ✅ Docker (AWS ECS, Google Cloud Run)
 - ✅ Self-Hosted möglich
@@ -52,11 +57,13 @@ Ich verwende **Next.js 14+ mit App Router** als Full-Stack-Framework.
 ### Alternative 1: Vite + React + Express (separate Backend)
 
 **Pros:**
+
 - ✅ Flexibler (separate Frontend/Backend)
 - ✅ Vite ist schneller im Development
 - ✅ Kann Backend in anderer Sprache schreiben (z.B. Go, Python)
 
 **Cons:**
+
 - ❌ Zwei separate Deployments
 - ❌ Mehr Setup-Aufwand
 - ❌ Keine shared Types ohne zusätzliche Tools
@@ -68,11 +75,13 @@ Next.js Full-Stack ist für Solo-Dev effizienter. Die Backend-Requirements sind 
 ### Alternative 2: Remix
 
 **Pros:**
+
 - ✅ Modernes Full-Stack-Framework
 - ✅ Gute TypeScript-Integration
 - ✅ Server-first Architektur
 
 **Cons:**
+
 - ❌ Kleineres Ecosystem als Next.js
 - ❌ Weniger etabliert
 - ❌ Weniger Community-Support
@@ -84,9 +93,11 @@ Next.js ist etablierter, hat größeres Ecosystem, mehr Ressourcen. Für MVP ist
 ### Alternative 3: Create React App (CRA)
 
 **Pros:**
+
 - ✅ Einfach für reine Frontend-Apps
 
 **Cons:**
+
 - ❌ **Veraltet** (React-Team empfiehlt CRA nicht mehr)
 - ❌ Kein Backend
 - ❌ Keine Server Components
@@ -98,6 +109,7 @@ CRA ist deprecated. Next.js ist der offizielle Nachfolger.
 ## Rationale
 
 **Warum App Router (vs. Pages Router)?**
+
 - ✅ Server Components (default)
 - ✅ Moderne Architektur (Zukunft von Next.js)
 - ✅ Bessere Performance (weniger Client-JS)
@@ -105,6 +117,7 @@ CRA ist deprecated. Next.js ist der offizielle Nachfolger.
 - ❌ Neue API (Lernkurve), aber lohnt sich langfristig
 
 **Trade-offs:**
+
 - **Pro:** Schnellere Entwicklung, weniger Boilerplate, gutes Ecosystem
 - **Con:** Vendor Lock-in (Next.js-specific patterns), Framework-Overhead
 

@@ -10,6 +10,7 @@
 This directory contains GitHub Actions workflows for automated CI/CD pipeline.
 
 **Workflows:**
+
 1. `ci.yml` - Continuous Integration
 2. `nightly.yml` - Nightly Testing
 3. `deploy-production.yml` - Production Deployment
@@ -29,25 +30,30 @@ quality → test → build → docker → deploy-staging
 ```
 
 **1. Code Quality**
+
 - Lint (ESLint)
 - Type Check (TypeScript)
 - Format Check (Prettier)
 - Security Audit (pnpm audit)
 
 **2. Tests**
-- Unit Tests (Vitest) - *To be implemented*
-- Integration Tests - *To be implemented*
+
+- Unit Tests (Vitest) - _To be implemented_
+- Integration Tests - _To be implemented_
 - Database: PostgreSQL 15
 
 **3. Build**
+
 - Next.js Production Build
 - Prisma Client Generation
 
 **4. Docker**
+
 - Build Docker image
 - Test image health
 
 **5. Deploy Staging** (if `main` branch)
+
 - Automatic deployment to staging
 - Smoke tests
 
@@ -79,21 +85,24 @@ nightly-tests → backup-test → dependency-check
 ```
 
 **1. Comprehensive Tests**
-- Full Unit Test Suite - *To be implemented*
-- Full Integration Tests - *To be implemented*
-- E2E Tests (Playwright) - *To be implemented*
-- Performance Tests - *To be implemented*
-- Visual Regression Tests - *To be implemented*
+
+- Full Unit Test Suite - _To be implemented_
+- Full Integration Tests - _To be implemented_
+- E2E Tests (Playwright) - _To be implemented_
+- Performance Tests - _To be implemented_
+- Visual Regression Tests - _To be implemented_
 - Deep Security Audit
 - Docker Build Test
 - Database Migration Test
 
 **2. Database Backup Test**
+
 - Test backup creation
 - Test restore process
 - Verify data integrity
 
 **3. Dependency Check**
+
 - Check for outdated dependencies
 - Security vulnerability scan
 
@@ -129,32 +138,38 @@ validate → pre-deployment-tests → build → deploy → rollback (if fails) �
 ```
 
 **1. Validate**
+
 - Check version tag exists
 - Verify version format
 - Create deployment summary
 
 **2. Pre-Deployment Tests**
+
 - Run critical tests
 - Build application
 - Database migrations (test)
 
 **3. Build**
+
 - Build Docker image
 - Tag with version
 - Push to registry (when configured)
 - Test image
 
 **4. Deploy** (requires approval)
+
 - Update production service
 - Run database migrations (manual)
 - Health checks
 - Smoke tests
 
 **5. Rollback** (if failure)
+
 - Generate rollback instructions
 - Notify team
 
 **6. Monitor**
+
 - 10-minute monitoring period
 - Check error rates
 - Success notification
@@ -250,6 +265,7 @@ Configure two environments in GitHub settings:
 - Separate database
 
 **Environment Variables:**
+
 ```bash
 NEXTAUTH_URL=https://staging.your-domain.com
 DATABASE_URL=postgresql://... (staging database)
@@ -264,6 +280,7 @@ DATABASE_URL=postgresql://... (staging database)
 - Manual deployment only
 
 **Environment Variables:**
+
 ```bash
 NEXTAUTH_URL=https://your-domain.com
 DATABASE_URL=postgresql://... (production database)
@@ -309,10 +326,11 @@ Jobs marked with `if: false` are disabled:
 ```yaml
 - name: Run Unit Tests
   run: pnpm run test:unit
-  if: false  # Enable when tests are implemented
+  if: false # Enable when tests are implemented
 ```
 
 **To enable:**
+
 1. Remove `if: false` line
 2. Implement the corresponding functionality
 3. Test locally first
@@ -323,6 +341,7 @@ Jobs marked with `if: false` are disabled:
 Update deployment steps in workflows:
 
 **AWS ECS:**
+
 ```yaml
 - name: Deploy to AWS ECS
   run: |
@@ -333,6 +352,7 @@ Update deployment steps in workflows:
 ```
 
 **Railway:**
+
 ```yaml
 - name: Deploy to Railway
   run: |
@@ -341,6 +361,7 @@ Update deployment steps in workflows:
 ```
 
 **Vercel:**
+
 ```yaml
 - name: Deploy to Vercel
   uses: amondnet/vercel-action@v25
@@ -412,6 +433,7 @@ gh run list --workflow=ci.yml --status in_progress --json databaseId --jq '.[].d
 **Issue:** `Error: failed to solve: process "/bin/sh ..." failed`
 
 **Solution:**
+
 ```bash
 # Test locally
 docker build --progress=plain -t test .
@@ -428,6 +450,7 @@ docker build --progress=plain -t test .
 **Issue:** Deployment waiting for approval indefinitely
 
 **Solution:**
+
 1. Go to GitHub Actions
 2. Find pending deployment
 3. Click "Review deployments"
@@ -438,11 +461,12 @@ docker build --progress=plain -t test .
 **Issue:** Test job exceeds timeout
 
 **Solution:**
+
 ```yaml
 # Increase timeout in workflow
 jobs:
   test:
-    timeout-minutes: 30  # Increase from default 15
+    timeout-minutes: 30 # Increase from default 15
 ```
 
 ---

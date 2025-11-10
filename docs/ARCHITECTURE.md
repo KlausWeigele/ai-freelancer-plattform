@@ -1,4 +1,5 @@
 # Architecture & Technical Design
+
 # AI-Freelancer-Plattform Deutschland
 
 **Version:** 1.0
@@ -9,9 +10,9 @@
 
 ## Document History
 
-| Version | Datum | Änderungen |
-|---------|-------|------------|
-| 1.0 | 2025-10-27 | Initial Architecture Design |
+| Version | Datum      | Änderungen                  |
+| ------- | ---------- | --------------------------- |
+| 1.0     | 2025-10-27 | Initial Architecture Design |
 
 ---
 
@@ -20,6 +21,7 @@
 Aus dem PRD extrahierte technische Anforderungen:
 
 ### 1.1 Scale & Performance
+
 - **MVP Target:** 50 concurrent users
 - **V1.0 Target:** 500+ users
 - **Expected Data:**
@@ -29,6 +31,7 @@ Aus dem PRD extrahierte technische Anforderungen:
 - **Performance:** <2s Page Load, <500ms API Response
 
 ### 1.2 Security Requirements
+
 - HTTPS only (TLS 1.3)
 - DSGVO-Compliance (EU Data Residency)
 - Password Hashing (bcrypt, cost 12+)
@@ -39,12 +42,14 @@ Aus dem PRD extrahierte technische Anforderungen:
 - Bot Spam Prevention (hCaptcha, Honeypots)
 
 ### 1.3 Integration Requirements
+
 - **Email:** Transactional Emails (Verification, Notifications)
 - **Payments:** Manual (MVP) → Stripe (V1.0)
 - **AI:** Anthropic Claude API (V1.0 für AI-Features)
 - **Monitoring:** Sentry, CloudWatch
 
 ### 1.4 Resource Constraints
+
 - **Developer:** Solo (1 Person)
 - **Timeline:** 3 Monate MVP Development
 - **Budget:** 18k€ Pre-Launch, 2k€/Monat Running
@@ -56,6 +61,7 @@ Aus dem PRD extrahierte technische Anforderungen:
 ### 2.1 Final Tech Stack
 
 #### Frontend
+
 ```yaml
 Framework: Next.js 14+ (App Router)
 Language: TypeScript 5.0+
@@ -66,6 +72,7 @@ HTTP Client: Fetch API (native) + tRPC Client
 ```
 
 #### Backend
+
 ```yaml
 Runtime: Node.js 20 LTS
 Framework: Next.js 14+ (API Routes + Server Actions)
@@ -78,6 +85,7 @@ Cron Jobs: Vercel Cron oder GitHub Actions
 ```
 
 #### Database
+
 ```yaml
 Primary DB: PostgreSQL 15 (AWS RDS)
 ORM: Prisma 5.x
@@ -87,6 +95,7 @@ Future: Redis (V1.0 für Caching/Sessions)
 ```
 
 #### AI Stack (V1.0)
+
 ```yaml
 LLM: Anthropic Claude 3.5 Sonnet
 Framework: Separate Python FastAPI Microservice
@@ -95,6 +104,7 @@ Embedding Model: text-embedding-3-small (OpenAI)
 ```
 
 #### Infrastructure & Deployment
+
 ```yaml
 Hosting: AWS (Primary)
   - Compute: ECS Fargate (Container)
@@ -109,6 +119,7 @@ SSL: AWS Certificate Manager
 ```
 
 #### Development Tools
+
 ```yaml
 Package Manager: pnpm (required by user preference)
 Version Control: Git + GitHub
@@ -126,6 +137,7 @@ Error Tracking: Sentry
 ### 2.2 Why This Stack?
 
 **Next.js 14+ (Full-Stack)**
+
 - ✅ Unified codebase (Frontend + Backend)
 - ✅ App Router: Server Components, Server Actions
 - ✅ Great TypeScript support
@@ -134,6 +146,7 @@ Error Tracking: Sentry
 - ✅ Solo-dev friendly
 
 **PostgreSQL + Prisma**
+
 - ✅ Relational data model (Users, Projects, Bookings)
 - ✅ ACID compliance (Critical für Payments)
 - ✅ Prisma: Best-in-class TypeScript ORM
@@ -141,6 +154,7 @@ Error Tracking: Sentry
 - ✅ AWS RDS: Managed, Backups, Scaling
 
 **tRPC**
+
 - ✅ End-to-end type safety (Frontend ↔ Backend)
 - ✅ No code generation needed
 - ✅ Perfect für TypeScript Full-Stack
@@ -148,6 +162,7 @@ Error Tracking: Sentry
 - ❌ NOT public API (nur internal)
 
 **AWS**
+
 - ✅ EU Data Residency (Frankfurt)
 - ✅ DSGVO-Compliance
 - ✅ Mature ecosystem
@@ -155,6 +170,7 @@ Error Tracking: Sentry
 - ❌ Complexity (aber notwendig für Production)
 
 **Tailwind CSS + shadcn/ui**
+
 - ✅ Utility-first CSS (schnelle Entwicklung)
 - ✅ shadcn/ui: Copy-paste Components (kein Heavy Framework)
 - ✅ Customizable, Type-safe
@@ -167,6 +183,7 @@ Error Tracking: Sentry
 ADRs werden in separatem Folder dokumentiert: `/docs/adr/`
 
 **Created ADRs:**
+
 - ADR-001: Use Next.js 14 for Full-Stack Framework
 - ADR-002: Use PostgreSQL + Prisma for Data Layer
 - ADR-003: Use tRPC for Type-Safe API
@@ -175,7 +192,7 @@ ADRs werden in separatem Folder dokumentiert: `/docs/adr/`
 - ADR-006: Use Tailwind CSS + shadcn/ui for UI
 - ADR-007: Manual Matching (MVP) → AI-Matching (V1.0)
 
-*(ADRs werden separat erstellt)*
+_(ADRs werden separat erstellt)_
 
 ---
 
@@ -243,12 +260,15 @@ ADRs werden in separatem Folder dokumentiert: `/docs/adr/`
 ### 4.2 Component Breakdown
 
 #### 4.2.1 Client Layer (Browser)
+
 - **Responsibility:** User Interface, Client-side State, Form Validation
 - **Technology:** React 18+ (Server Components + Client Components)
 - **Communication:** tRPC Client → Backend
 
 #### 4.2.2 Application Layer (Next.js)
+
 **Frontend:**
+
 - Server Components (default, fast rendering)
 - Client Components (interactive, marked with `'use client'`)
 - App Router Pages (`/app` directory)
@@ -256,25 +276,30 @@ ADRs werden in separatem Folder dokumentiert: `/docs/adr/`
 - Route Handlers (API Routes)
 
 **Backend:**
+
 - tRPC Procedures (Type-safe API)
 - Server Actions (mutations)
 - Middleware (Auth, CORS, Rate Limiting)
 - Cron Jobs (Trial → Active transition)
 
 #### 4.2.3 Data Layer
+
 **PostgreSQL:**
+
 - Relational DB (Users, Projects, Bookings, Messages)
 - ACID transactions
 - Full-text search (später)
 - pgvector (V1.0 für AI Embeddings)
 
 **Prisma ORM:**
+
 - Type-safe queries
 - Automatic migrations
 - Connection pooling
 - Query optimization
 
 #### 4.2.4 External Services
+
 - **AWS SES:** Transactional Emails
 - **AWS S3:** File Storage (V1.0)
 - **Sentry:** Error Tracking
@@ -309,7 +334,7 @@ ADRs werden in separatem Folder dokumentiert: `/docs/adr/`
 
 ## 5. Database Schema Design
 
-*(Separate file: `/docs/DATABASE_SCHEMA.md` with full Prisma schema)*
+_(Separate file: `/docs/DATABASE_SCHEMA.md` with full Prisma schema)_
 
 **Preview: Core Models**
 
@@ -570,29 +595,35 @@ model Invoice {
 ### 5.2 Key Design Decisions
 
 **1. UUIDs für Primary Keys**
+
 - Besser für distributed systems
 - Keine Sequence-Collisions
 - Nicht-sequentiell (Security)
 
 **2. snake_case in DB, camelCase in Prisma**
+
 - DB-Convention: snake_case
 - TypeScript-Convention: camelCase
 - Prisma `@map()` für Mapping
 
 **3. Soft Deletes vs. Hard Deletes**
+
 - Hard Deletes (CASCADE) für MVP
 - Später: Soft Deletes für Audit Trail
 
 **4. Enums in DB**
+
 - Type-safe auf DB-Level
 - Validierung in DB + Code
 
 **5. Arrays für Skills**
+
 - PostgreSQL native Arrays
 - Simple für MVP
 - Später: Many-to-Many Relation mit Skills-Table
 
 **6. Decimal für Money**
+
 - `Decimal(10, 2)` für Beträge
 - Vermeidet Floating-Point-Fehler
 
@@ -603,6 +634,7 @@ model Invoice {
 ### 6.1 API Architecture: tRPC
 
 **Why tRPC?**
+
 - ✅ End-to-end type safety (Frontend ↔ Backend)
 - ✅ No REST endpoints → Weniger Boilerplate
 - ✅ Auto-completion, Type-checking
@@ -634,59 +666,67 @@ import { router, publicProcedure, protectedProcedure } from '../trpc';
 
 export const authRouter = router({
   register: publicProcedure
-    .input(z.object({
-      email: z.string().email(),
-      password: z.string().min(8),
-      role: z.enum(['FREELANCER', 'COMPANY']),
-    }))
+    .input(
+      z.object({
+        email: z.string().email(),
+        password: z.string().min(8),
+        role: z.enum(['FREELANCER', 'COMPANY']),
+      })
+    )
     .mutation(async ({ input, ctx }) => {
       // Create user, send verification email
     }),
 
   verifyEmail: publicProcedure
-    .input(z.object({
-      token: z.string(),
-    }))
+    .input(
+      z.object({
+        token: z.string(),
+      })
+    )
     .mutation(async ({ input, ctx }) => {
       // Verify email token, activate account
     }),
 
   login: publicProcedure
-    .input(z.object({
-      email: z.string().email(),
-      password: z.string(),
-    }))
+    .input(
+      z.object({
+        email: z.string().email(),
+        password: z.string(),
+      })
+    )
     .mutation(async ({ input, ctx }) => {
       // Validate credentials, return JWT
     }),
 
-  logout: protectedProcedure
-    .mutation(async ({ ctx }) => {
-      // Invalidate session
-    }),
+  logout: protectedProcedure.mutation(async ({ ctx }) => {
+    // Invalidate session
+  }),
 
   requestPasswordReset: publicProcedure
-    .input(z.object({
-      email: z.string().email(),
-    }))
+    .input(
+      z.object({
+        email: z.string().email(),
+      })
+    )
     .mutation(async ({ input, ctx }) => {
       // Send password reset email
     }),
 
   resetPassword: publicProcedure
-    .input(z.object({
-      token: z.string(),
-      newPassword: z.string().min(8),
-    }))
+    .input(
+      z.object({
+        token: z.string(),
+        newPassword: z.string().min(8),
+      })
+    )
     .mutation(async ({ input, ctx }) => {
       // Reset password with token
     }),
 
-  getSession: protectedProcedure
-    .query(async ({ ctx }) => {
-      // Return current user session
-      return ctx.session.user;
-    }),
+  getSession: protectedProcedure.query(async ({ ctx }) => {
+    // Return current user session
+    return ctx.session.user;
+  }),
 });
 ```
 
@@ -696,18 +736,20 @@ export const authRouter = router({
 // src/server/routers/freelancers.ts
 export const freelancersRouter = router({
   create: protectedProcedure
-    .input(z.object({
-      name: z.string(),
-      location: z.string(),
-      bio: z.string().max(500).optional(),
-      skills: z.array(z.string()).min(1).max(20),
-      experienceLevel: z.enum(['APPRENTICE', 'INTERMEDIATE', 'EXPERT']),
-      dayRate: z.number().int().min(300).max(2000),
-      availableFrom: z.date().optional(),
-      daysPerWeek: z.number().int().min(1).max(5),
-      portfolioUrl: z.string().url().optional(),
-      portfolioDescription: z.string().optional(),
-    }))
+    .input(
+      z.object({
+        name: z.string(),
+        location: z.string(),
+        bio: z.string().max(500).optional(),
+        skills: z.array(z.string()).min(1).max(20),
+        experienceLevel: z.enum(['APPRENTICE', 'INTERMEDIATE', 'EXPERT']),
+        dayRate: z.number().int().min(300).max(2000),
+        availableFrom: z.date().optional(),
+        daysPerWeek: z.number().int().min(1).max(5),
+        portfolioUrl: z.string().url().optional(),
+        portfolioDescription: z.string().optional(),
+      })
+    )
     .mutation(async ({ input, ctx }) => {
       // Create freelancer profile (status: PENDING_REVIEW)
     }),
@@ -719,20 +761,24 @@ export const freelancersRouter = router({
     }),
 
   update: protectedProcedure
-    .input(z.object({
-      id: z.string().uuid(),
-      // ... update fields
-    }))
+    .input(
+      z.object({
+        id: z.string().uuid(),
+        // ... update fields
+      })
+    )
     .mutation(async ({ input, ctx }) => {
       // Update freelancer profile (own profile only)
     }),
 
   list: protectedProcedure // Admin only
-    .input(z.object({
-      status: z.enum(['PENDING_REVIEW', 'ACTIVE', 'REJECTED']).optional(),
-      limit: z.number().int().max(100).default(20),
-      offset: z.number().int().default(0),
-    }))
+    .input(
+      z.object({
+        status: z.enum(['PENDING_REVIEW', 'ACTIVE', 'REJECTED']).optional(),
+        limit: z.number().int().max(100).default(20),
+        offset: z.number().int().default(0),
+      })
+    )
     .query(async ({ input, ctx }) => {
       // List freelancers (admin matching)
     }),
@@ -745,16 +791,30 @@ export const freelancersRouter = router({
 // src/server/routers/projects.ts
 export const projectsRouter = router({
   create: protectedProcedure // Company only
-    .input(z.object({
-      name: z.string().max(100),
-      description: z.string().max(5000),
-      skills: z.array(z.string()).min(1).max(10),
-      budgetRange: z.enum(['LESS_10K', 'RANGE_10_20K', 'RANGE_20_50K', 'RANGE_50_100K', 'MORE_100K']),
-      durationEstimate: z.enum(['ONE_TWO_WEEKS', 'TWO_FOUR_WEEKS', 'ONE_THREE_MONTHS', 'THREE_SIX_MONTHS', 'MORE_SIX_MONTHS']),
-      startDate: z.date(),
-      remoteType: z.enum(['REMOTE', 'ONSITE', 'HYBRID']),
-      contractModel: z.enum(['MILESTONE', 'SPRINT', 'RETAINER', 'TIME_MATERIAL']),
-    }))
+    .input(
+      z.object({
+        name: z.string().max(100),
+        description: z.string().max(5000),
+        skills: z.array(z.string()).min(1).max(10),
+        budgetRange: z.enum([
+          'LESS_10K',
+          'RANGE_10_20K',
+          'RANGE_20_50K',
+          'RANGE_50_100K',
+          'MORE_100K',
+        ]),
+        durationEstimate: z.enum([
+          'ONE_TWO_WEEKS',
+          'TWO_FOUR_WEEKS',
+          'ONE_THREE_MONTHS',
+          'THREE_SIX_MONTHS',
+          'MORE_SIX_MONTHS',
+        ]),
+        startDate: z.date(),
+        remoteType: z.enum(['REMOTE', 'ONSITE', 'HYBRID']),
+        contractModel: z.enum(['MILESTONE', 'SPRINT', 'RETAINER', 'TIME_MATERIAL']),
+      })
+    )
     .mutation(async ({ input, ctx }) => {
       // Create project (status: OPEN)
       // Send admin notification
@@ -767,11 +827,13 @@ export const projectsRouter = router({
     }),
 
   list: protectedProcedure // Admin only
-    .input(z.object({
-      status: z.enum(['OPEN', 'PROPOSALS_SENT', /* ... */]).optional(),
-      limit: z.number().int().max(100).default(20),
-      offset: z.number().int().default(0),
-    }))
+    .input(
+      z.object({
+        status: z.enum(['OPEN', 'PROPOSALS_SENT' /* ... */]).optional(),
+        limit: z.number().int().max(100).default(20),
+        offset: z.number().int().default(0),
+      })
+    )
     .query(async ({ input, ctx }) => {
       // List projects (admin matching)
     }),
@@ -784,10 +846,12 @@ export const projectsRouter = router({
 // src/server/routers/bookings.ts
 export const bookingsRouter = router({
   create: protectedProcedure // Company only
-    .input(z.object({
-      projectId: z.string().uuid(),
-      freelancerId: z.string().uuid(),
-    }))
+    .input(
+      z.object({
+        projectId: z.string().uuid(),
+        freelancerId: z.string().uuid(),
+      })
+    )
     .mutation(async ({ input, ctx }) => {
       // Create booking (status: PENDING_ACCEPTANCE)
       // Send email to freelancer
@@ -807,20 +871,24 @@ export const bookingsRouter = router({
     }),
 
   cancel: protectedProcedure // Both sides during trial
-    .input(z.object({
-      id: z.string().uuid(),
-      daysWorked: z.number().min(0.5),
-    }))
+    .input(
+      z.object({
+        id: z.string().uuid(),
+        daysWorked: z.number().min(0.5),
+      })
+    )
     .mutation(async ({ input, ctx }) => {
       // Cancel booking → status: CANCELLED
       // Calculate partial payment
     }),
 
   complete: protectedProcedure // Either side
-    .input(z.object({
-      id: z.string().uuid(),
-      daysWorked: z.number().min(0.5),
-    }))
+    .input(
+      z.object({
+        id: z.string().uuid(),
+        daysWorked: z.number().min(0.5),
+      })
+    )
     .mutation(async ({ input, ctx }) => {
       // Mark as completed → status: PENDING_COMPLETION (wait for other side)
     }),
@@ -837,6 +905,7 @@ export const bookingsRouter = router({
 ### 6.3 REST Fallback (for Webhooks, External APIs)
 
 **Use Cases:**
+
 - Stripe Webhooks (V1.0)
 - Health Check Endpoint
 - Future: Public API for Partners
@@ -909,17 +978,17 @@ export async function POST(request: Request) {
 
 ```typescript
 // src/lib/auth.ts
-import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import { prisma } from "./db";
-import bcrypt from "bcryptjs";
+import NextAuth from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import { prisma } from './db';
+import bcrypt from 'bcryptjs';
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
     CredentialsProvider({
       credentials: {
-        email: { type: "email" },
-        password: { type: "password" },
+        email: { type: 'email' },
+        password: { type: 'password' },
       },
       async authorize(credentials) {
         const user = await prisma.user.findUnique({
@@ -932,10 +1001,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
         if (!user || !user.emailVerified) return null;
 
-        const valid = await bcrypt.compare(
-          credentials.password,
-          user.passwordHash
-        );
+        const valid = await bcrypt.compare(credentials.password, user.passwordHash);
 
         if (!valid) return null;
 
@@ -948,7 +1014,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
     maxAge: 7 * 24 * 60 * 60, // 7 days
   },
   jwt: {
@@ -1025,7 +1091,7 @@ export const freelancerProcedure = protectedProcedure.use(async ({ ctx, next }) 
 ```typescript
 // Example: User can only update own profile
 freelancersRouter.update = protectedProcedure
-  .input(z.object({ id: z.string().uuid(), /* ... */ }))
+  .input(z.object({ id: z.string().uuid() /* ... */ }))
   .mutation(async ({ input, ctx }) => {
     const profile = await prisma.freelancerProfile.findUnique({
       where: { id: input.id },
@@ -1199,6 +1265,7 @@ freelancer/
 ### 9.1 Security Checklist
 
 ✅ **Authentication**
+
 - [x] bcrypt password hashing (cost 12)
 - [x] JWT tokens with expiration
 - [x] HTTP-only cookies for refresh tokens
@@ -1207,6 +1274,7 @@ freelancer/
 - [x] Rate limiting on login (5 attempts / 15min)
 
 ✅ **Input Validation**
+
 - [x] Zod schemas for all inputs
 - [x] Client-side + Server-side validation
 - [x] SQL injection prevention (Prisma parameterized queries)
@@ -1214,12 +1282,14 @@ freelancer/
 - [x] CSRF protection (SameSite cookies)
 
 ✅ **API Security**
+
 - [x] Rate limiting (100 req/min per IP)
 - [x] Authentication on protected endpoints
 - [x] Authorization checks (user owns resource)
 - [x] CORS configuration (own domain only)
 
 ✅ **Data Security**
+
 - [x] HTTPS only (TLS 1.3)
 - [x] HSTS header enabled
 - [x] Environment variables for secrets
@@ -1227,6 +1297,7 @@ freelancer/
 - [x] EU Data Residency (AWS Frankfurt)
 
 ✅ **Infrastructure Security**
+
 - [x] Dependabot enabled (GitHub)
 - [x] Regular security audits (pnpm audit)
 - [x] Database backups (AWS RDS automated)
@@ -1237,6 +1308,7 @@ freelancer/
 **See PRD Section 6.2 NFR-007a for details**
 
 **Key Strategies:**
+
 1. Input Sanitization (Blacklist dangerous patterns)
 2. Secure Prompt Structure (Claude `system` parameter)
 3. System-Prompt Protection (Constants, not user-modifiable)
@@ -1251,18 +1323,19 @@ freelancer/
 
 ### 10.1 Performance Targets
 
-| Metric | MVP Target | V1.0 Target |
-|--------|-----------|-------------|
-| LCP (Largest Contentful Paint) | <2s | <1.5s |
-| FID (First Input Delay) | <100ms | <50ms |
-| CLS (Cumulative Layout Shift) | <0.1 | <0.05 |
-| API Response Time (p95) | <500ms | <300ms |
-| Database Query Time (avg) | <100ms | <50ms |
-| Concurrent Users | 50 | 500+ |
+| Metric                         | MVP Target | V1.0 Target |
+| ------------------------------ | ---------- | ----------- |
+| LCP (Largest Contentful Paint) | <2s        | <1.5s       |
+| FID (First Input Delay)        | <100ms     | <50ms       |
+| CLS (Cumulative Layout Shift)  | <0.1       | <0.05       |
+| API Response Time (p95)        | <500ms     | <300ms      |
+| Database Query Time (avg)      | <100ms     | <50ms       |
+| Concurrent Users               | 50         | 500+        |
 
 ### 10.2 Performance Strategies
 
 **Frontend:**
+
 - [x] Next.js Server Components (reduce client JS)
 - [x] Code Splitting (automatic via Next.js)
 - [x] Image Optimization (next/image)
@@ -1271,6 +1344,7 @@ freelancer/
 - [x] Caching (SWR for data fetching)
 
 **Backend:**
+
 - [x] Database Indexes (on FK, status, frequently queried columns)
 - [x] Connection Pooling (Prisma: max 10 connections MVP)
 - [x] Pagination (limit query results to 20-100)
@@ -1278,12 +1352,14 @@ freelancer/
 - [ ] Redis Caching (V1.0 for sessions, query results)
 
 **Database:**
+
 - [x] Proper Indexes (created via Prisma)
 - [x] Avoid N+1 queries (Prisma `include` strategically)
 - [ ] Database Views (for complex queries, später)
 - [x] Regular VACUUM (PostgreSQL maintenance, automated)
 
 **Monitoring:**
+
 - [x] Sentry (Error Tracking)
 - [x] AWS CloudWatch (Infrastructure Monitoring)
 - [ ] APM (Application Performance Monitoring, später)
@@ -1356,6 +1432,7 @@ freelancer/
 ### 11.2 Environment Configuration
 
 **Environments:**
+
 1. **Local** (Development)
 2. **Staging** (Testing, Pre-Production)
 3. **Production** (Live)
@@ -1520,6 +1597,7 @@ jobs:
 **Status:** ✅ DRAFT COMPLETE - Ready for Review
 
 **Sign-Off:**
+
 - [ ] Architecture reviewed and approved
 - [ ] Tech Stack finalized
 - [ ] Database Schema designed

@@ -9,12 +9,14 @@
 ## Context
 
 Die AI-Freelancer-Plattform braucht Authentication für:
+
 - User Login/Logout (Freelancer, Firmen, Admin)
 - Session Management (7 Tage "Remember Me")
 - API Authorization (Protected Endpoints)
 - Security (DSGVO, Password Security)
 
 **Requirements:**
+
 - Secure (bcrypt Password Hashing, Token Expiration)
 - Stateless (Horizontal Scaling möglich)
 - Long-lived Sessions (7 Tage)
@@ -47,31 +49,37 @@ Ich verwende **JWT (JSON Web Tokens) mit Refresh Tokens** via **NextAuth.js v5**
 ### Why JWT?
 
 **Stateless:**
+
 - ✅ No server-side session storage
 - ✅ Horizontal scaling easy (no session-stickiness)
 - ✅ Works with serverless (AWS ECS, Lambda)
 
 **Self-contained:**
+
 - ✅ Token contains user info (userId, role)
 - ✅ No DB lookup on every request (fast)
 
 **Standard:**
+
 - ✅ Well-established (RFC 7519)
 - ✅ Libraries available (jsonwebtoken, jose)
 
 ### Why Refresh Tokens?
 
 **Short-lived Access Tokens (15 min):**
+
 - ✅ Security: Stolen token is useless after 15 min
 - ✅ Revocation: Refresh Token can be revoked
 
 **Long-lived Refresh Tokens (7 days):**
+
 - ✅ UX: User doesn't have to re-login every 15 min
 - ✅ Security: Stored in HTTP-only Cookie (XSS-protected)
 
 ### Why NextAuth.js?
 
 **Pros:**
+
 - ✅ Next.js-native (built for App Router)
 - ✅ Handles JWT automatically
 - ✅ Providers support (Email/Password, Google, GitHub, etc.)
@@ -79,10 +87,12 @@ Ich verwende **JWT (JSON Web Tokens) mit Refresh Tokens** via **NextAuth.js v5**
 - ✅ CSRF protection
 
 **Cons:**
+
 - ❌ Abstraction (weniger Kontrolle)
 - ❌ V5 ist noch Beta (aber stable genug)
 
 **Alternatives:**
+
 - Custom JWT implementation (mehr Arbeit)
 - Lucia (neue Library, kleineres Ecosystem)
 
@@ -92,25 +102,27 @@ Ich verwende **JWT (JSON Web Tokens) mit Refresh Tokens** via **NextAuth.js v5**
 
 ```typescript
 // src/lib/auth.ts
-import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import { prisma } from "./db";
-import bcrypt from "bcryptjs";
-import { z } from "zod";
+import NextAuth from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import { prisma } from './db';
+import bcrypt from 'bcryptjs';
+import { z } from 'zod';
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
     CredentialsProvider({
       credentials: {
-        email: { type: "email" },
-        password: { type: "password" },
+        email: { type: 'email' },
+        password: { type: 'password' },
       },
       async authorize(credentials) {
         // Validate input
-        const parsed = z.object({
-          email: z.string().email(),
-          password: z.string().min(8),
-        }).safeParse(credentials);
+        const parsed = z
+          .object({
+            email: z.string().email(),
+            password: z.string().min(8),
+          })
+          .safeParse(credentials);
 
         if (!parsed.success) return null;
 
@@ -129,10 +141,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         if (!user.emailVerified) return null;
 
         // Verify password
-        const valid = await bcrypt.compare(
-          parsed.data.password,
-          user.passwordHash
-        );
+        const valid = await bcrypt.compare(parsed.data.password, user.passwordHash);
 
         if (!valid) return null;
 
@@ -152,7 +161,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
     maxAge: 7 * 24 * 60 * 60, // 7 days
   },
   jwt: {
@@ -265,17 +274,20 @@ export const protectedProcedure = publicProcedure.use(async ({ ctx, next }) => {
 ## Security Measures
 
 ✅ **Password Security:**
+
 - bcrypt (cost 12)
 - Min. 8 chars, 1 number, 1 special char
 - Rate limiting: 5 login attempts / 15 min
 
 ✅ **Token Security:**
+
 - HTTPS only
 - HTTP-only Cookies (Refresh Token)
 - SameSite=Strict (CSRF protection)
 - Token expiration (15 min / 7 days)
 
 ✅ **DSGVO:**
+
 - Password reset flow (1h token expiration)
 - User can delete account (delete tokens)
 
