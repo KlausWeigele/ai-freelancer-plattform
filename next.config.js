@@ -3,6 +3,10 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
 
+  // Standalone output for Docker deployment
+  // Reduces Docker image size from ~1GB to ~150MB
+  output: 'standalone',
+
   // TypeScript & ESLint configuration
   typescript: {
     // Dangerously allow production builds to complete even if there are type errors.
