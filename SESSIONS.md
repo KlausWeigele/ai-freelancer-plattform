@@ -3,18 +3,45 @@
 **Projekt:** AI-Freelancer-Plattform → AWS Deployment (weigele.art)
 
 **Team:**
-- **Klaus** - Product Owner & Decision Maker
-- **Sonnet 4.5** - CI/CD, Dokumentation, Analyse
-- **Codex** - Terraform/IaC, AWS Infrastruktur, Feature-Implementation
+- **Klaus** - Product Owner, Decisions, Prioritäten, Task-Zuweisung, Merge-Freigabe
+- **Sonnet 4.5** (Claude Code) - Flexibel je Aufgabe: Features, CI/CD, Doku, Analyse
+- **Codex** - Flexibel je Aufgabe: Infra, Features, CI/CD, Terraform
+
+**⚠️ Keine feste Aufgabenverteilung!** Klaus entscheidet pro Task wer es übernimmt.
 
 ---
 
 ## Workflow
 
-**Planung:** TODO.md für zentrale Task-Liste
-**Branch/PR:** Feature-Branches, wechselseitige Reviews
-**Commits:** Mit "🤖 Generated with Claude Code" Footer
-**Sync:** In diesem Dokument fortlaufend reinschreiben was gemacht wurde
+### Artefakte
+- **SESSIONS.md** (diese Datei): Laufendes Log jeder Session (wer, was, Ergebnis)
+- **CLAUDE.md**: Projektkontext als "Living Doc", Update bei großen Meilensteinen
+- **TODO.md**: Kanban/Backlog, "Quelle der Wahrheit" für Tasks/Phasen
+
+### Ablauf je Session
+1. **Start:** Kurz "Session N - Wer, Ziel, Scope" notieren
+2. **Arbeit:** Branch anlegen (feat/*, fix/*, chore/*, ci/*, infra/*), kleine PRs
+3. **Ende:** Status/Commits in SESSIONS.md notieren, CLAUDE.md bei größeren Änderungen updaten
+4. **Handover:** "Owner → Next Owner, Nächste Schritte: …"
+
+### Branches & Commits
+- **Branches:** feat/*, fix/*, chore/*, ci/*, infra/*
+- **Commits:** Conventional Commits (feat:, fix:, chore:, docs:)
+- **Footer:** "🤖 Generated with [Claude Code]" + Optional: Co-authored-by
+
+### PR & Reviews
+- **PR-Template:** Kurz - Zweck, Änderungen, Tests, Checkliste
+- **Reviews:** Cross-Check zwischen Sonnet/Codex, Klaus entscheidet Merge
+- **Merge:** "Squash & merge" (ein Commit pro PR)
+
+### CI Gates
+- **Pflicht:** Lint, Type-Check, Build, Docker Build
+- **Optional (später):** Tests, Coverage, Security Scans
+- **Regel:** PRs nur mergen wenn Gates grün
+
+### Handoff-Signale
+- **Go/No-Go** nach CI
+- Bei Übergabe: Klare Next Steps + Owner
 
 ---
 
@@ -189,14 +216,19 @@ docker-build:
 
 ## Session 2: [Nächste Session - von Codex oder Sonnet]
 
-### Was gemacht
-[Hier fortlaufend reinschreiben...]
+### Was gemacht (Codex, 2025-11-11)
+- Phase 2 gestartet: AWS/ECR & CI-Integration vorbereitet
+  - Terraform Modul `modules/ecr` implementiert (Repo, Lifecycle, Scan on push)
+  - Environment `production` angelegt und ECR-Moduleinbindung mit Provider
+  - `SECRETS.md` hinzugefügt (GitHub Secrets Checkliste)
+  - Deploy-Workflow angepasst: ECR Login + Build&Push, bedingt aktiv bei gesetzten Secrets
 
 ### Commits
-[Commit-Liste...]
+- docs/infra & CI updates (noch nicht gepusht? → nach Freigabe)
 
 ### Status
-[Was funktioniert, was blockiert...]
+- CI: weiterhin grün erwartet; Deploy-Workflow wartet auf Secrets
+- Terraform: Skelett vorhanden, ECR kann erstellt werden (lokal `terraform init/plan/apply`)
 
 ### Nächste Schritte
 [...]

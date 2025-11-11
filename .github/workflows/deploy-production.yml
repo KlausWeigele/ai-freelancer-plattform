@@ -23,6 +23,7 @@ on:
 env:
   NODE_VERSION: '20'
   PNPM_VERSION: '10.11.1'
+  AWS_REGION: ${{ secrets.AWS_REGION || 'eu-central-1' }}
 
 jobs:
   # ============================================================================
@@ -164,17 +165,17 @@ jobs:
 
       # AWS ECR Login (if using AWS)
       - name: Configure AWS credentials
+        if: ${{ secrets.AWS_ACCESS_KEY_ID != '' && secrets.AWS_SECRET_ACCESS_KEY != '' }}
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-central-1
-        if: false  # Enable when AWS is configured
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Log in to Amazon ECR
+        if: ${{ secrets.AWS_ACCOUNT_ID != '' }}
         id: ecr-login
         uses: aws-actions/amazon-ecr-login@v2
-        if: false  # Enable when AWS is configured
 
       - name: Build Docker Image
         uses: docker/build-push-action@v5
@@ -184,6 +185,20 @@ jobs:
           tags: |
             freelancer-app:${{ inputs.version }}
             freelancer-app:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Build and Push to Amazon ECR
+        if: ${{ secrets.AWS_ACCOUNT_ID != '' && secrets.AWS_ACCESS_KEY_ID != '' }}
+        uses: docker/build-push-action@v5
+        env:
+          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY || 'freelancer-app' }}
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/${{ env.ECR_REPOSITORY }}:${{ inputs.version }}
+            ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/${{ env.ECR_REPOSITORY }}:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
 

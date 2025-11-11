@@ -54,6 +54,7 @@ Online-Marktplatz für AI/IT-Freelancer in Deutschland mit Fokus auf:
 
 ### Phase 2-7: Pending
 - Phase 2: AWS Account Setup (IAM, ECR, Secrets)
+  - Fortschritt: ECR Terraform-Modul implementiert; Deploy-Workflow kann Images nach ECR pushen (Secrets vorausgesetzt).
 - Phase 3: Terraform Infrastructure (VPC, RDS, ECS, ALB)
 - Phase 4: CloudFront Configuration
 - Phase 5: GitHub Actions Integration
