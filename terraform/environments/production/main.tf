@@ -25,8 +25,22 @@ module "ecr" {
   repository_name = var.ecr_repository_name
 }
 
+module "ecs_cluster" {
+  source       = "../../modules/ecs"
+  cluster_name = var.ecs_cluster_name
+}
+
 output "ecr_repository_url" {
   description = "ECR repository URL (use in CI/CD)"
   value       = module.ecr.repository_url
 }
 
+output "ecs_cluster_name" {
+  description = "ECS Cluster Name"
+  value       = module.ecs_cluster.cluster_name
+}
+
+output "ecs_cluster_arn" {
+  description = "ECS Cluster ARN"
+  value       = module.ecs_cluster.cluster_arn
+}

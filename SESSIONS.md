@@ -222,6 +222,7 @@ docker-build:
   - Environment `production` angelegt und ECR-Moduleinbindung mit Provider
   - `SECRETS.md` hinzugefügt (GitHub Secrets Checkliste)
   - Deploy-Workflow angepasst: ECR Login + Build&Push, bedingt aktiv bei gesetzten Secrets
+  - ECS Fargate Skeleton: `modules/ecs` (Cluster), in `production` eingebunden, Outputs ergänzt
 
 ### Commits
 - docs/infra & CI updates (noch nicht gepusht? → nach Freigabe)
