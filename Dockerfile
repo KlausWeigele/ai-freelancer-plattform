@@ -7,8 +7,8 @@
 # ============================================================================
 FROM node:20-alpine AS deps
 
-# Install pnpm
-RUN corepack enable && corepack prepare pnpm@latest --activate
+# Install pnpm (pin to repository version for deterministic builds)
+RUN corepack enable && corepack prepare pnpm@10.11.1 --activate
 
 WORKDIR /app
 
@@ -23,8 +23,8 @@ RUN pnpm install --frozen-lockfile
 # ============================================================================
 FROM node:20-alpine AS builder
 
-# Install pnpm
-RUN corepack enable && corepack prepare pnpm@latest --activate
+# Install pnpm (pin to repository version for deterministic builds)
+RUN corepack enable && corepack prepare pnpm@10.11.1 --activate
 
 WORKDIR /app
 

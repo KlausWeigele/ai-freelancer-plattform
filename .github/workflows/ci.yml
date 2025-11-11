@@ -44,16 +44,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          # cache: 'pnpm'  # Disabled: pnpm-lock.yaml not tracked
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install  # No --frozen-lockfile until lockfile is tracked
+        run: pnpm install --frozen-lockfile
 
       - name: Generate Prisma Client
         run: pnpm db:generate
 
       - name: Lint
-        if: false  # Temporarily disabled: Next.js 16 + ESLint issues in CI
         run: pnpm run lint
 
       - name: Type Check
@@ -103,10 +102,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          # cache: 'pnpm'  # Disabled: pnpm-lock.yaml not tracked
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install  # No --frozen-lockfile until lockfile is tracked
+        run: pnpm install --frozen-lockfile
 
       - name: Generate Prisma Client
         run: pnpm db:generate
@@ -161,10 +160,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          # cache: 'pnpm'  # Disabled: pnpm-lock.yaml not tracked
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install  # No --frozen-lockfile until lockfile is tracked
+        run: pnpm install --frozen-lockfile
 
       - name: Generate Prisma Client
         run: pnpm db:generate
