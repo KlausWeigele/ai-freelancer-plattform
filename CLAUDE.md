@@ -20,9 +20,8 @@ Online-Marktplatz für AI/IT-Freelancer in Deutschland mit Fokus auf:
 **Timeline:** Phase 1-7, aktuell in Phase 1
 
 ### Team Structure
-- **Klaus Weigele** - Product Owner, Vision, Decisions
-- **Sonnet 4.5** (ich) - CI/CD, Dokumentation, Code-Analyse, Testing
-- **Codex** - Terraform/IaC, AWS Infrastructure, Feature-Implementation
+- **Klaus Weigele** – Product Owner, Vision, Decisions
+- **AI Agents:** Claude Code, Codex – Aufgaben und Rollen werden pro Session/Task von Klaus zugewiesen (keine feste Vorab-Zuordnung). Beide Agents können sowohl App‑Features als auch Infra/CI übernehmen; Vorschläge willkommen, Entscheidung bei Klaus.
 
 **Workflow:** Feature-Branches → PR-Review → Merge → TODO.md Tracking
 
