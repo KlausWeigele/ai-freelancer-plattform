@@ -1,6 +1,6 @@
 # AI-Freelancer-Plattform - Deployment Checkliste
 
-**Ziel:** Deployment auf **weigele.art** mit CloudFront + ECS + RDS
+**Ziel:** Deployment auf **muster-plattform.de** mit CloudFront + ECS + RDS
 **Start:** 2025-11-10
 **Geschätzte Dauer:** 5-7 Tage (12-15 Stunden)
 
@@ -30,7 +30,7 @@
 
 - [x] Implementiert
 - [ ] Getestet
-- **Ressource:** Route 53 Hosted Zone `weigele.art` (Z05025201BQ9KO181NQS8)
+- **Ressource:** Route 53 Hosted Zone `muster-plattform.de` (Z05025201BQ9KO181NQS8)
 - **Kosten:** $0.50/Monat
 - **Status:** ✅ Aktiv
 - **Notizen:** 7 DNS Records vorhanden, CloudFront Alias aktiv
@@ -40,7 +40,7 @@
 - [x] Implementiert
 - [ ] Getestet
 - **Ressource:** CloudFront Distribution `E10XAH9K76973M`
-- **Domains:** weigele.art, www.weigele.art
+- **Domains:** muster-plattform.de, www.muster-plattform.de
 - **Kosten:** Free Tier, dann pay-per-use
 - **Status:** ✅ Aktiv (Origin fehlt momentan)
 - **Notizen:** Functions für www→apex redirect vorhanden
@@ -49,7 +49,7 @@
 
 - [x] Implementiert
 - [ ] Getestet
-- **Ressource:** SSL Certificate für `weigele.art` (us-east-1)
+- **Ressource:** SSL Certificate für `muster-plattform.de` (us-east-1)
 - **Status:** ✅ Issued, von CloudFront genutzt
 - **Kosten:** Kostenlos
 
@@ -57,8 +57,8 @@
 
 - [x] Implementiert
 - [ ] Getestet
-- **S3 Bucket:** `weigele-terraform-state`
-- **DynamoDB Table:** `weigele-terraform-locks`
+- **S3 Bucket:** `muster-terraform-state`
+- **DynamoDB Table:** `muster-terraform-locks`
 - **Status:** ✅ Vorhanden, leer
 - **Kosten:** ~$0.002/Monat
 
@@ -66,7 +66,7 @@
 
 - [x] Implementiert
 - [ ] Getestet
-- **Repository:** `https://github.com/KlausWeigele/ai-freelancer-plattform.git`
+- **Repository:** `https://github.com/MaxMustermann/ai-freelancer-plattform.git`
 - **Branch:** master
 - **Status:** ✅ Konfiguriert
 - **Secrets:** 4 Secrets (DATABASE_URL, JWT_SECRET, NEXTAUTH_SECRET, NEXTAUTH_URL)
@@ -162,7 +162,7 @@
   - `AmazonS3FullAccess`
   - `AmazonVPCFullAccess`
   - `ElasticLoadBalancingFullAccess`
-  - `AmazonRoute53ReadOnlyAccess` (nur read für weigele.art)
+  - `AmazonRoute53ReadOnlyAccess` (nur read für muster-plattform.de)
   - `CloudFrontFullAccess`
   - `AmazonEC2ContainerRegistryFullAccess` (ECR)
 - **Output:** Access Key ID + Secret Access Key (sicher speichern!)
@@ -190,8 +190,8 @@
 
 - [ ] Implementiert
 - [ ] Getestet
-- **S3 Bucket:** Bereits vorhanden (`weigele-terraform-state`)
-- **DynamoDB Table:** Bereits vorhanden (`weigele-terraform-locks`)
+- **S3 Bucket:** Bereits vorhanden (`muster-terraform-state`)
+- **DynamoDB Table:** Bereits vorhanden (`muster-terraform-locks`)
 - **Action:** Konfiguration in Terraform Backend Block
 - **Test:** `terraform init` in dev environment
 
@@ -381,7 +381,7 @@
   - Origin Domain: ALB DNS Name (aus Terraform output)
   - Origin Protocol: HTTPS only
   - Origin SSL Protocols: TLSv1.2
-  - Custom Headers: `X-Forwarded-Host: weigele.art`
+  - Custom Headers: `X-Forwarded-Host: muster-plattform.de`
 - **Test:** CloudFront zeigt Fehler (noch kein Docker Image deployed)
 
 ### 4.2 CloudFront Cache Behavior optimieren
@@ -406,7 +406,7 @@
 - [ ] Getestet
 - **Functions:** 2 Functions vorhanden (redirect-www-to-apex, function)
 - **Action:** Funktionalität prüfen, ggf. anpassen
-- **Test:** www.weigele.art → weigele.art Redirect funktioniert
+- **Test:** www.muster-plattform.de → muster-plattform.de Redirect funktioniert
 
 ### 4.4 CloudFront Monitoring aktivieren
 
@@ -534,9 +534,9 @@
 - [ ] Getestet
 - **Steps:**
   1. CloudFront Origin zeigt auf Dev/Staging ALB
-  2. `curl https://weigele.art/api/health`
-  3. `curl https://weigele.art/api/version`
-  4. Website im Browser: `https://weigele.art`
+  2. `curl https://muster-plattform.de/api/health`
+  3. `curl https://muster-plattform.de/api/version`
+  4. Website im Browser: `https://muster-plattform.de`
   5. Cache-Behavior testen (API nicht gecached, Static gecached)
   6. SSL/HTTPS funktioniert
 - **Erfolg:** CloudFront → ALB → ECS → RDS funktioniert
@@ -575,7 +575,7 @@
 - **Steps:**
   1. CloudFront Origin: Production ALB DNS
   2. Cache invalidieren: `aws cloudfront create-invalidation --paths "/*"`
-  3. Website testen: `https://weigele.art`
+  3. Website testen: `https://muster-plattform.de`
   4. DNS Propagation warten (bis zu 48h)
   5. SSL funktioniert
   6. Alle Features funktionieren
@@ -672,7 +672,7 @@
 
 - [x] AWS Kosten von $36/Monat auf $0.60/Monat reduziert
 - [x] CloudFront Distribution E10XAH9K76973M behalten für Reuse
-- [x] Terraform State Backend bereits vorhanden (weigele-terraform-state)
+- [x] Terraform State Backend bereits vorhanden (muster-terraform-state)
 
 ### 2025-11-10: Phase 1 Complete ✅
 

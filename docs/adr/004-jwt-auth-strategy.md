@@ -307,6 +307,6 @@ export const protectedProcedure = publicProcedure.use(async ({ ctx, next }) => {
 
 ---
 
-**Author:** Klaus Weigele
+**Author:** Max Mustermann
 **Date:** 27. Oktober 2025
 **Status:** Accepted

@@ -349,7 +349,7 @@ Erstellt VPC, Subnets, Security Groups.
 
 ---
 
-**Author:** Klaus Weigele
+**Author:** Max Mustermann
 **Date:** 27. Oktober 2025
 **Status:** Setup Phase (Phase 3)
 **Next Steps:** Module Implementation (Phase 3.6)

@@ -1612,4 +1612,4 @@ jobs:
 **Document Version:** 1.0
 **Created:** 27. Oktober 2025
 **Last Updated:** 27. Oktober 2025
-**Author:** Klaus Weigele
+**Author:** Max Mustermann

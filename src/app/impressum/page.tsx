@@ -66,24 +66,27 @@ export default function ImpressumPage() {
 
           <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
             <p className="font-semibold text-gray-900 mb-2">
-              Klaus Weigele
+              Max Mustermann
               <br />
-              [Straße und Hausnummer]
+              Musterstraße 123
               <br />
-              [PLZ und Ort]
+              12345 Musterstadt
             </p>
 
             <div className="mt-4 space-y-2 text-gray-700">
               <p>
                 <strong>E-Mail:</strong>{' '}
-                <a href="mailto:kontakt@weigele.art" className="text-blue-600 hover:underline">
-                  kontakt@weigele.art
+                <a
+                  href="mailto:kontakt@muster-plattform.de"
+                  className="text-blue-600 hover:underline"
+                >
+                  kontakt@muster-plattform.de
                 </a>
               </p>
               <p>
                 <strong>Website:</strong>{' '}
-                <a href="https://www.weigele.art" className="text-blue-600 hover:underline">
-                  www.weigele.art
+                <a href="https://www.muster-plattform.de" className="text-blue-600 hover:underline">
+                  www.muster-plattform.de
                 </a>
               </p>
             </div>
@@ -101,7 +104,7 @@ export default function ImpressumPage() {
         {/* Vertreten durch */}
         <section className="mb-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Vertreten durch</h2>
-          <p className="text-gray-700">Klaus Weigele (Betreiber)</p>
+          <p className="text-gray-700">Max Mustermann (Betreiber)</p>
         </section>
 
         {/* Kontakt */}
@@ -110,8 +113,11 @@ export default function ImpressumPage() {
           <div className="space-y-2 text-gray-700">
             <p>
               <strong>E-Mail:</strong>{' '}
-              <a href="mailto:kontakt@weigele.art" className="text-blue-600 hover:underline">
-                kontakt@weigele.art
+              <a
+                href="mailto:kontakt@muster-plattform.de"
+                className="text-blue-600 hover:underline"
+              >
+                kontakt@muster-plattform.de
               </a>
             </p>
             {/* Optional: Telefon */}

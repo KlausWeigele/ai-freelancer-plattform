@@ -237,7 +237,7 @@ pnpm db:studio              # Open Prisma Studio (GUI)
 
 ## 📞 Contact
 
-**Developer:** Klaus Weigele
+**Developer:** Max Mustermann
 **Status:** Solo Developer (MVP Phase)
 
 ---

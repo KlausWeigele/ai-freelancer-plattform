@@ -9,7 +9,7 @@ User-agent: *
 Disallow: /
 
 # No sitemap (test website)
-# Sitemap: https://www.weigele.art/sitemap.xml
+# Sitemap: https://www.muster-plattform.de/sitemap.xml
 
 # Explanation:
 # This test website should not be indexed by search engines.

@@ -830,7 +830,7 @@ See [Rollback Procedures](#rollback-procedures) section.
 
 ---
 
-**Author:** Klaus Weigele
+**Author:** Max Mustermann
 **Date:** 27. Oktober 2025
 **Status:** Phase 3.6 Complete
 **Next:** Phase 4 (UX Design)

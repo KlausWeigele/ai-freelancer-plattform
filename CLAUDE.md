@@ -8,20 +8,24 @@
 ## 🎯 Project Context
 
 ### Vision
+
 Online-Marktplatz für AI/IT-Freelancer in Deutschland mit Fokus auf:
+
 - Transparente Projektvermittlung
 - Faire Konditionen für Freelancer
 - DSGVO-konform
 - Deutsche Sprache & Kultur
 
 ### Deployment Goal
-**Target:** weigele.art (CloudFront → ALB → ECS Fargate → RDS PostgreSQL)
+
+**Target:** muster-plattform.de (CloudFront → ALB → ECS Fargate → RDS PostgreSQL)
 **Region:** eu-central-1 (Frankfurt)
 **Timeline:** Phase 1-7, aktuell in Phase 1
 
 ### Team Structure
-- **Klaus Weigele** – Product Owner, Vision, Decisions
-- **AI Agents:** Claude Code, Codex – Aufgaben und Rollen werden pro Session/Task von Klaus zugewiesen (keine feste Vorab-Zuordnung). Beide Agents können sowohl App‑Features als auch Infra/CI übernehmen; Vorschläge willkommen, Entscheidung bei Klaus.
+
+- **Max Mustermann** – Product Owner, Vision, Decisions
+- **AI Agents:** Claude Code, Codex – Aufgaben und Rollen werden pro Session/Task von Max zugewiesen (keine feste Vorab-Zuordnung). Beide Agents können sowohl App‑Features als auch Infra/CI übernehmen; Vorschläge willkommen, Entscheidung bei Max.
 
 **Workflow:** Feature-Branches → PR-Review → Merge → TODO.md Tracking
 
@@ -30,14 +34,16 @@ Online-Marktplatz für AI/IT-Freelancer in Deutschland mit Fokus auf:
 ## 📊 Current Implementation Status
 
 ### Phase 0: Existing Infrastructure ✅ COMPLETE (9/9)
+
 - ✅ CloudFront Distribution (E2EBJUQH6VGZWO) existiert
-- ✅ Route 53 Hosted Zone (weigele.art) konfiguriert
-- ✅ ACM Certificate (*.weigele.art) validiert
+- ✅ Route 53 Hosted Zone (muster-plattform.de) konfiguriert
+- ✅ ACM Certificate (\*.muster-plattform.de) validiert
 - ✅ S3 Bucket für Terraform State existiert
 - ✅ DynamoDB für State Locking gelöscht (kostensparend)
 - ✅ AWS Cost von $36/Monat auf $0.60/Monat reduziert
 
 ### Phase 1: Next.js Production Optimizations ⚠️ PARTIAL (3/3 lokal, CI blocked)
+
 - ✅ **Standalone Output aktiviert** (next.config.js:20)
   - Reduziert Docker Image von ~1GB auf ~150MB
   - `.next/standalone` build erfolgreich (147MB)
@@ -53,6 +59,7 @@ Online-Marktplatz für AI/IT-Freelancer in Deutschland mit Fokus auf:
 **Codex Update:** Hat ESLint 9 Flat Config migriert, Lint re-enabled (Commits: 6089dde, b76c7a3)
 
 ### Phase 2-7: Pending
+
 - Phase 2: AWS Account Setup (IAM, ECR, Secrets)
   - Fortschritt: ECR Terraform-Modul implementiert; Deploy-Workflow kann Images nach ECR pushen (Secrets vorausgesetzt).
 - Phase 3: Terraform Infrastructure (VPC, RDS, ECS, ALB)
@@ -70,23 +77,27 @@ Online-Marktplatz für AI/IT-Freelancer in Deutschland mit Fokus auf:
 ### Technology Stack
 
 **Core:**
+
 - **Framework:** Next.js 16.0.0 (Full Stack, SSR, App Router)
 - **Runtime:** Node.js 22.20.0
 - **Language:** TypeScript 5.9.3 (strict mode)
 - **Package Manager:** pnpm 10.11.1 ⚠️ (Bleeding-Edge, Lock-File Issues)
 
 **Frontend:**
+
 - React 19.2.0
 - Tailwind CSS 4.1.16
 - Responsive Design, Mobile-First
 
 **Backend:**
+
 - tRPC 11.7.0 (Type-safe API)
 - Prisma 6.18.0 (ORM)
 - PostgreSQL 15 (RDS geplant)
 - JWT Authentication (geplant)
 
 **Infrastructure:**
+
 - Docker (Multi-Stage Builds)
 - AWS ECS Fargate (Container Orchestration)
 - AWS RDS PostgreSQL (Managed Database)
@@ -95,6 +106,7 @@ Online-Marktplatz für AI/IT-Freelancer in Deutschland mit Fokus auf:
 - Terraform (Infrastructure as Code)
 
 **CI/CD:**
+
 - GitHub Actions (ci.yml, nightly.yml, deploy-production.yml)
 - ESLint 9.x (Flat Config seit Codex Update)
 - Prettier 3.2.5
@@ -103,20 +115,24 @@ Online-Marktplatz für AI/IT-Freelancer in Deutschland mit Fokus auf:
 ### Code Quality Standards
 
 **Linting:**
+
 - ESLint 9.x mit Flat Config (eslint.config.js)
 - Extends: next/core-web-vitals
 - ⚠️ **Known Issue:** Next.js 16.0.0 hatte CLI Lint Bug, Codex hat zu ESLint direkt migriert
 
 **Formatting:**
+
 - Prettier (automatisch via CI)
 - Format-Check blockiert Merges
 
 **Type Safety:**
+
 - TypeScript Strict Mode aktiviert
 - No implicit any
 - Type-Check in CI Pipeline
 
 **Testing:**
+
 - Unit Tests geplant (Jest/Vitest)
 - Integration Tests geplant
 - E2E Tests geplant (Playwright)
@@ -125,6 +141,7 @@ Online-Marktplatz für AI/IT-Freelancer in Deutschland mit Fokus auf:
 ### Patterns & Conventions
 
 **File Structure:**
+
 ```
 src/
 ├── app/                    # Next.js App Router
@@ -140,17 +157,20 @@ src/
 ```
 
 **API Endpoints:**
+
 - `/api/health` - Health Check (DB connection)
 - `/api/version` - Version Info (commit, buildTime)
 - `/api/trpc/*` - tRPC API (planned)
 
 **Naming Conventions:**
+
 - Components: PascalCase
 - Files: kebab-case oder camelCase
 - API Routes: lowercase
 
 **Git Workflow:**
-- Branch: Feature-Branches (feature/*, fix/*, chore/*)
+
+- Branch: Feature-Branches (feature/_, fix/_, chore/\*)
 - Commits: Conventional Commits (feat:, fix:, chore:, docs:, style:, refactor:)
 - Footer: "🤖 Generated with [Claude Code]" + Co-Authored-By: Claude
 
@@ -159,6 +179,7 @@ src/
 ## 🚀 Quick Setup & Development
 
 ### Prerequisites
+
 ```bash
 Node.js: 22.x
 pnpm: 10.11.1
@@ -166,9 +187,10 @@ PostgreSQL: 15 (local dev or Docker)
 ```
 
 ### Environment Setup
+
 ```bash
 # 1. Clone & Install
-git clone https://github.com/KlausWeigele/ai-freelancer-plattform.git
+git clone https://github.com/MaxMustermann/ai-freelancer-plattform.git
 cd ai-freelancer-plattform
 pnpm install
 
@@ -189,6 +211,7 @@ pnpm dev
 ```
 
 ### Common Commands
+
 ```bash
 pnpm dev              # Development Server (Port 3000)
 pnpm build            # Production Build
@@ -201,20 +224,22 @@ pnpm prisma studio    # Database GUI
 ```
 
 ### Docker Build (Local)
+
 ```bash
 docker build -t ai-freelancer-plattform .
 docker run -p 3000:3000 ai-freelancer-plattform
 ```
 
 ### Health Checks
+
 ```bash
 # Development
 curl http://localhost:3000/api/health
 curl http://localhost:3000/api/version
 
 # Production (nach Deployment)
-curl https://weigele.art/api/health
-curl https://weigele.art/api/version
+curl https://muster-plattform.de/api/health
+curl https://muster-plattform.de/api/version
 ```
 
 ---
@@ -224,6 +249,7 @@ curl https://weigele.art/api/version
 ### Next.js Configuration (next.config.js)
 
 **Key Settings:**
+
 ```javascript
 {
   output: 'standalone',           // Docker optimization (150MB vs 1GB)
@@ -238,6 +264,7 @@ curl https://weigele.art/api/version
 ### TypeScript Configuration (tsconfig.json)
 
 **Strict Mode:**
+
 ```json
 {
   "compilerOptions": {
@@ -254,6 +281,7 @@ curl https://weigele.art/api/version
 ### Database Schema (prisma/schema.prisma)
 
 **Models:**
+
 - User (Freelancer, Client, Admin)
 - Profile (Skills, Bio, Hourly Rate)
 - Project (Title, Description, Budget)
@@ -266,13 +294,15 @@ curl https://weigele.art/api/version
 ### Environment Variables
 
 **Required:**
+
 ```bash
 DATABASE_URL          # PostgreSQL Connection String
 NEXTAUTH_SECRET       # JWT Secret (generate with: openssl rand -base64 32)
-NEXTAUTH_URL          # App URL (http://localhost:3000 dev, https://weigele.art prod)
+NEXTAUTH_URL          # App URL (http://localhost:3000 dev, https://muster-plattform.de prod)
 ```
 
 **Optional:**
+
 ```bash
 NEXT_PUBLIC_APP_URL   # Public App URL
 AWS_REGION            # eu-central-1
@@ -284,22 +314,26 @@ AWS_ACCOUNT_ID        # For ECR
 ## 🐛 Known Issues & Workarounds
 
 ### 1. Next.js 16.0.0 Lint CLI Bug (RESOLVED by Codex)
+
 **Status:** ✅ Fixed
 **Issue:** `next lint` interpretierte "lint" als Verzeichnisname
 **Solution:** Codex migrierte zu ESLint 9 Flat Config, nutzt `eslint .` direkt
 **Commits:** 6089dde, b76c7a3
 
 ### 2. pnpm 10.11.1 Lock-File Generation (ACTIVE)
+
 **Status:** ❌ Aktiv (Docker Build blockiert)
 **Issue:** pnpm 10.11.1 generiert `pnpm-lock.yaml` nicht automatisch
 **Impact:** Docker Build schlägt fehl (COPY pnpm-lock.yaml not found)
 **Solution Options:**
+
 - A) Lock-File committen: `pnpm install --lockfile-only` (EMPFOHLEN)
 - B) Dockerfile anpassen (nicht production-ready)
 - C) Docker Build temporär disablen
-**Next Action:** Codex oder nächste Session sollte Option A wählen
+  **Next Action:** Codex oder nächste Session sollte Option A wählen
 
 ### 3. CI/CD Performance (Workaround Active)
+
 **Status:** ⚠️ Workaround
 **Issue:** pnpm cache disabled wegen fehlender Lock-File
 **Impact:** Langsamere CI-Runs (keine Dependency Cache)
@@ -307,6 +341,7 @@ AWS_ACCOUNT_ID        # For ECR
 **Files:** .github/workflows/ci.yml, nightly.yml, deploy-production.yml
 
 ### 4. Tests Not Implemented Yet
+
 **Status:** 📝 TODO
 **Issue:** Test-Suite noch nicht implementiert
 **Impact:** Tests in CI disabled (Step mit `if: false`)
@@ -317,12 +352,14 @@ AWS_ACCOUNT_ID        # For ECR
 ## 📈 Quality Metrics & Performance Targets
 
 ### Build Metrics (Current)
+
 - **Build Time:** ~30-60s (Next.js build)
 - **Standalone Size:** 147 MB (ohne Docker)
 - **Docker Image Size:** ~300-500 MB Target (mit Node.js Alpine)
 - **Type-Check Time:** ~5-10s
 
 ### Performance Targets (Production)
+
 - **Time to First Byte (TTFB):** < 200ms
 - **First Contentful Paint (FCP):** < 1.5s
 - **Largest Contentful Paint (LCP):** < 2.5s (Core Web Vital)
@@ -330,11 +367,13 @@ AWS_ACCOUNT_ID        # For ECR
 - **First Input Delay (FID):** < 100ms
 
 ### Availability Targets
+
 - **Uptime:** 99.9% (ECS Auto-Scaling)
 - **RTO (Recovery Time Objective):** < 15 minutes
 - **RPO (Recovery Point Objective):** < 5 minutes
 
 ### Cost Targets
+
 - **Current AWS:** $0.60/month (Route 53 only)
 - **Estimated Production:** $50-100/month
   - ECS Fargate: $25-40/month (2 Tasks, 0.5 vCPU, 1GB RAM)
@@ -348,12 +387,14 @@ AWS_ACCOUNT_ID        # For ECR
 ## 🚀 Enhancement Ideas & Future Development
 
 ### Phase 1.5: Testing Foundation (Priority: High)
+
 - [ ] Jest/Vitest setup
 - [ ] Unit Tests für Health/Version Endpoints
 - [ ] Integration Tests für API Routes
 - [ ] CI Test-Coverage Reports
 
 ### Phase 2.5: Monitoring & Observability (Priority: High)
+
 - [ ] CloudWatch Dashboards
 - [ ] Application Insights (Logs, Metrics, Traces)
 - [ ] Error Tracking (Sentry oder AWS X-Ray)
@@ -361,6 +402,7 @@ AWS_ACCOUNT_ID        # For ECR
 - [ ] Cost Alerts (AWS Budgets)
 
 ### Phase 3.5: Security Hardening (Priority: Medium)
+
 - [ ] AWS WAF Configuration (DDoS Protection)
 - [ ] Security Headers (CSP, HSTS, etc.)
 - [ ] Penetration Testing
@@ -368,6 +410,7 @@ AWS_ACCOUNT_ID        # For ECR
 - [ ] Secrets Rotation Strategy
 
 ### Phase 4: Feature Development (Priority: Medium)
+
 - [ ] User Authentication (NextAuth.js mit JWT)
 - [ ] Freelancer Profile CRUD
 - [ ] Project Listing & Search
@@ -377,13 +420,15 @@ AWS_ACCOUNT_ID        # For ECR
 - [ ] Payment Integration (Stripe?)
 
 ### Phase 5: Advanced Features (Priority: Low)
+
 - [ ] AI-Powered Project Matching
 - [ ] Real-time Notifications (WebSockets)
-- [ ] Analytics Dashboard für Klaus
+- [ ] Analytics Dashboard für Max
 - [ ] Multi-Language Support (i18n)
 - [ ] Mobile App (React Native?)
 
 ### Tech Debt / Improvements
+
 - [ ] Downgrade zu stabileren Versions? (Next.js 15.x, pnpm 9.x)
 - [ ] Lock-File Strategy langfristig festlegen
 - [ ] CI Performance Optimization (Cache, Parallelisierung)
@@ -394,6 +439,7 @@ AWS_ACCOUNT_ID        # For ECR
 ## 📚 Related Documentation
 
 **Project Docs:**
+
 - `README.md` - Project Overview
 - `TODO.md` - Task Tracking (39 Tasks, 8 Phases)
 - `SESSIONS.md` - Team Session Log (Sonnet/Codex Sync)
@@ -402,6 +448,7 @@ AWS_ACCOUNT_ID        # For ECR
 - `RISK_ASSESSMENT.md` - Risk Analysis
 
 **Architecture Docs:**
+
 - `docs/ARCHITECTURE.md` - System Architecture Overview
 - `docs/deployment-guide.md` - Deployment Instructions
 - `docs/adr/` - Architecture Decision Records (6 ADRs)
@@ -413,6 +460,7 @@ AWS_ACCOUNT_ID        # For ECR
   - 006: Terraform IaC
 
 **Infrastructure:**
+
 - `terraform/README.md` - Terraform Setup Instructions
 - `docker/README.md` - Docker Configuration Guide
 - `.github/workflows/` - CI/CD Pipeline Definitions
@@ -422,6 +470,7 @@ AWS_ACCOUNT_ID        # For ECR
 ## 🔄 Update History
 
 ### 2025-11-10 (Session 1 - Sonnet 4.5)
+
 - ✅ Initial CLAUDE.md created
 - ✅ Phase 0-1 Status dokumentiert
 - ✅ Known Issues: Next.js 16 Lint Bug, pnpm Lock-File
@@ -430,6 +479,7 @@ AWS_ACCOUNT_ID        # For ECR
 - ✅ Enhancement Ideas gesammelt
 
 ### Next Update Triggers:
+
 - [ ] Nach Phase 1 Completion (Docker Build fixed)
 - [ ] Nach Phase 2 (AWS Setup complete)
 - [ ] Nach Terraform Infrastructure Deployment
@@ -442,6 +492,7 @@ AWS_ACCOUNT_ID        # For ECR
 ## 💡 Lessons Learned (Running Log)
 
 ### 2025-11-10 (Session 1)
+
 1. **Bleeding-Edge = Bleeding Time**
    - Next.js 16.0.0, pnpm 10.11.1, ESLint 9.x kombiniert = 2h CI-Debugging
    - Lesson: Für Production LTS/Stable Versions bevorzugen

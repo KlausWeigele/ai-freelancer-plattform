@@ -358,6 +358,6 @@ Production (500 users):
 
 ---
 
-**Author:** Klaus Weigele
+**Author:** Max Mustermann
 **Date:** 27. Oktober 2025
 **Status:** Accepted

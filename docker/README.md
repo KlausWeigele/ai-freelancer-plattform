@@ -509,7 +509,7 @@ NEXT_TELEMETRY_DISABLED="1"
 
 ---
 
-**Author:** Klaus Weigele
+**Author:** Max Mustermann
 **Date:** 27. Oktober 2025
 **Status:** Phase 3.5 Complete
 **Next:** Phase 3.6 (GitHub & CI/CD)

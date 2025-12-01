@@ -488,6 +488,6 @@ jobs:
 
 ---
 
-**Author:** Klaus Weigele
+**Author:** Max Mustermann
 **Last Updated:** 27. Oktober 2025
 **Version:** 1.0.0

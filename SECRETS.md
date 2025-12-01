@@ -10,6 +10,7 @@ This document lists the required secrets/variables for CI/CD and deployment.
 - `AWS_REGION` – Default `eu-central-1` (can be overridden per workflow).
 
 Optional (later phases):
+
 - `ECR_REPOSITORY` – Defaults to `freelancer-app` if unset.
 - `DATABASE_URL` – For migrations during deploy (Phase 3+).
 - `NEXTAUTH_SECRET` – For app runtime (stored in ECS task definition or AWS Secrets Manager).
@@ -24,8 +25,8 @@ ecr_repository_name = "freelancer-app"
 ```
 
 ## Notes
+
 - The deploy workflow will push images to:
   `${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/<repository>:<version>`
 - Ensure the ECR repository exists (Terraform module provided under `terraform/modules/ecr`).
 - Never commit secrets to Git. Use GitHub Secrets or AWS Secrets Manager.
-
