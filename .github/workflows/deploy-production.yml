@@ -211,6 +211,8 @@ jobs:
             -e DATABASE_URL="postgresql://test:test@host.docker.internal:5432/test?schema=public" \
             -e NEXTAUTH_SECRET="test-secret" \
             -e JWT_SECRET="test-jwt" \
+            -e BASIC_AUTH_USER="${{ secrets.BASIC_AUTH_USER }}" \
+            -e BASIC_AUTH_PASSWORD="${{ secrets.BASIC_AUTH_PASSWORD }}" \
             freelancer-app:${{ inputs.version }}
 
           sleep 15
