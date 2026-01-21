@@ -92,7 +92,6 @@ export default function ImpressumPage() {
             </div>
           </div>
 
-          {/* TODO Comment for customization */}
           <div className="mt-4 bg-blue-50 border-l-4 border-blue-500 p-4 text-sm">
             <p className="text-blue-900">
               <strong>Hinweis:</strong> Bitte ergänzen Sie Ihre vollständigen Kontaktdaten (Straße,
